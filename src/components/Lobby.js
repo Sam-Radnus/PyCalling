@@ -1,8 +1,12 @@
 import React from 'react'
 import '../Styles/lobby.css'
 import {Link ,Navigate,useNavigate,useLocation} from 'react-router-dom';
+import { useState } from 'react';
+import Room from './Room';
 function Lobby() {
     let navigate=useNavigate();
+    let [name,setName]=useState('');
+    let [room,setRoom]=useState('');
   return (
     <div>
          
@@ -18,16 +22,27 @@ function Lobby() {
  
                  <div className="form__field__wrapper">
                      <label>Your Name</label>
-                     <input type="text" name="name"  placeholder="Enter your display name..." />
+                     <input type="text" name="name" onChange={(e)=>{
+                        setName(e.target.value);
+                     }} placeholder="Enter your display name..." />
                  </div>
  
                  <div className="form__field__wrapper">
                      <label>Room Name</label>
-                     <input type="text" name="room"  placeholder="Enter room name..." />
+                     <input type="text" name="room" onChange={(e)=>{
+                        setRoom(e.target.value);
+                     }} placeholder="Enter room name..." />
                  </div>
  
                  <div className="form__field__wrapper">
-                     <button onClick={()=>{navigate('/Room')}} type="submit">Go to Room 
+                     <button onClick={(e)=>{
+                        e.preventDefault();
+                        console.log("name:",name)
+                        console.log("room:",room)       
+                        navigate(`/Room/${room}`)       
+                        sessionStorage.setItem('name',name)     
+                        return <Room name={name}/>
+                   }} type="submit">Go to Room 
                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
                     </button>
                  </div>
