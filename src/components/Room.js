@@ -7,14 +7,23 @@ import { useEffect } from 'react';
 import { logout,selectUser } from "./../features/userSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-function Room(props) {
+import {useNavigate} from "react-router-dom";
+function Room() {
     const dispatch=useDispatch();
+    const navigate=useNavigate();
     const user=useSelector(selectUser);
-    let {name}=props;
     useEffect(()=>{
-        let name2=sessionStorage.getItem('name')
+        try{
         console.log(user.name);
-    },[props.name])
+        console.log(user.loggedIn);
+       }
+       catch(error)
+       {
+       
+        console.log(error);
+        navigate('/Lobby')
+       }
+    })
     return (
         <main className="container">
             <div id="room__container">
