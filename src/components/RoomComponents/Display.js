@@ -8,7 +8,9 @@ function Display(props) {
   const { users, tracks } = props;
   useEffect(()=>{
     console.warn(users);
-  })
+    
+    
+  },[users,tracks]);
   return (
 
     <>
@@ -19,10 +21,10 @@ function Display(props) {
               <AgoraVideoPlayer className='vid' videoTrack={tracks[1]} style={{ height: '100%', width: '100%' }} />
               {users.length > 0 &&
                 users.map((user) => {
-                  {console.error(users.length)}
+                  {console.error(users)}
                   if (user.videoTrack) {
                     return (
-                      <div id="stream__box" style={{height:'20vh',width:'20vw'}}>
+                      <div style={{height:'20vh',width:'20vw'}}>
                       <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ height: '95%', width: '95%' }} key={user.uid} />
                       </div>
                     );
