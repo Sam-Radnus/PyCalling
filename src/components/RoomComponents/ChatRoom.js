@@ -7,14 +7,14 @@ function ChatRoom() {
     <div id="messages">
         <div className="message__wrapper">
             <div className="message__body__bot">
-                <strong className="message__author__bot">🤖 Mumble Bot</strong>
+                <strong className="message__author__bot">🤖 PyCardis Bot</strong>
                 <p className="message__text__bot">Welcome to the room, Don't be shy, say hello!</p>
             </div>
         </div>
 
         <div className="message__wrapper">
             <div className="message__body__bot">
-                <strong className="message__author__bot">🤖 Mumble Bot</strong>
+                <strong className="message__author__bot">🤖 PyCardis Bot</strong>
                 <p className="message__text__bot">Dennis Ivy just entered the room!</p>
             </div>
         </div>
@@ -28,14 +28,14 @@ function ChatRoom() {
 
         <div className="message__wrapper">
             <div className="message__body__bot">
-                <strong className="message__author__bot">🤖 Mumble Bot</strong>
+                <strong className="message__author__bot">🤖 PyCardis Bot</strong>
                 <p className="message__text__bot">Sulamita  just entered the room!</p>
             </div>
         </div>
 
         <div className="message__wrapper">
             <div className="message__body__bot">
-                <strong className="message__author__bot">🤖 Mumble Bot</strong>
+                <strong className="message__author__bot">🤖 PyCardis Bot</strong>
                 <p className="message__text__bot">Shahriar P. Shuvo  just entered the room!</p>
             </div>
         </div>
@@ -103,7 +103,7 @@ function ChatRoom() {
 
         <div className="message__wrapper">
             <div className="message__body__bot">
-                <strong className="message__author__bot">🤖 Mumble Bot</strong>
+                <strong className="message__author__bot">🤖 PyCardis Bot</strong>
                 <p className="message__text__bot">👋 Sulamita  has left the room</p>
             </div>
         </div>

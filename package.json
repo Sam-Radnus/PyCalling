@@ -7,6 +7,8 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "agora-rtc-react": "github:AgoraIO-Community/agora-rtc-react#v1.0.1",
+    "agora-rtc-sdk-ng": "^4.12.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.2",

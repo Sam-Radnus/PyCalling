@@ -8,7 +8,7 @@ function Navbar() {
        <div className="nav--list">
             <Link to="/">
                 <h3 id="logo">
-                    <img src={require("./images/logo.png")} alt="Site Logo"/>
+                   
                     <span>PyCalling</span>
                 </h3>
             </Link>    
