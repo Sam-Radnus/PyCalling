@@ -21,7 +21,7 @@ import {
 } from "agora-rtc-react";
 function Room() {
 
-    const [user, setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
     const [start, setStart] = useState(false);
     const client = useClient();
     const appid = "9e4b87cc837448969b97b4301e2aca92";
@@ -30,11 +30,11 @@ function Room() {
     const [channelName, setChannelName] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const users = useSelector(selectUser);
+    const user = useSelector(selectUser);
     useEffect(() => {
         try {
-            console.log(users.name);
-            console.log(users.loggedIn);
+            console.log(user.name);
+            console.log(user.loggedIn);
         }
         catch (error) {
 
@@ -43,25 +43,26 @@ function Room() {
         }
     });
     useEffect(() => {
-        let init = async (name) => {
+        let init = async (name) => { 
             console.log("init", name);
             client.on("user-published", async (user, mediaType) => {
-
+                  
                 await client.subscribe(user, mediaType);
-                console.error("subscribe success");
                 if (mediaType === "video") {
                     setUsers((prevUsers) => {
                         return [...prevUsers, user];
                     });
                 }
                 if (mediaType === "audio") {
-                    user.audioTrack?.play();
+                    user.audioTrack.play();
                 }
+                let members=await client.getMembers()
+                console.warn(members);
             });
             client.on("user-unpublished", (user, type) => {
                 console.log("unpublished", user, type);
                 if (type === "audio") {
-                    user.audioTrack?.stop();
+                    user.audioTrack.stop();
                 }
                 if (type === "video") {
                     setUsers((prevUsers) => {
@@ -76,8 +77,14 @@ function Room() {
                     return prevUsers.filter((User) => User.uid !== user.uid);
                 });
             });
-
-            await client.join(appid, name, null);
+            try{
+            let x=await client.join(appid, name, null);
+            console.error(x);
+            }
+           catch(error)
+           {
+             console.error(error);
+           }
             if (tracks) await client.publish([tracks[0], tracks[1]]);
             setStart(true);
 
@@ -91,9 +98,9 @@ function Room() {
     return (
         <main className="container">
             <div id="room__container">
-                <ChatRoom />
+                 <ChatRoom /> 
                 {start && tracks && <Display users={users} tracks={tracks} />}
-                <Participants />
+                 <Participants /> 
             </div>
         </main>
     )
