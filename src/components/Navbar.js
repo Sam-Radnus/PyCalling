@@ -9,7 +9,6 @@ function Navbar() {
        <div className="nav--list">
             <Link to="/">
                 <h3 id="logo">
-                   
                     <span>PyCalling</span>
                 </h3>
             </Link>    

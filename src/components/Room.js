@@ -30,15 +30,15 @@ function Room() {
     const [channelName, setChannelName] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(selectUser);
+    const x = useSelector(selectUser);
+
     useEffect(() => {
         try {
-            console.log(user.name);
-            console.log(user.loggedIn);
+            console.log(x.name);
+            console.log(x.loggedIn);
         }
         catch (error) {
-
-            console.log(error);
+            console.warn(error);
             navigate('/Lobby')
         }
     });
