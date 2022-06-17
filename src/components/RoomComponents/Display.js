@@ -1,16 +1,37 @@
 import React from 'react'
 import '../../Styles/room.css'
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 import { config, useClient, useMicrophoneAndCameraTracks } from "./../../settings.js";
 import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
+import { useSelector } from "react-redux"
+
+import { login,selectUser } from "./../../features/userSlice.js";
 function Display(props) {
   let { setInCall } = props;
+  const x=useSelector(selectUser);
+  const dispatch=useDispatch();
   const { users, tracks } = props;
+  const client = useClient();
+  const navigate=useNavigate();
+  const [trackState, setTrackState] = useState({ video: true, audio: true });
   useEffect(()=>{
     console.warn(users);
     
     
   },[users,tracks]);
+  useEffect(()=>{
+   
+    try{
+    console.log(x);
+    }
+    catch(error)
+    {
+      console.error(error);
+    }
+
+  });
   return (
 
     <>
@@ -31,7 +52,25 @@ function Display(props) {
         <button id="screen-btn" >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 1v17h24v-17h-24zm22 15h-20v-13h20v13zm-6.599 4l2.599 3h-12l2.599-3h6.802z" /></svg>
         </button>
-        <button id="leave-btn" >
+        <button id="leave-btn" onClick={async()=>{
+           await client.leave();
+           client.removeAllListeners();
+           tracks[0].close();
+           tracks[1].close();
+           dispatch(
+            login({
+                name:'',
+                room:'',
+                loggedIn:false,
+            }),
+           )
+           sessionStorage.setItem('name','');
+           sessionStorage.setItem('room','');
+           sessionStorage.setItem('loggedIn',x.loggedIn);
+           //setInCall(false);
+           navigate('/Lobby');
+
+        }} >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z" /></svg>
         </button>
         </div>
@@ -47,16 +86,18 @@ function Display(props) {
               <AgoraVideoPlayer className='vid' videoTrack={tracks[1]} style={{ height: '100%', width: '100%' }} />
 
             </div>
+            <div style={{ height:'20vh',width:'20vw'}} id="videos">
         {users.length > 0 &&
                 users.map((user) => {
                   {console.error(users)}
                   if (user.videoTrack) {
                     return (
                       <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ height: '100%', width: '100%' }} key={user.uid} />
-                      
+                
                     );
                   } else return null;
                 })}
+                </div>
         </div>
       
       </section>
