@@ -15,6 +15,8 @@ function Display(props) {
   const x=useSelector(selectUser);
   const dispatch=useDispatch();
   const { users, tracks } = props;
+  const [big,setBig]=useState(false);
+  const { screen }=props;
   const client = useClient();
   const [screenShare,setScreenShare]=useState(false);
   const navigate=useNavigate();
@@ -26,6 +28,8 @@ function Display(props) {
            setScreenShare(false);
            console.warn(screenShare)
            setTrackState(tracks[1]);
+           await client.unpublish([localScreenTracks]);
+           await client.publish([tracks[1]]);
            console.warn('hey');
            console.warn(x);
         }
@@ -34,16 +38,23 @@ function Display(props) {
           setScreenShare(true)
           localScreenTracks=await AgoraRTC.createScreenVideoTrack();
           setTrackState(localScreenTracks);
+          await client.unpublish([tracks[1]])
+          await client.publish([localScreenTracks]);
+          
+    
         }
         //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
   useEffect(()=>{
-     
+      console.warn(props.screen);
   },[trackState])
   return (
 
     <>
       <section id="stream__container">
+        <div id="big">
+
+        </div>
       <div >
         <button onClick={()=>{
           console.error('Hi')
@@ -91,11 +102,8 @@ function Display(props) {
        
         <div id="stream__container">
          <div style={{display:'grid',gridTemplateColumns:'1fr 2fr'}}>
-         { screenShare && <div id="screen">
-  
-          </div>
-                 }
-                         <div style={{ height:'20vh',width:'20vw'}} id={`user`}>
+      
+                         <div  style={{ height:'20vh',width:'20vw'}} id={`user`}>
               <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ height: '100%', width: '100%' }} />
     
             </div>
@@ -104,7 +112,7 @@ function Display(props) {
                 users.map((user) => {
                   if (user.videoTrack) {
                     return (
-                      <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ height: '100%', width: '100%' }} key={user.uid} />
+                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ height: '100%', width: '100%' }} key={user.uid} />
                     );
                   } else return null;
                 })}

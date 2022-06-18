@@ -18,6 +18,7 @@ import {
     IAgoraRTCRemoteUser,
     ICameraVideoTrack,
     IMicrophoneAudioTrack,
+    createScreenVideoTrack,
 } from "agora-rtc-react";
 function Room() {
 
@@ -26,10 +27,12 @@ function Room() {
     const client = useClient();
     const appid = "9e4b87cc837448969b97b4301e2aca92";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
+    const  screen =createScreenVideoTrack();
     const [inCall, setInCall] = useState(false);
     const [channelName, setChannelName] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const x = useSelector(selectUser);
 
     useEffect(() => {
@@ -50,8 +53,10 @@ function Room() {
                 await client.subscribe(user, mediaType);
                 if (mediaType === "video") {
                     setUsers((prevUsers) => {
+                        
                         return [...prevUsers, user];
                     });
+                    
                 }
                 if (mediaType === "audio") {
                     user.audioTrack.play();
@@ -63,6 +68,7 @@ function Room() {
                 console.log("unpublished", user, type);
                 if (type === "audio") {
                     user.audioTrack.stop();
+                    
                 }
                 if (type === "video") {
                     setUsers((prevUsers) => {
@@ -85,7 +91,7 @@ function Room() {
            {
              console.error(error);
            }
-            if (tracks) await client.publish([tracks[0], tracks[1]]);
+            if (tracks) await client.publish([tracks[0], tracks[1]],screen);
             setStart(true);
 
         };
@@ -95,11 +101,12 @@ function Room() {
             init('main');
         }
     }, [client, ready, tracks]);
+    
     return (
         <main className="container">
             <div id="room__container">
                  <ChatRoom /> 
-                {start && tracks && <Display users={users} tracks={tracks} />}
+                {start && tracks && screen && <Display users={users} screen={screen} tracks={tracks} />}
                  <Participants /> 
             </div>
         </main>
