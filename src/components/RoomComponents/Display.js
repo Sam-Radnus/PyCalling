@@ -28,8 +28,10 @@ function Display(props) {
            setScreenShare(false);
            console.warn(screenShare)
            setTrackState(tracks[1]);
-           await client.unpublish([localScreenTracks]);
+           await client.unpublish();
            await client.publish([tracks[1]]);
+           
+          
            console.warn('hey');
            console.warn(x);
         }
