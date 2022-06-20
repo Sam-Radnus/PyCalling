@@ -13,6 +13,7 @@ function Lobby() {
     let [room,setRoom]=useState('');
     const dispatch=useDispatch();
     const x=useSelector(selectUser);
+    
     useEffect(()=>{
             try{
             console.log(x);
@@ -60,6 +61,9 @@ function Lobby() {
                             login({
                                 name:name,
                                 room:room,
+                                camera:true,
+                                mic:true,
+                                screen:false,
                                 loggedIn:true,
                             })
                         )
