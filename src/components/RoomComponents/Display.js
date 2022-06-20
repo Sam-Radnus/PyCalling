@@ -10,17 +10,16 @@ import { useSelector } from "react-redux"
 import { login,selectUser } from "./../../features/userSlice.js";
 function Display(props) {
 
-  let { setInCall } = props;
+
   let localScreenTracks=[];
   const x=useSelector(selectUser);
   const dispatch=useDispatch();
   const { users, tracks } = props;
-  const [big,setBig]=useState(false);
-  const { screen }=props;
   const client = useClient();
   const [screenShare,setScreenShare]=useState(false);
   const navigate=useNavigate();
   const [trackState, setTrackState] = useState(tracks[1]);
+  
   const screenSharing=async(e)=>{
         if(screenShare)
         {
@@ -31,7 +30,7 @@ function Display(props) {
            await client.unpublish();
            await client.publish([tracks[1]]);
            
-          
+        
            console.warn('hey');
            console.warn(x);
         }
@@ -48,7 +47,7 @@ function Display(props) {
         //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
   useEffect(()=>{
-      console.warn(props.screen);
+      console.warn(users);
   },[trackState])
   return (
 

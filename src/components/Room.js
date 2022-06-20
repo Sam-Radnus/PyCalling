@@ -20,24 +20,25 @@ import {
     IMicrophoneAudioTrack,
     createScreenVideoTrack,
 } from "agora-rtc-react";
+import { createChannel } from 'agora-rtm-react';
 function Room() {
-
+    let token=null;
     const [users, setUsers] = useState([]);
     const [start, setStart] = useState(false);
     const client = useClient();
     const appid = "9e4b87cc837448969b97b4301e2aca92";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
-    const [inCall, setInCall] = useState(false);
-    const [channelName, setChannelName] = useState("");
+    const [username,setName]=useState();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const channel=createChannel();
     const x = useSelector(selectUser);
-
+    
     useEffect(() => {
         try {
             console.log(x.name);
+            setName(x.name);
             console.log(x.loggedIn);
         }
         catch (error) {
@@ -49,25 +50,22 @@ function Room() {
         let init = async (name) => { 
             console.log("init", name);
             client.on("user-published", async (user, mediaType) => {
-                  
                 await client.subscribe(user, mediaType);
                 if (mediaType === "video") {
                     setUsers((prevUsers) => {
-                        
                         return [...prevUsers, user];
-                    });
-                    
+                    });   
                 }
                 if (mediaType === "audio") {
                     user.audioTrack.play();
                 }
-                let members=await client.getMembers()
+                let members=await channel.getMembers()
                 console.warn(members);
             });
-            client.on("user-unpublished", (user, type) => {
+            client.on("user-unpublished",(user, type) => {
                 console.log("unpublished", user, type);
                 if (type === "audio") {
-                    user.audioTrack.stop();
+                    user.audioTrack?.stop();
                     
                 }
                 if (type === "video") {
@@ -84,8 +82,12 @@ function Room() {
                 });
             });
             try{
-            let x=await client.join(appid, name, null);
-            console.error(x);
+            let x=await client.join(appid, name,token, username.toString());
+            console.warn(x);
+            setUsers((prevUsers)=>{
+                return [...prevUsers,x];
+            })
+            console.warn(users);
             }
            catch(error)
            {
@@ -106,8 +108,8 @@ function Room() {
         <main className="container">
             <div id="room__container">
                  <ChatRoom /> 
-                {start && tracks && screen && <Display users={users} screen={screen} tracks={tracks} />}
-                 <Participants /> 
+                {start && tracks && screen && users && <Display users={users} screen={screen} tracks={tracks} />}
+                {start && tracks && screen && users &&  <Participants users={users} /> }
             </div>
         </main>
     )
