@@ -77,16 +77,14 @@ function Display(props) {
            client.removeAllListeners();
            tracks[0].close();
            tracks[1].close();
+           client.leave();
            dispatch(
-            login({
+           login({
                 name:'',
                 room:'',
                 loggedIn:false,
             }),
            )
-           sessionStorage.setItem('name','');
-           sessionStorage.setItem('room','');
-           sessionStorage.setItem('loggedIn',x.loggedIn);
            //setInCall(false);
            navigate('/Lobby');
 
