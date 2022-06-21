@@ -14,15 +14,7 @@ function Lobby() {
     const dispatch=useDispatch();
     const x=useSelector(selectUser);
     
-    useEffect(()=>{
-            try{
-            console.log(x);
-            }
-            catch(error)
-            {
-              console.error(error);
-            }
-    },[x])
+    
   return (
     <div>
          

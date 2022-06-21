@@ -30,11 +30,12 @@ function Room() {
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
     const [username,setName]=useState();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const channel=createChannel();
     const x = useSelector(selectUser);
     
+
+
     useEffect(() => {
         try {
             console.log(x.name);
@@ -43,6 +44,10 @@ function Room() {
         }
         catch (error) {
             console.warn(error);
+            navigate('/Lobby')
+        }
+        if(!x.loggedIn)
+        {
             navigate('/Lobby')
         }
     });
@@ -107,7 +112,7 @@ function Room() {
     return (
         <main className="container">
             <div id="room__container">
-                 <ChatRoom /> 
+                {start && tracks && screen && users &&  <ChatRoom /> }
                 {start && tracks && screen && users && <Display users={users} screen={screen} tracks={tracks} />}
                 {start && tracks && screen && users &&  <Participants users={users} /> }
             </div>
