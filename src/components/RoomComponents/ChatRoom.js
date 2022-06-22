@@ -18,6 +18,7 @@ function ChatRoom(props) {
         
         let message=client.createMessage({text,messageType:'TEXT'})
         console.warn(message);
+        console.warn(users);
         await testChannel.sendMessage(message)
         setTexts((previous) => {
             return [...previous, { msg: { text }, uid }]
@@ -29,24 +30,23 @@ function ChatRoom(props) {
        // let x=users[1]._uintid;
         console.warn(val);
         let val2=val.toString();
+        console.warn(users);
+       // console.warn(users[users.length-1]._uintid)
+        console.warn('hey');
         await client.login({uid:val2});
         await testChannel.join();
-        console.warn('hey');
-        client.on('ConnectionStateChanged',async(state,reason)=>{
-            console.warn('ConnectionStateChanged',state,reason)
-        })
-        testChannel.on('ChannelMessage',(msg,uid)=>{
-            setTexts((previous)=>{
-                return [...previous,{msg,uid}]
+        client.on('ConnectionStateChanged', async (state, reason) => {
+            console.log('ConnectionStateChanged', state, reason)
+          })
+          testChannel.on('ChannelMessage', (msg, uid) => {
+            setTexts((previous) => {
+              return [...previous, { msg, uid }]
             })
-        })
-        testChannel.on('MemberJoined',(memberId)=>{
-            console.warn('New Member:',memberId)
-            
-        })
-
-        console.warn('hi');
-        setLoggedIn(true);
+          })
+          testChannel.on('MemberJoined', (memberId) => {
+            console.log('New Member: ', memberId)
+          })
+          setLoggedIn(true)
     }
     let logout=async()=>{
         await testChannel.leave();
@@ -54,15 +54,16 @@ function ChatRoom(props) {
         testChannel.removeAllListeners()
         setLoggedIn(false);
     }
-    
     useEffect(()=>{
-        if(users.length!=0){
-        console.warn(users);
-        console.warn(Object.values(users).pop()._uintid);
-        login(Object.values(users).pop()._uintid);
         
+        if(users.length>1){
+        login(users[users.length-1]._uintid);
+        console.warn(users[users.length-1]._uintid);
         }
-     },[users]);
+        else{
+            login('userId')
+        }
+     },[users.length]);
   return (
     <section id="messages__container">
 

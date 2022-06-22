@@ -25,6 +25,7 @@ function Room() {
     let token=null;
     const [users, setUsers] = useState([]);
     const [start, setStart] = useState(false);
+    const [uid,setUid]=useState('');
     const client = useClient();
     const appid = "9e4b87cc837448969b97b4301e2aca92";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
@@ -56,6 +57,8 @@ function Room() {
             console.log("init", name);
             client.on("user-published", async (user, mediaType) => {
                 await client.subscribe(user, mediaType);
+                setUid(user.uid);
+
                 if (mediaType === "video") {
                     setUsers((prevUsers) => {
                         return [...prevUsers, user];
@@ -112,7 +115,7 @@ function Room() {
     return (
         <main className="container">
             <div id="room__container">
-                {start && tracks && screen && users &&  <ChatRoom /> }
+                {start && tracks && screen && users &&  <ChatRoom uid={uid} users={users} /> }
                 {start && tracks && screen && users && <Display users={users} screen={screen} tracks={tracks} />}
                 {start && tracks && screen && users &&  <Participants users={users} /> }
             </div>
