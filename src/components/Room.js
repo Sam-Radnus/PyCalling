@@ -58,18 +58,20 @@ function Room() {
             client.on("user-published", async (user, mediaType) => {
                 await client.subscribe(user, mediaType);
                 setUid(user.uid);
-
-                if (mediaType === "video") {
-                    setUsers((prevUsers) => {
-                        return [...prevUsers, user];
-                    });   
-                }
-                if (mediaType === "audio") {
-                    user.audioTrack.play();
-                }
-                let members=await channel.getMembers()
-                console.warn(members);
+                   if (mediaType === "video" ) {
+                       setUsers((prevUsers) => {
+                           return [...prevUsers, user];
+                       });   
+                       console.warn(users);
+                   }
+                   if (mediaType === "audio") {
+                       user.audioTrack.play();
+                   }
+                   let members=await channel.getMembers()
+                   console.warn(members);
+              
             });
+
             client.on("user-unpublished",(user, type) => {
                 console.log("unpublished", user, type);
                 if (type === "audio") {
@@ -111,13 +113,16 @@ function Room() {
             init('main');
         }
     }, [client, ready, tracks]);
-    
+    useEffect(()=>{
+       console.warn(users);
+    },[users.length]);
     return (
         <main className="container">
             <div id="room__container">
-                {start && tracks && screen && users &&  <ChatRoom uid={uid} users={users} /> }
+            
+                {start && tracks && screen && users &&  <ChatRoom uid={uid} users={users} /> } 
                 {start && tracks && screen && users && <Display users={users} screen={screen} tracks={tracks} />}
-                {start && tracks && screen && users &&  <Participants users={users} /> }
+                {start && tracks && screen && users &&  <Participants users={users}  /> }
             </div>
         </main>
     )

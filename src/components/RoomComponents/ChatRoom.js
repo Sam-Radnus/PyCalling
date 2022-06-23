@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { createChannel, createClient, RtmMessage } from 'agora-rtm-react'
 const useClient = createClient("9e4b87cc837448969b97b4301e2aca92");
+const USER_ID = Math.floor(Math.random() * 1000000001);
 const useChannel = createChannel('TV')
 function ChatRoom(props) {
     const client=useClient();
@@ -14,9 +15,9 @@ function ChatRoom(props) {
     const uid2=props.uid;
     const sendMsg=async(text)=>{
     
-        console.warn(text);
-        
-        let message=client.createMessage({text,messageType:'TEXT'})
+        console.warn(isLoggedIn);
+        setUid(users[0]);
+        let message=client.createMessage({text,user:uid,messageType:'TEXT'})
         console.warn(message);
         console.warn(users);
         await testChannel.sendMessage(message)
@@ -27,14 +28,14 @@ function ChatRoom(props) {
         console.warn(texts);
     }
     let login=async(val)=>{
-       // let x=users[1]._uintid;
-        console.warn(val);
         let val2=val.toString();
-        console.warn(users);
-       // console.warn(users[users.length-1]._uintid)
-        console.warn('hey');
-        await client.login({uid:val2});
+        console.warn(isLoggedIn);
+
+        await client.login({uid:USER_ID.toString()});
+        console.warn(2);
         await testChannel.join();
+        
+        console.warn(3);
         client.on('ConnectionStateChanged', async (state, reason) => {
             console.log('ConnectionStateChanged', state, reason)
           })
@@ -47,6 +48,7 @@ function ChatRoom(props) {
             console.log('New Member: ', memberId)
           })
           setLoggedIn(true)
+          console.warn(4);
     }
     let logout=async()=>{
         await testChannel.leave();
@@ -55,15 +57,16 @@ function ChatRoom(props) {
         setLoggedIn(false);
     }
     useEffect(()=>{
-        
-        if(users.length>1){
+        console.warn(users);
+        if(users.length>1)
+        {
         login(users[users.length-1]._uintid);
         console.warn(users[users.length-1]._uintid);
         }
         else{
-            login('userId')
+            login(users[0])
         }
-     },[users.length]);
+     },[]);
   return (
     <section id="messages__container">
 
@@ -91,7 +94,8 @@ function ChatRoom(props) {
         { texts.map((text,i)=>
         <div key={i} className="message__wrapper">
             <div className="message__body">
-                <strong className="message__author">User</strong>
+                {console.warn(text)}
+                <strong className="message__author">{text.uid}</strong>
                 <p className="message__text">{text.msg['text']}</p>
             </div>
         </div>
