@@ -302,7 +302,8 @@
   }
   
   .stream__actions a,
-  .stream__actions button {
+  .stream__actions button 
+  {
     cursor: pointer;
     background-color: #262625;
     color: #fff;
