@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import '../../Styles/room.css'
 import '../../App.css'
-
 function Participants(props) {
   let {users}=props;
   // useEffect(()=>{
