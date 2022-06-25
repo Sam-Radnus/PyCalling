@@ -13,42 +13,46 @@ function ChatRoom(props) {
     const [isLoggedIn,setLoggedIn]=useState(false);
     const users=props.users;
     const uid2=props.uid;
+    useEffect(() => {
+        if (textInput) setTexts([...texts, textInput]);
+      }, [texts.length]);    
     const sendMsg=async(text)=>{
     
-        console.warn(isLoggedIn);
+      
         setUid(users[0]);
-        let message=client.createMessage({text,user:uid,messageType:'TEXT'})
+        let message=client.createMessage({text,uid:USER_ID.toString(),messageType:'TEXT'})
         console.warn(message);
         console.warn(users);
         await testChannel.sendMessage(message)
         setTexts((previous) => {
-            return [...previous, { msg: { text }, uid }]
+            return [...previous, { msg: { text }, uid:USER_ID.toString() }]
          })
         setTextInput('');   
-        console.warn(texts);
+      
     }
     let login=async(val)=>{
         let val2=val.toString();
         console.warn(isLoggedIn);
 
         await client.login({uid:USER_ID.toString()});
-        console.warn(2);
+      
         await testChannel.join();
-        
-        console.warn(3);
+        await client.setLocalUserAttributes({user:users[0]});
         client.on('ConnectionStateChanged', async (state, reason) => {
             console.log('ConnectionStateChanged', state, reason)
           })
-          testChannel.on('ChannelMessage', (msg, uid) => {
+          testChannel.on('ChannelMessage',async (msg, uid) => {
+            const user = await client.getUserAttributes(uid);
+           
             setTexts((previous) => {
-              return [...previous, { msg, uid }]
+              return [...previous, { msg, uid:user }]
             })
           })
           testChannel.on('MemberJoined', (memberId) => {
-            console.log('New Member: ', memberId)
+            console.warn('New Member: ', memberId)
           })
           setLoggedIn(true)
-          console.warn(4);
+         
     }
     let logout=async()=>{
         await testChannel.leave();
@@ -57,16 +61,9 @@ function ChatRoom(props) {
         setLoggedIn(false);
     }
     useEffect(()=>{
-        console.warn(users);
-        if(users.length>1)
-        {
-        login(users[users.length-1]._uintid);
-        console.warn(users[users.length-1]._uintid);
-        }
-        else{
-            login(users[0])
-        }
+        login('100');
      },[]);
+    
   return (
     <section id="messages__container">
 
@@ -94,8 +91,8 @@ function ChatRoom(props) {
         { texts.map((text,i)=>
         <div key={i} className="message__wrapper">
             <div className="message__body">
-                {console.warn(text)}
-                <strong className="message__author">{text.uid}</strong>
+               
+                <strong className="message__author">{text.uid.user?text.uid.user:'you'}</strong>
                 <p className="message__text">{text.msg['text']}</p>
             </div>
         </div>
