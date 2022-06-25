@@ -8,7 +8,8 @@ function ChatRoom(props) {
     const client=useClient();
     const testChannel=useChannel(client);
     const [texts,setTexts]=useState([]);
-    const [uid,setUid]=useState('')
+    const [uid,setUid]=useState('');
+    const [hide,setHide]=useState(false);
     const [textInput,setTextInput]=useState('')
     const [isLoggedIn,setLoggedIn]=useState(false);
     const users=props.users;
@@ -16,10 +17,11 @@ function ChatRoom(props) {
     useEffect(() => {
         if (textInput) setTexts([...texts, textInput]);
       }, [texts.length]);    
-    const sendMsg=async(text)=>{
+    const sendMsg=async(text,hide)=>{
     
-      
+        
         setUid(users[0]);
+        await client.setLocalUserAttributes({user:hide?'user':users[0]});
         let message=client.createMessage({text,uid:USER_ID.toString(),messageType:'TEXT'})
         console.warn(message);
         console.warn(users);
@@ -102,12 +104,21 @@ function ChatRoom(props) {
 
     <form id="message__form" onSubmit={(e)=>{
         e.preventDefault();
-        sendMsg(textInput)}}>
+        }}>
         <input type="text" name="message" onChange={(e)=>{
-            
             setTextInput(e.target.value);
         }} placeholder="Send a message...." />
+        <button onClick={(e)=>{
+             e.preventDefault();
+             
+             sendMsg(textInput,false);
+        }}style={{marginTop:'5px'}}>send publicly</button>
+        <button onClick={(e)=>{
+             e.preventDefault();
+             sendMsg(textInput,true);
+        }}style={{marginTop:'5px',marginLeft:'5px'}}>send anonymously</button>
     </form>
+    
 
 </section>
   )
