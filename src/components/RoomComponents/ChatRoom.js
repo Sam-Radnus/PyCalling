@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { createChannel, createClient, RtmMessage } from 'agora-rtm-react'
+import '../../Styles/room.css'
 const useClient = createClient("9e4b87cc837448969b97b4301e2aca92");
 const USER_ID = Math.floor(Math.random() * 1000000001);
 const useChannel = createChannel('TV')
@@ -108,15 +109,15 @@ function ChatRoom(props) {
         <input type="text" name="message" onChange={(e)=>{
             setTextInput(e.target.value);
         }} placeholder="Send a message...." />
-        <button onClick={(e)=>{
+        <button className="send" onClick={(e)=>{
              e.preventDefault();
              
              sendMsg(textInput,false);
-        }}style={{marginTop:'5px'}}>send publicly</button>
-        <button onClick={(e)=>{
+        }}style={{marginTop:'5px'}}><i className="fa-solid fa-message"></i></button>
+        <button className="send" onClick={(e)=>{
              e.preventDefault();
              sendMsg(textInput,true);
-        }}style={{marginTop:'5px',marginLeft:'5px'}}>send anonymously</button>
+        }}style={{marginTop:'5px',marginLeft:'5px'}}><i class="fa-solid fa-comment-slash"></i></button>
     </form>
     
 
