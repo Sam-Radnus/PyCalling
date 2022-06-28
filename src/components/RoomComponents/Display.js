@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { config, useClient, useMicrophoneAndCameraTracks } from "./../../settings.js";
 import AgoraRTC, { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
 import { useSelector } from "react-redux"
-
+import Participants from './Participants';
 import { login,selectUser } from "./../../features/userSlice.js";
 function Display(props) {
 
@@ -53,6 +53,7 @@ function Display(props) {
   return (
 
     <>
+     <Participants users={users}  />
       <section id="stream__container">
         <div id="big">
 
@@ -108,16 +109,16 @@ function Display(props) {
         <div id="stream__container">
          <div style={{display:'grid',gridTemplateColumns:'1fr 2fr'}}>
       
-                         <div  style={{ height:'20vh',width:'20vw'}} id={`user`}>
-              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ height: '100%', width: '100%' }} />
+                         <div  style={{margin:'15px',height:'20vh',width:'20vw'}} id={`user`}>
+              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle:'solid',borderRadius:'5px',borderColor:'blue',height: '100%', width: '100%' }} />
     
             </div>
-            <div style={{ height:'20vh',width:'20vw'}} id="videos">
+            <div style={{ margin:'15px',height:'20vh',width:'20vw'}} id="videos">
         {users.length > 0 &&
                 users.map((user) => {
                   if (user.videoTrack) {
                     return (
-                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ height: '100%', width: '100%' }} key={user.uid} />
+                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{  borderStyle:'solid',borderRadius:'5px',borderColor:'red',height: '100%', width: '100%' }} key={user.uid} />
                     );
                   } else return null;
                 })}

@@ -367,3 +367,13 @@
     transform: translateX(-50%);
     cursor:pointer;
   }
+  button[class="volume"]
+  {
+    background-color: blue;
+    color:white;
+    border:none;
+    height:40px;
+    width:35px;
+    border-radius:5px;
+    cursor:pointer;
+  }

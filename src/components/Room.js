@@ -121,8 +121,8 @@ function Room() {
             <div id="room__container">
             
                 {start && tracks && screen && users &&  <ChatRoom uid={uid} users={users} /> } 
-                {start && tracks && screen && users && <Display users={users} screen={screen} tracks={tracks} />}
-                {start && tracks && screen && users &&  <Participants users={users}  /> }
+                {start && tracks && screen && users &&  <Display  users={users} screen={screen} tracks={tracks} />}
+              
             </div>
         </main>
     )
