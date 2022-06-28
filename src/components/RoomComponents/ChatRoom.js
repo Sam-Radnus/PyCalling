@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import { createChannel, createClient, RtmMessage } from 'agora-rtm-react'
 import '../../Styles/room.css'
+
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout, selectUser } from "./../../features/userSlice";
 const useClient = createClient("9e4b87cc837448969b97b4301e2aca92");
 const USER_ID = Math.floor(Math.random() * 1000000001);
 const useChannel = createChannel('TV')
@@ -14,33 +18,46 @@ function ChatRoom(props) {
     const [textInput,setTextInput]=useState('')
     const [isLoggedIn,setLoggedIn]=useState(false);
     const users=props.users;
+    const [type,setType]=useState('bot');
+    const cust = useSelector(selectUser);
     const uid2=props.uid;
     useEffect(() => {
-        if (textInput) setTexts([...texts, textInput]);
+        console.warn(texts);
       }, [texts.length]);    
     const sendMsg=async(text,hide)=>{
     
         
         setUid(users[0]);
+        setType('none');
         await client.setLocalUserAttributes({user:hide?'user':users[0]});
-        let message=client.createMessage({text,uid:USER_ID.toString(),messageType:'TEXT'})
-        console.warn(message);
-        console.warn(users);
+        let message=client.createMessage({text,uid:USER_ID.toString(),type:'none',messageType:'TEXT'})
+       // console.warn(message);
+       // console.warn(users);
         await testChannel.sendMessage(message)
         setTexts((previous) => {
-            return [...previous, { msg: { text }, uid:USER_ID.toString() }]
+            return [...previous, { msg: { text },type:'none' ,uid:USER_ID.toString() }]
          })
         setTextInput('');   
       
     }
     let login=async(val)=>{
-        let val2=val.toString();
+        
         console.warn(isLoggedIn);
-
+        console.warn(cust.name);
         await client.login({uid:USER_ID.toString()});
-      
         await testChannel.join();
+        setType('bot');
+        let text=`${cust.name} just joined the room,say hello!!!`;
+        let message=client.createMessage({text,uid:'PyCardis Bot',type:'bot',messageType:'TEXT'});
+        await testChannel.sendMessage(message);
+        setTexts((previous) => {
+            return [...previous, { msg: { text },type:'bot' ,uid:'PyCardis Bot' }]
+         })
+        
         await client.setLocalUserAttributes({user:users[0]});
+        console.warn(users);
+        
+        
         client.on('ConnectionStateChanged', async (state, reason) => {
             console.log('ConnectionStateChanged', state, reason)
           })
@@ -48,11 +65,14 @@ function ChatRoom(props) {
             const user = await client.getUserAttributes(uid);
            
             setTexts((previous) => {
-              return [...previous, { msg, uid:user }]
+              return [...previous, { msg, uid:user,type:type}]
             })
           })
-          testChannel.on('MemberJoined', (memberId) => {
-            console.warn('New Member: ', memberId)
+          testChannel.on('MemberJoined',async (memberId) => {
+          //  console.warn('New Member: ', memberId)
+           // console.warn(users);
+            
+            // console.warn(texts);
           })
           setLoggedIn(true)
          
@@ -93,10 +113,10 @@ function ChatRoom(props) {
         </div>
         { texts.map((text,i)=>
         <div key={i} className="message__wrapper">
-            <div className="message__body">
-               
-                <strong className="message__author">{text.uid.user?text.uid.user:'you'}</strong>
-                <p className="message__text">{text.msg['text']}</p>
+            <div className={`message__body${text.type==='bot'?'_bot':''}`}>
+                {text.type==='bot'?<strong className="message__author__bot">🤖 PyCardis Bot</strong>:<strong className="message__author">{text.uid.user?text.uid.user:'you'}</strong>}
+                
+                <p  className={`message__text${text.type==='bot'?'_bot':''}`}>{text.msg['text']}</p>
             </div>
         </div>
         )}

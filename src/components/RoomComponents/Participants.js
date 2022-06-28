@@ -3,12 +3,16 @@ import '../../Styles/room.css'
 import '../../App.css'
 function Participants(props) {
   let {users}=props;
+  //const users1=useUsers()[0];
   // useEffect(()=>{
   //    console.warn(users);
   // },[users]);
+  const action=async()=>{
+    
+  }
   return (
     <section id="members__container">
-
+      
     <div id="members__header">
         <p>Participants</p>
         <strong id="members__count">{users.length}</strong>

@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import {
+import AgoraRTC, {
     AgoraVideoPlayer,
     createClient,
     createMicrophoneAndCameraTracks,
@@ -27,6 +27,7 @@ function Room() {
     const [start, setStart] = useState(false);
     const [uid,setUid]=useState('');
     const client = useClient();
+    
     const appid = "9e4b87cc837448969b97b4301e2aca92";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
@@ -39,9 +40,9 @@ function Room() {
 
     useEffect(() => {
         try {
-            console.log(x.name);
+            console.warn(x.name);
             setName(x.name);
-            console.log(x.loggedIn);
+            console.warn(x.loggedIn);
         }
         catch (error) {
             console.warn(error);
@@ -55,8 +56,10 @@ function Room() {
     useEffect(() => {
         let init = async (name) => { 
             console.log("init", name);
+            
             client.on("user-published", async (user, mediaType) => {
                 await client.subscribe(user, mediaType);
+                
                 setUid(user.uid);
                    if (mediaType === "video" ) {
                        setUsers((prevUsers) => {
@@ -66,6 +69,9 @@ function Room() {
                    }
                    if (mediaType === "audio") {
                        user.audioTrack.play();
+                       user.audioTrack.setVolume(0);
+                       console.warn(user);
+                       
                    }
                    let members=await channel.getMembers()
                    console.warn(members);
@@ -76,6 +82,7 @@ function Room() {
                 console.log("unpublished", user, type);
                 if (type === "audio") {
                     user.audioTrack?.stop();
+                    
                     
                 }
                 if (type === "video") {
@@ -105,7 +112,7 @@ function Room() {
            }
             if (tracks) await client.publish([tracks[0], tracks[1]],screen);
             setStart(true);
-
+            
         };
 
         if (ready && tracks) {
