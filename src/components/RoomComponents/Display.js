@@ -31,7 +31,7 @@ function Display(props) {
            await client.unpublish();
            await client.publish([tracks[1]]);
            
-        
+           
            console.warn('hey');
            console.warn(x);
         }
@@ -42,7 +42,7 @@ function Display(props) {
           setTrackState(localScreenTracks);
           await client.unpublish([tracks[1]])
           await client.publish([localScreenTracks]);
-          
+      
     
         }
         //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
@@ -63,6 +63,7 @@ function Display(props) {
           
           console.warn(camera);
           tracks[1].muted?tracks[1].setMuted(false):tracks[1].setMuted(true);
+          
           setCamera(tracks[1].muted);
 
         }} >
@@ -110,13 +111,14 @@ function Display(props) {
          <div style={{display:'grid',gridTemplateColumns:'1fr 2fr'}}>
       
                          <div  style={{margin:'15px',height:'20vh',width:'20vw'}} id={`user`}>
-              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle:'solid',borderRadius:'5px',borderColor:'blue',height: '100%', width: '100%' }} />
-    
+              <AgoraVideoPlayer className='vid' videoTrack={trackState}  style={{ borderStyle:'solid',borderRadius:'5px',borderColor:'blue',height: '100%', width: '100%' }} />
+                                                                                                                                                                                            
             </div>
             <div style={{ margin:'15px',height:'20vh',width:'20vw'}} id="videos">
         {users.length > 0 &&
                 users.map((user) => {
                   if (user.videoTrack) {
+                    
                     return (
                       <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{  borderStyle:'solid',borderRadius:'5px',borderColor:'red',height: '100%', width: '100%' }} key={user.uid} />
                     );
