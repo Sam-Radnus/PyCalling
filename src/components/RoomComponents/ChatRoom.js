@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { logout, selectUser } from "./../../features/userSlice";
 const useClient = createClient("9e4b87cc837448969b97b4301e2aca92");
 const USER_ID = Math.floor(Math.random() * 1000000001);
+let type='bot';
 const useChannel = createChannel('TV')
 function ChatRoom(props) {
     const client=useClient();
@@ -18,17 +19,17 @@ function ChatRoom(props) {
     const [textInput,setTextInput]=useState('')
     const [isLoggedIn,setLoggedIn]=useState(false);
     const users=props.users;
-    const [type,setType]=useState('bot');
+   
     const cust = useSelector(selectUser);
     const uid2=props.uid;
     useEffect(() => {
         console.warn(texts);
       }, [texts.length]);    
     const sendMsg=async(text,hide)=>{
-    
-        
+       
+       
         setUid(users[0]);
-        setType('none');
+        type='none';
         await client.setLocalUserAttributes({user:hide?'user':users[0]});
         let message=client.createMessage({text,uid:USER_ID.toString(),type:'none',messageType:'TEXT'})
        // console.warn(message);
@@ -46,16 +47,11 @@ function ChatRoom(props) {
         console.warn(cust.name);
         await client.login({uid:USER_ID.toString()});
         await testChannel.join();
-        setType('bot');
-        let text=`${cust.name} just joined the room,say hello!!!`;
-        let message=client.createMessage({text,uid:'PyCardis Bot',type:'bot',messageType:'TEXT'});
-        await testChannel.sendMessage(message);
-        setTexts((previous) => {
-            return [...previous, { msg: { text },type:'bot' ,uid:'PyCardis Bot' }]
-         })
+       
         
-        await client.setLocalUserAttributes({user:users[0]});
-        console.warn(users);
+        
+        //await client.setLocalUserAttributes({user:users[0]});
+        //console.warn(users);
         
         
         client.on('ConnectionStateChanged', async (state, reason) => {
@@ -63,15 +59,22 @@ function ChatRoom(props) {
           })
           testChannel.on('ChannelMessage',async (msg, uid) => {
             const user = await client.getUserAttributes(uid);
-           
-            setTexts((previous) => {
-              return [...previous, { msg, uid:user,type:type}]
+            console.warn(user);     
+             setTexts((previous) => {
+              return [...previous, { msg, uid:user, type:type}]
             })
           })
           testChannel.on('MemberJoined',async (memberId) => {
           //  console.warn('New Member: ', memberId)
-           // console.warn(users);
-            
+           // console.warn(users);          
+            type='bot';
+            let text=`${cust.name} just joined the room,say hello!!!`;
+            let message=client.createMessage({text,uid:'PyCardis Bot',type:'bot',messageType:'TEXT'});
+            await testChannel.sendMessage(message);
+            setTexts((previous) => {
+               return [...previous, { msg: { text },type:type,uid:'PyCardis Bot' }]
+            })
+            type='none';
             // console.warn(texts);
           })
           setLoggedIn(true)

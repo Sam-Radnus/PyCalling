@@ -363,11 +363,11 @@
     position: fixed;
     bottom: 1rem;
     border-radius:8px;
-    left:50%;
+    left:20%;
     transform: translateX(-50%);
     cursor:pointer;
   }
-  button[class="volume"]
+  button[class="volume"],button[class="local"]
   {
     background-color: blue;
     color:white;
@@ -376,4 +376,12 @@
     width:35px;
     border-radius:5px;
     cursor:pointer;
+  }
+  button[class="local"]
+  {
+    height:fit-content;
+    width: fit-content;
+    font-size: 25px;
+    padding:15px;
+    margin-left:10px;
   }
