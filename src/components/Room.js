@@ -69,7 +69,7 @@ function Room() {
                    }
                    if (mediaType === "audio") {
                        user.audioTrack.play();
-                       user.audioTrack.setVolume(0);
+                       
                        console.warn(user);
                        
                    }
