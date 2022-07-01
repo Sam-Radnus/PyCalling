@@ -40,9 +40,9 @@ function Room() {
 
     useEffect(() => {
         try {
-            console.warn(x.name);
+            console.log(x.name);
             setName(x.name);
-            console.warn(x.loggedIn);
+            console.log(x.loggedIn);
         }
         catch (error) {
             console.warn(error);
@@ -99,17 +99,17 @@ function Room() {
                 });
             });
             try{
-            let x=await client.join(appid, name,token, username.toString());
-            console.warn(x);
-            setUsers((prevUsers)=>{
-                return [...prevUsers,x];
+               let x=await client.join(appid, name,token, username.toString());
+               console.log(x);
+               setUsers((prevUsers)=>{
+                   return [...prevUsers,x];
             })
-            console.warn(users);
+                console.warn(users);
             }
-           catch(error)
-           {
-             console.error(error);
-           }
+            catch(error)
+            {
+              console.error(error);
+            }
             if (tracks) await client.publish([tracks[0], tracks[1]],screen);
             setStart(true);
             

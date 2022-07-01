@@ -9,6 +9,7 @@ import { useSelector } from "react-redux"
 import Participants from './Participants';
 import { login, selectUser } from "./../../features/userSlice.js";
 import { Popover } from 'react-tiny-popover'
+
 function Display(props) {
 
 
@@ -23,8 +24,10 @@ function Display(props) {
   const navigate = useNavigate();
   const [trackState, setTrackState] = useState(tracks[1]);
   const [mic, setMic] = useState(true);
+  const [videoConfigs, setVideoConfigs] = useState([]);
+  const [selectedConfig,setSelectedConfig]=useState([]);
   const [stats, setStats] = useState([]);
-  const [volume,setVolume]=useState(100);
+  const [volume, setVolume] = useState(100);
   const [localStats, setLocalStats] = useState([]);
   const [camera, setCamera] = useState(true);
   const screenSharing = async (e) => {
@@ -91,17 +94,30 @@ function Display(props) {
     //console.warn(localStatsList);
     console.warn(client.getRemoteNetworkQuality());
     setLocalStats(localStatsList)
-  }, [isPopoverOpen]);
-  const tuneVolume=(op)=>{
-       let val=volume;
-       (op==='+')?setVolume(val+25):setVolume(val-25);
-       tracks[0].setVolume(volume);
-       console.warn(op);
-       console.warn(volume);
-  }
-  useEffect(()=>{
+    var videoProfiles = [
+      { label: "480p_1", detail: "640×480, 15fps, 500Kbps", value: "480p_1" },
+      { label: "480p_2", detail: "640×480, 30fps, 1000Kbps", value: "480p_2" },
+      { label: "720p_1", detail: "1280×720, 15fps, 1130Kbps", value: "720p_1" },
+      { label: "720p_2", detail: "1280×720, 30fps, 2000Kbps", value: "720p_2" },
+      { label: "1080p_1", detail: "1920×1080, 15fps, 2080Kbps", value: "1080p_1" },
+      { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
+      { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
+    ]
+    
+    setVideoConfigs(videoProfiles);
+    console.warn(videoConfigs);
+  }, [isPopoverOpen,videoConfigs.length]);
+  
+  const tuneVolume = (op) => {
+    let val = volume;
+    (op === '+') ? setVolume(val + 25) : setVolume(val - 25);
+    tracks[0].setVolume(volume);
+    console.warn(op);
     console.warn(volume);
-  },[volume]);
+  }
+  useEffect(() => {
+    console.warn(volume);
+  }, [volume]);
   return (
 
     <>
@@ -156,15 +172,11 @@ function Display(props) {
 
             <i className="fa-solid fa-camera"></i>
           </button>
-          <div  className="member__wrapper" id="member__1__wrapper">
-            <p><button className="volume" onClick={()=>{tuneVolume('+')}}> <i className="fa-solid fa-volume-high"></i> </button></p>
-            {volume+25}
-            <p><button className="volume" onClick={()=>{tuneVolume('-')}} > <i className="fa-solid fa-volume-low"></i> </button></p>
-            
-        </div>
-            
+
+
           <button style={{ color: 'white', backgroundColor: mic ? 'blue' : 'red' }} onClick={() => {
             tracks[0].muted ? tracks[0].setMuted(false) : tracks[0].setMuted(true);
+            tracks[1].setEncoderConfiguration({ width: 200, height: 640 });
             setMic(tracks[0].muted)
             console.warn(mic);
           }} className="controls">
@@ -192,6 +204,21 @@ function Display(props) {
           }} >
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
+          <div style={{ display: 'inline', marginLeft: '50px' }}>
+            <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px' }} onClick={() => { tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
+            <span style={{ fontSize: '25px' }}>{volume + 25}</span>
+            <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginRight: '15px' }} onClick={() => { tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
+  
+          </div>
+          <select name="configs" value={selectedConfig} onChange={(e)=>{
+              console.warn(e.target.value);
+              setSelectedConfig(e.target.value);
+              tracks[1].setEncoderConfiguration(e.target.value);
+          }} id="Config">
+            {videoConfigs.map(config=>
+               <option key={config.label} value={config.label}>{config.label}</option>
+            )};
+          </select>
         </div>
         {/* <div id="stream__box" >
           <div id="streams__container">
