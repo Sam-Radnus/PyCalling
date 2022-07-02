@@ -388,3 +388,21 @@
   div#controller{
     margin-left: 20%;
   }
+  select[id="config"]{
+    height:50px;
+    width:100px;
+    color:white;
+    background-color: blue;
+    border:none;
+    margin-top:0%;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:20px;
+    padding:5px;
+  }
+ option{
+    width:100px;
+    cursor:pointer;
+
+  }
+  

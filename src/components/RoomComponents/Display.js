@@ -206,19 +206,21 @@ function Display(props) {
           </button>
           <div style={{ display: 'inline', marginLeft: '50px' }}>
             <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px' }} onClick={() => { tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
-            <span style={{ fontSize: '25px' }}>{volume + 25}</span>
+            <span style={{ fontSize: '25px',transition:'1ms ease-in' }}>{volume + 25}</span>
             <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginRight: '15px' }} onClick={() => { tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
-  
+          
           </div>
-          <select name="configs" value={selectedConfig} onChange={(e)=>{
+         
+          <select id="config" name="configs" value={selectedConfig} onChange={(e)=>{
               console.warn(e.target.value);
               setSelectedConfig(e.target.value);
               tracks[1].setEncoderConfiguration(e.target.value);
-          }} id="Config">
+          }}>
             {videoConfigs.map(config=>
-               <option key={config.label} value={config.label}>{config.label}</option>
+               <option   key={config.label} value={config.label}>{config.label}</option>
             )};
           </select>
+        
         </div>
         {/* <div id="stream__box" >
           <div id="streams__container">
@@ -231,7 +233,7 @@ function Display(props) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr' }}>
 
             <div style={{ margin: '15px', height: '20vh', width: '20vw' }} id={`user`}>
-              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle: 'solid', borderRadius: '5px', borderColor: 'blue', height: '100%', width: '100%' }} />
+              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle: 'solid', borderRadius: '10px', borderColor: 'blue', height: '100%', width: '100%',borderWidth:'10px'}} />
 
             </div>
             <div style={{ margin: '15px', height: '20vh', width: '20vw' }} id="videos">
@@ -240,7 +242,7 @@ function Display(props) {
                   if (user.videoTrack) {
 
                     return (
-                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ borderStyle: 'solid', borderRadius: '5px', borderColor: 'red', height: '100%', width: '100%' }} key={user.uid} />
+                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ borderStyle: 'solid', borderRadius: '5px', borderColor: 'red', height: '100%', width: '100%',borderWidth:'10px' }} key={user.uid} />
                     );
                   } else return null;
                 })}
