@@ -405,4 +405,20 @@
     cursor:pointer;
 
   }
-  
+div[class="full-screen"]
+{
+  height:50vh;
+  width:70vw;
+}  
+div[class="mid-screen"]
+{
+  height:20vh;
+  width:20vw;
+}
+div[class="grid-container"]
+{
+  display: grid;
+  grid-template-columns: auto auto auto;
+ 
+  padding: 10px;
+}

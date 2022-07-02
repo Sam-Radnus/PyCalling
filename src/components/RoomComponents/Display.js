@@ -9,6 +9,10 @@ import { useSelector } from "react-redux"
 import Participants from './Participants';
 import { login, selectUser } from "./../../features/userSlice.js";
 import { Popover } from 'react-tiny-popover'
+import image1 from './adidas.jpg';
+import image2 from './bored.png';
+import image3 from './unnamed-2.webp';
+import image4 from './unnamed5.png';
 
 function Display(props) {
 
@@ -25,8 +29,9 @@ function Display(props) {
   const [trackState, setTrackState] = useState(tracks[1]);
   const [mic, setMic] = useState(true);
   const [videoConfigs, setVideoConfigs] = useState([]);
-  const [selectedConfig,setSelectedConfig]=useState([]);
+  const [selectedConfig, setSelectedConfig] = useState([]);
   const [stats, setStats] = useState([]);
+  const [isFull, setFull] = useState(false);
   const [volume, setVolume] = useState(100);
   const [localStats, setLocalStats] = useState([]);
   const [camera, setCamera] = useState(true);
@@ -103,11 +108,11 @@ function Display(props) {
       { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
       { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
     ]
-    
+
     setVideoConfigs(videoProfiles);
     console.warn(videoConfigs);
-  }, [isPopoverOpen,videoConfigs.length]);
-  
+  }, [isPopoverOpen, videoConfigs.length]);
+
   const tuneVolume = (op) => {
     let val = volume;
     (op === '+') ? setVolume(val + 25) : setVolume(val - 25);
@@ -118,6 +123,7 @@ function Display(props) {
   useEffect(() => {
     console.warn(volume);
   }, [volume]);
+
   return (
 
     <>
@@ -206,21 +212,21 @@ function Display(props) {
           </button>
           <div style={{ display: 'inline', marginLeft: '50px' }}>
             <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px' }} onClick={() => { tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
-            <span style={{ fontSize: '25px',transition:'1ms ease-in' }}>{volume + 25}</span>
+            <span style={{ fontSize: '25px', transition: '1ms ease-in' }}>{volume + 25}</span>
             <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginRight: '15px' }} onClick={() => { tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
-          
+
           </div>
-         
-          <select id="config" name="configs" value={selectedConfig} onChange={(e)=>{
-              console.warn(e.target.value);
-              setSelectedConfig(e.target.value);
-              tracks[1].setEncoderConfiguration(e.target.value);
+
+          <select id="config" name="configs" value={selectedConfig} onChange={(e) => {
+            console.warn(e.target.value);
+            setSelectedConfig(e.target.value);
+            tracks[1].setEncoderConfiguration(e.target.value);
           }}>
-            {videoConfigs.map(config=>
-               <option   key={config.label} value={config.label}>{config.label}</option>
+            {videoConfigs.map(config =>
+              <option key={config.label} value={config.label}>{config.label}</option>
             )};
           </select>
-        
+
         </div>
         {/* <div id="stream__box" >
           <div id="streams__container">
@@ -230,19 +236,48 @@ function Display(props) {
         </div> */}
 
         <div id="stream__container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr' }}>
+          <div className="grid-container" >
 
-            <div style={{ margin: '15px', height: '20vh', width: '20vw' }} id={`user`}>
-              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle: 'solid', borderRadius: '10px', borderColor: 'blue', height: '100%', width: '100%',borderWidth:'10px'}} />
+            <div onClick={() => {
+              isFull ? setFull(false) : setFull(true)
+            }
+            } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
+              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle: 'solid', borderRadius: '10px', borderColor: 'blue', height: '100%', width: '100%', borderWidth: '10px' }} />
 
             </div>
+
+            <div style={{borderRadius:'10px', margin: '15px', height: '20vh',backgroundPosition:'center' ,width: '20vw',backgroundImage:`url(${image1})` }} id="videos1">
+              
+            </div>
+            <div style={{borderRadius:'10px', margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw',backgroundImage:`url(${image2})` }} id="videos2">
+
+            </div>
+            <div style={{borderRadius:'10px', margin: '15px', height: '20vh', backgroundPosition:'center' ,width: '20vw' ,backgroundImage:`url(${image3})`}} id="videos3">
+
+            </div>
+            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw',backgroundImage:`url(${image4})` }} id="videos4">
+
+            </div>
+            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh', backgroundPosition:'center' ,width: '20vw',backgroundImage:`url(${image1})` }} id="videos5">
+
+            </div>
+            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw' ,backgroundImage:`url(${image2})`}} id="videos6">
+
+            </div>
+            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw' ,backgroundImage:`url(${image3})`}} id="videos7">
+
+            </div>
+            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw' ,backgroundImage:`url(${image3})`}} id="videos7">
+
+            </div>
+
             <div style={{ margin: '15px', height: '20vh', width: '20vw' }} id="videos">
               {users.length > 0 &&
                 users.map((user) => {
                   if (user.videoTrack) {
 
                     return (
-                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ borderStyle: 'solid', borderRadius: '5px', borderColor: 'red', height: '100%', width: '100%',borderWidth:'10px' }} key={user.uid} />
+                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ borderStyle: 'solid', borderRadius: '5px', borderColor: 'red', height: '100%', width: '100%', borderWidth: '10px' }} key={user.uid} />
                     );
                   } else return null;
                 })}
