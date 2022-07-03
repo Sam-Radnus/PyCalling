@@ -31,7 +31,9 @@ function Display(props) {
   const [videoConfigs, setVideoConfigs] = useState([]);
   const [selectedConfig, setSelectedConfig] = useState([]);
   const [stats, setStats] = useState([]);
+  const [second,setSecond]=useState('');
   const [isFull, setFull] = useState(false);
+  const [isFull2, setFull2] = useState(false);
   const [volume, setVolume] = useState(100);
   const [localStats, setLocalStats] = useState([]);
   const [camera, setCamera] = useState(true);
@@ -246,28 +248,73 @@ function Display(props) {
 
             </div>
 
-            <div style={{borderRadius:'10px', margin: '15px', height: '20vh',backgroundPosition:'center' ,width: '20vw',backgroundImage:`url(${image1})` }} id="videos1">
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true) 
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos1" ? isFull?'full2':'full' :'mid'}-screen`}
+             style={{borderRadius:'10px', margin: '15px',backgroundPosition:'center' ,backgroundImage:`url(${image1})` }} id="videos1">
               
             </div>
-            <div style={{borderRadius:'10px', margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw',backgroundImage:`url(${image2})` }} id="videos2">
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+
+            } 
+            } className={`${isFull2 && second==="videos2"  ? isFull?'full2':'full' :'mid'}-screen`} style={{borderRadius:'10px', margin: '15px',backgroundPosition:'center' ,backgroundImage:`url(${image2})` }} id="videos2">
 
             </div>
-            <div style={{borderRadius:'10px', margin: '15px', height: '20vh', backgroundPosition:'center' ,width: '20vw' ,backgroundImage:`url(${image3})`}} id="videos3">
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos3"  ? isFull?'full2':'full' :'mid'}-screen`} style={{borderRadius:'10px', margin: '15px',  backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos3">
 
             </div>
-            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw',backgroundImage:`url(${image4})` }} id="videos4">
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos4"  ? isFull?'full2':'full' :'mid'}-screen`} style={{ borderRadius:'10px',margin: '15px',backgroundPosition:'center' , backgroundImage:`url(${image4})` }} id="videos4">
 
             </div>
-            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh', backgroundPosition:'center' ,width: '20vw',backgroundImage:`url(${image1})` }} id="videos5">
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos5"  ? isFull?'full2':'full' :'mid'}-screen`}
+            style={{ borderRadius:'10px',margin: '15px',  backgroundPosition:'center' ,backgroundImage:`url(${image1})` }} id="videos5">
 
             </div>
-            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw' ,backgroundImage:`url(${image2})`}} id="videos6">
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos6"  ? isFull?'full2':'full' :'mid'}-screen`} style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image2})`}} id="videos6">
 
             </div>
-            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw' ,backgroundImage:`url(${image3})`}} id="videos7">
+            <div  onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos7"  ? isFull?'full2':'full' :'mid'}-screen`}
+            style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos7">
 
             </div>
-            <div style={{ borderRadius:'10px',margin: '15px', height: '20vh',backgroundPosition:'center' , width: '20vw' ,backgroundImage:`url(${image3})`}} id="videos7">
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos1"  ? isFull?'full2':'full' :'mid'}-screen`}
+             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos7">
 
             </div>
 
