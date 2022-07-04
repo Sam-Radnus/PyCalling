@@ -212,13 +212,13 @@ function Display(props) {
           }} >
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
-          <div style={{ display: 'inline', marginLeft: '50px' }}>
+          <div style={{ display: 'inline', marginLeft: '30px' }}>
             <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px' }} onClick={() => { tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
             <span style={{ fontSize: '25px', transition: '1ms ease-in' }}>{volume + 25}</span>
             <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginRight: '15px' }} onClick={() => { tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
 
-          </div>
-
+         
+          <span style={{fontSize:'20px'}}>Video Config</span>
           <select id="config" name="configs" value={selectedConfig} onChange={(e) => {
             console.warn(e.target.value);
             setSelectedConfig(e.target.value);
@@ -228,7 +228,8 @@ function Display(props) {
               <option key={config.label} value={config.label}>{config.label}</option>
             )};
           </select>
-
+         
+          </div>
         </div>
         {/* <div id="stream__box" >
           <div id="streams__container">
@@ -238,7 +239,7 @@ function Display(props) {
         </div> */}
 
         <div id="stream__container">
-          <div className="grid-container" >
+          <div style={{marginLeft:'2vw'}} className="grid-container" >
 
             <div onClick={() => {
               isFull ? setFull(false) : setFull(true)
@@ -313,8 +314,8 @@ function Display(props) {
               console.warn(e.target.id);
               setSecond(e.target.id);
             } 
-            } className={`${isFull2 && second==="videos1"  ? isFull?'full2':'full' :'mid'}-screen`}
-             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos7">
+            } className={`${isFull2 && second==="videos8"  ? isFull?'full2':'full' :'mid'}-screen`}
+             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos8">
 
             </div>
 
