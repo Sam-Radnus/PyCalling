@@ -21,13 +21,15 @@ import AgoraRTC, {
     createScreenVideoTrack,
 } from "agora-rtc-react";
 import { createChannel } from 'agora-rtm-react';
-function Room() {
+function Room(props) {
     let token=null;
+    let {room}=props;
     const [users, setUsers] = useState([]);
     const [start, setStart] = useState(false);
     const [uid,setUid]=useState('');
     const client = useClient();
-    
+    const [channelName, setChannelName] = useState("");
+    const roomName=props.room;
     const appid = "9e4b87cc837448969b97b4301e2aca92";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
@@ -55,7 +57,7 @@ function Room() {
     });
     useEffect(() => {
         let init = async (name) => { 
-            console.log("init", name);
+            console.log("init:", name);
             
             client.on("user-published", async (user, mediaType) => {
                 await client.subscribe(user, mediaType);
@@ -98,26 +100,30 @@ function Room() {
                     return prevUsers.filter((User) => User.uid !== user.uid);
                 });
             });
+            
             try{
-               let x=await client.join(appid, name,token, username.toString());
-               console.log(x);
-               setUsers((prevUsers)=>{
-                   return [...prevUsers,x];
-            })
-                console.warn(users);
-            }
-            catch(error)
-            {
-              console.error(error);
-            }
+                let x=await client.join(appid, name,token,null);
+                console.warn(x);
+                setUsers((prevUsers)=>{
+                    return [...prevUsers,x];
+             })
+                 console.warn(users);
+             }
+             catch(error)
+             {
+               console.error(error);
+             }
+               
             if (tracks) await client.publish([tracks[0], tracks[1]],screen);
             setStart(true);
             
         };
 
-        if (ready && tracks) {
+        if (ready && tracks ) {
             console.log("init ready");
-            init('main');
+            console.warn(room);
+            let roomName=sessionStorage.getItem('room');
+            init(roomName);
         }
     }, [client, ready, tracks]);
     useEffect(()=>{
