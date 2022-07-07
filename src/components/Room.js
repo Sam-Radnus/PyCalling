@@ -21,15 +21,15 @@ import AgoraRTC, {
     createScreenVideoTrack,
 } from "agora-rtc-react";
 import { createChannel } from 'agora-rtm-react';
-function Room(props) {
+function Room() {
     let token=null;
-    let {room}=props;
+   
     const [users, setUsers] = useState([]);
     const [start, setStart] = useState(false);
     const [uid,setUid]=useState('');
     const client = useClient();
     const [channelName, setChannelName] = useState("");
-    const roomName=props.room;
+   
     const appid = "9e4b87cc837448969b97b4301e2aca92";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
@@ -41,6 +41,7 @@ function Room(props) {
 
 
     useEffect(() => {
+        
         try {
             console.log(x.name);
             setName(x.name);
@@ -72,11 +73,10 @@ function Room(props) {
                    if (mediaType === "audio") {
                        user.audioTrack.play();
                        
-                       console.warn(user);
+    
                        
                    }
-                   let members=await channel.getMembers()
-                   console.warn(members);
+
               
             });
 
@@ -102,8 +102,8 @@ function Room(props) {
             });
             
             try{
-                let x=await client.join(appid, name,token,null);
-                console.warn(x);
+                let x=await client.join(appid, name,token,username.toString());
+               
                 setUsers((prevUsers)=>{
                     return [...prevUsers,x];
              })
@@ -121,7 +121,7 @@ function Room(props) {
 
         if (ready && tracks ) {
             console.log("init ready");
-            console.warn(room);
+            
             let roomName=sessionStorage.getItem('room');
             init(roomName);
         }
