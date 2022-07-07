@@ -4,9 +4,9 @@ import '../../App.css'
 function Participants(props) {
   let {users}=props;
   //const users1=useUsers()[0];
-  // useEffect(()=>{
-  //    console.warn(users);
-  // },[users]);
+   useEffect(()=>{
+      console.warn(users);
+   },[users]);
   const action=async()=>{
     
   }

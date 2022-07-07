@@ -108,12 +108,6 @@ function ChatRoom(props) {
             </div>
         </div>
        
-        <div className="message__wrapper">
-            <div className="message__body">
-                <strong className="message__author">Dennis Ivy</strong>
-                <p className="message__text">Does anyone know when he will be back?</p>
-            </div>
-        </div>
         { texts.map((text,i)=>
         <div key={i} className="message__wrapper">
             <div className={`message__body${text.type==='bot'?'_bot':''}`}>
