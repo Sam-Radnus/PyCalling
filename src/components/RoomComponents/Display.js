@@ -142,7 +142,7 @@ function Display(props) {
             content={<div style={{ position: 'absolute', backgroundColor: '#262625', top: '25%', left: '0%', paddingLeft: '25px', borderRadius: '5px', transition: '2s ease-in-out' }}>
 
               {stats.map((stat) =>
-                <p style={{ fontSize: '25px' }}>
+                <p style={{ fontSize: '15px' }}>
                   <small >{stat.description}</small><span>:{stat.value} {stat.unit}</span>
                 </p>
               )}
@@ -159,7 +159,7 @@ function Display(props) {
             content={<div style={{ position: 'absolute', backgroundColor: '#262625', top: '25%', left: '0%', width: '10vw', paddingLeft: '25px', borderRadius: '5px', transition: '2s ease-in-out' }}>
 
               {localStats.map((stat) =>
-                <p style={{ fontSize: '25px' }}>
+                <p style={{ fontSize: '15px' }}>
                   <small >{stat.description}</small><span>:{stat.value} {stat.unit}</span>
                 </p>
               )}
@@ -213,12 +213,12 @@ function Display(props) {
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
           <div style={{ display: 'inline', marginLeft: '30px' }}>
-            <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px' }} onClick={() => { tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
-            <span style={{ fontSize: '25px', transition: '1ms ease-in' }}>{volume + 25}</span>
-            <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginRight: '15px' }} onClick={() => { tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
+            <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px'  }} onClick={() => { volume<100 && tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
+            <span style={{ fontSize: '15px', transition: '1ms ease-in' }}>{volume + 25}</span>
+            <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginRight: '15px' }} onClick={() => { volume>-1 &&  tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
 
          
-          <span style={{fontSize:'20px'}}>Video Config</span>
+          <span style={{fontSize:'10px'}}>Video Config</span>
           <select id="config" name="configs" value={selectedConfig} onChange={(e) => {
             console.warn(e.target.value);
             setSelectedConfig(e.target.value);

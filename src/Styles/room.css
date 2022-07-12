@@ -304,13 +304,13 @@
   }
   div#controller  button[class="controls"] 
   {
-    height:50px;
-    width:75px;
+    height:30px;
+    width:35px;
     cursor:pointer;
     border: none;
     border-radius: 5px;
     margin:5px;
-    font-size: 25px;
+    font-size: 15px;
     color:white;
     transition: 0.5s ease-in-out;
     
@@ -382,8 +382,8 @@
     background-color: blue;
     color:white;
     border:none;
-    height:40px;
-    width:35px;
+    height:20px;
+    width:25px;
     border-radius:5px;
     cursor:pointer;
   }
@@ -396,15 +396,15 @@
   {
     height:fit-content;
     width: fit-content;
-    font-size: 20px;
+    font-size: 10px;
     padding:10px;
     margin-left:10px;
   }
   div#controller{
-    margin-left: 15%;
+    margin-left: 5%;
   }
   select[id="config"]{
-    height:50px;
+    height:30px;
     width:100px;
     color:white;
     background-color: blue;
@@ -413,7 +413,7 @@
     margin-left: 10px;
     border-radius:5px;
     cursor:pointer;
-    font-size:20px;
+    font-size:10px;
     padding:5px;
   }
  option{
@@ -446,7 +446,7 @@ div[class="full2-screen"]
 div[class="mid-screen"]
 {
   height:15vh;
-  width:20vw;
+  width:19vw;
 }
 div[class="grid-container"]
 {
