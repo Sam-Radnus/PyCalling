@@ -15,7 +15,7 @@ function Lobby() {
     const x=useSelector(selectUser);
     
   return (
-    <div>
+    <div style={{height:'100vh',backgroundColor:'#181E23'}}>
          
 
     <main id="room__lobby__container">

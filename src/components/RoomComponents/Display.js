@@ -239,7 +239,7 @@ function Display(props) {
         </div> */}
 
         <div id="stream__container">
-          <div style={{marginLeft:'2vw'}} className="grid-container" >
+          <div style={{marginLeft:'0vw'}} className="grid-container" >
 
             <div onClick={() => {
               isFull ? setFull(false) : setFull(true)

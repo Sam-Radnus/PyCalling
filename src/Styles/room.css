@@ -79,8 +79,8 @@
     background-color: #262625;
     right: 0;
     position: absolute;
-    width: 100%;
-    max-width: 25rem;
+    width: 70%;
+    max-width: 20rem;
     overflow-y: auto;
     border-left: 1px solid #111;
   }
@@ -123,7 +123,7 @@
   
   .message__author {
     margin-right: 10px;
-    color: #2aca3e!important;
+    color: white!important;
   
   }
   
@@ -138,23 +138,24 @@
   }
   
   #message__form {
-    width: 23.2rem;
+    width: 20.2rem;
     position: fixed;
     bottom: 0;
     display: block;
-    background-color: #1a1a1a;
+    background-color: #16083e;
     padding: 1em;
   }
   
+  
   #message__form input {
     color: #fff;
-    width: 100%;
+    width:63%;
     border: none;
     border-radius: 5px;
     padding: 18px;
-    font-size: 14px;
+    font-size: 10px;
     box-sizing: border-box;
-    background-color: #3f434a;
+    background-color: #1153c6;
   }
   
   #message__form input:focus {
@@ -167,11 +168,11 @@
   
   #stream__container {
     justify-self: center;
-    width: calc(100% - 40.7rem);
+    width: calc(100% - 35.7rem);
     position: fixed;
     left: 15.7rem;
     top: clac(100vh - 72px);
-    overflow-y: auto;
+    overflow-x:hidden;
     height: 100%;
   }
   #stream__box{
@@ -194,7 +195,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap:2em;
+    gap:0em;
     align-items: center;
     margin-top:25px;
     margin-bottom: 225px;
@@ -317,15 +318,23 @@
   button[class="send"]
   {
     height:50px;
-    width:75px;
+    width:40px;
     cursor:pointer;
     border: none;
-    font-size: 25px;
+    font-size: 15px;
     border-radius: 5px;
     margin:5px;
+
     background-color: blue;
     color:white;
     transition: 0.5s ease-in-out;
+  }
+ 
+  button[class="send"]:hover{
+    background-color: #51B56D;
+  }
+  button[id="second"]:hover{
+    background-color: #F12646;
   }
   .stream__actions a,
   .stream__actions button 
@@ -436,7 +445,7 @@ div[class="full2-screen"]
 }  
 div[class="mid-screen"]
 {
-  height:20vh;
+  height:15vh;
   width:20vw;
 }
 div[class="grid-container"]

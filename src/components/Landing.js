@@ -25,9 +25,9 @@ function Landing() {
     <section className="hero__section">
        
         <div style={{marginLeft:'20%'}} className="hero__section__img">
-        <h1 style={{zIndex:'999',fontSize:'50px',position:'absolute',top:'20%'}}>Join in Now</h1>
-        <img id="hover" style={{maxHeight:'550px',objectFit:'contain'}} src={require("./images/lobby.png")}/> 
-        <img id="background"style={{height:'750px'}} src={require("./images/image.png")}/> 
+        <h1 id="title" style={{zIndex:'999',fontSize:'50px',position:'absolute',top:'5%'}}>Join in Now</h1>
+        <img id="hover" style={{objectFit:'contain'}} src={require("./images/lobby.png")}/> 
+        <img id="background" src={require("./images/image.png")}/> 
         </div>
     </section>
     

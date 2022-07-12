@@ -22,24 +22,18 @@ function ChatRoom(props) {
    
     const cust = useSelector(selectUser);
     const uid2=props.uid;
-    useEffect(() => {
-        console.warn(texts);
-      }, [texts.length]);    
+     
     const sendMsg=async(text,hide)=>{
-       
-       
         setUid(users[0]);
-        type='none';
         await client.setLocalUserAttributes({user:hide?'user':users[0]});
-        let message=client.createMessage({text,uid:USER_ID.toString(),type:'none',messageType:'TEXT'})
+        let message=client.createMessage({text,uid:USER_ID.toString(),messageType:'TEXT'})
        // console.warn(message);
        // console.warn(users);
         await testChannel.sendMessage(message)
         setTexts((previous) => {
-            return [...previous, { msg: { text },type:'none' ,uid:USER_ID.toString() }]
+            return [...previous, { msg: { text } ,uid:USER_ID.toString() }]
          })
         setTextInput('');   
-      
     }
     let login=async(val)=>{
         
@@ -67,14 +61,14 @@ function ChatRoom(props) {
           testChannel.on('MemberJoined',async (memberId) => {
           //  console.warn('New Member: ', memberId)
            // console.warn(users);          
-            type='bot';
-            let text=`${cust.name} just joined the room,say hello!!!`;
-            let message=client.createMessage({text,uid:'PyCardis Bot',type:'bot',messageType:'TEXT'});
-            await testChannel.sendMessage(message);
-            setTexts((previous) => {
-               return [...previous, { msg: { text },type:type,uid:'PyCardis Bot' }]
-            })
-            type='none';
+            // type='bot';
+            // let text=`${cust.name} just joined the room,say hello!!!`;
+            // let message=client.createMessage({text,uid:'PyCardis Bot',type:'bot',messageType:'TEXT'});
+            // await testChannel.sendMessage(message);
+            // setTexts((previous) => {
+            //    return [...previous, { msg: { text },type:type,uid:'PyCardis Bot' }]
+            // })
+            // type='none';
             // console.warn(texts);
           })
           setLoggedIn(true)
@@ -109,11 +103,11 @@ function ChatRoom(props) {
         </div>
        
         { texts.map((text,i)=>
-        <div key={i} className="message__wrapper">
-            <div className={`message__body${text.type==='bot'?'_bot':''}`}>
-                {text.type==='bot'?<strong className="message__author__bot">🤖 PyCardis Bot</strong>:<strong className="message__author">{text.uid.user?text.uid.user:'you'}</strong>}
+        <div key={i}  className="message__wrapper">
+            <div style={{color:'white',backgroundColor:`${text.uid.user?'#252D33':'#51B66D'}`}} className={`message__body`}>
+                <strong style={{color:'white'}} className="message__author">{text.uid.user?text.uid.user:'you'}</strong>
                 
-                <p  className={`message__text${text.type==='bot'?'_bot':''}`}>{text.msg['text']}</p>
+                <p   className={`message__text${text.type==='bot'?'_bot':''}`}>{text.msg['text']}</p>
             </div>
         </div>
         )}
@@ -131,7 +125,7 @@ function ChatRoom(props) {
              
              sendMsg(textInput,false);
         }}style={{marginTop:'5px'}}><i className="fa-solid fa-message"></i></button>
-        <button className="send" onClick={(e)=>{
+        <button className="send" id="second" onClick={(e)=>{
              e.preventDefault();
              sendMsg(textInput,true);
         }}style={{marginTop:'5px',marginLeft:'5px'}}><i class="fa-solid fa-comment-slash"></i></button>

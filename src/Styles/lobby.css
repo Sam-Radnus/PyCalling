@@ -1,8 +1,8 @@
 #form__container {
     width: 90%;
-    max-width: 600px;
+    max-width: 500px;
     border-radius: 10px;
-    background-color: #262625;
+    background-color: #1C2128;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -17,7 +17,7 @@
     border-radius: 10px 10px 0 0;
     padding: 10px;
     text-align: center;
-    background-color: #363739;
+    background-color: #22345C;
     margin: 0;
     font-size: 18px;
     font-size: 300;
@@ -52,7 +52,7 @@
   .form__field__wrapper button[type='submit'] {
     margin-top: 32px;
     cursor: pointer;
-    background-color: #845695;
+    background-color: #51B66D;
     border: none;
     color: #fff;
     font-size: 16px;
