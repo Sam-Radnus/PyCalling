@@ -185,3 +185,13 @@ a {
     background-color: transparent;
   }
 }
+img#hover{
+ position: absolute;
+ left:0;
+ margin-right:20px;
+} 
+img#background{
+  position:absolute;
+  left:40%;
+}
+ 

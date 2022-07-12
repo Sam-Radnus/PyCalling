@@ -8,6 +8,7 @@
   #room__container {
     position: relative;
     display: flex;
+    background-color: #1A1E23;
     gap: 3rem;
   }
   
@@ -174,7 +175,7 @@
     height: 100%;
   }
   #stream__box{
-    background-color: #3f434a;
+    background-color: #1A1E23;
     height:60vh
   }
   

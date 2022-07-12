@@ -8,7 +8,7 @@ function Landing() {
         <div className="nav--list">
              <Link to="/">
                  <h3 id="logo">
-                      <img src={require("./images/logo.png")} alt="Site Logo"/> 
+                    
                      <span> PyCalling</span>
                  </h3>
              </Link>    
@@ -23,9 +23,11 @@ function Landing() {
      </header>
 
     <section className="hero__section">
-        <h2>Interactive Chat & Streaming</h2>
-        <div className="hero__section__img">
-             <img style={{maxHeight:'550px',objectFit:'contain'}} src={require("./images/Group 42 (3).png")}/> 
+       
+        <div style={{marginLeft:'20%'}} className="hero__section__img">
+        <h1 style={{zIndex:'999',fontSize:'50px',position:'absolute',top:'20%'}}>Join in Now</h1>
+        <img id="hover" style={{maxHeight:'550px',objectFit:'contain'}} src={require("./images/lobby.png")}/> 
+        <img id="background"style={{height:'750px'}} src={require("./images/image.png")}/> 
         </div>
     </section>
     
