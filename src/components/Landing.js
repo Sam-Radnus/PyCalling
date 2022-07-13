@@ -3,7 +3,7 @@ import '../App.css'
 import {Link ,Navigate,useNavigate,useLocation} from 'react-router-dom';
 function Landing() {
   return (
-    <div>
+    <div >
             <header id="nav">
         <div className="nav--list">
              <Link to="/">
@@ -27,7 +27,7 @@ function Landing() {
         <div style={{marginLeft:'20%'}} className="hero__section__img">
         <h1 id="title" style={{zIndex:'999',fontSize:'50px',position:'absolute',top:'5%'}}>Join in Now</h1>
         <img id="hover" style={{objectFit:'contain'}} src={require("./images/lobby.png")}/> 
-        <img id="background" src={require("./images/image.png")}/> 
+        <img id="background" src={require("./images/maxresdefault.jpg")}/> 
         </div>
     </section>
     

@@ -28,7 +28,7 @@ function Participants(props) {
         {users.slice(1,10).map(user=>(
           <div key={user._uintid} className="member__wrapper" id="member__1__wrapper">
           <span className="green__icon"></span>
-          <p className="member_name">{user.uid}</p>
+          <p style={{fontSize:'5px'}} className="member_name">{user.uid}</p>
       </div>
         ))
       }

@@ -27,9 +27,9 @@
 }
 
 body {
-  background-color: #242424;
+  background-color: blue;
   color: #fff;
-
+  
   font-size: 14px;
   padding: 0;
   margin: 0;
@@ -64,7 +64,7 @@ a {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #000000;
-  background-color: #1a1a1a;
+  background-color: #100121;
   text-decoration: none;
   padding: 16px 5%;
   z-index: 999;
@@ -199,6 +199,7 @@ img#hover{
 img#background{
   position:absolute;
   left:35%;
+  top:9%;
   height: 90vh;
   width:65vw;
 }

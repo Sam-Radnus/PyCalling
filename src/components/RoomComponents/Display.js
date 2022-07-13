@@ -139,7 +139,7 @@ function Display(props) {
             isOpen={isPopoverOpen}
             positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
             onClickOutside={() => setIsPopoverOpen(false)}
-            content={<div style={{ position: 'absolute', backgroundColor: '#262625', top: '25%', left: '0%', paddingLeft: '25px', borderRadius: '5px', transition: '2s ease-in-out' }}>
+            content={<div style={{ position: 'absolute', backgroundColor: '#09041B', top: '25%', left: '0%', paddingLeft: '25px', borderRadius: '5px', transition: '2s ease-in-out' }}>
 
               {stats.map((stat) =>
                 <p style={{ fontSize: '15px' }}>
@@ -156,7 +156,7 @@ function Display(props) {
             isOpen={isPopoverOpen2}
             positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
             onClickOutside={() => setIsPopoverOpen2(false)}
-            content={<div style={{ position: 'absolute', backgroundColor: '#262625', top: '25%', left: '0%', width: '10vw', paddingLeft: '25px', borderRadius: '5px', transition: '2s ease-in-out' }}>
+            content={<div style={{ position: 'absolute', backgroundColor: '#09041B', top: '25%', left: '0%', width: '10vw', paddingLeft: '25px', borderRadius: '5px', transition: '2s ease-in-out' }}>
 
               {localStats.map((stat) =>
                 <p style={{ fontSize: '15px' }}>

@@ -12,21 +12,24 @@
     gap: 3rem;
   }
   
+  body{
+    background-color:#120142;
+  }
   #members__container {
     background-color: #262625;
     border-right: 1px solid #797a79;
     overflow-y: auto;
     width: 90%;
-    max-width: 250px;
+    max-width: 150px;
     position: fixed;
     height: 100%;
     z-index: 999;
   }
   
   #members__count {
-    background-color: #1d1d1c;
+    background-color: #08021f;
     padding: 7px 15px;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 600;
     border-radius: 5px;
   }
@@ -37,15 +40,17 @@
     align-items: center;
     padding: 0 1rem;
     position: fixed;
-    font-size: 18px;
-    background-color: #323143;
-    width: 218px;
+    font-size: 10px;
+    background-color: #280d73;
+    width: 120px;
   }
   
   #member__list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background-color:#09041B ;
+    height:100vh;
     padding-top: 5rem;
     padding-bottom: 6.5rem;
   }
@@ -63,20 +68,20 @@
   
   .green__icon {
     display: block;
-    height: 8px;
-    width: 8px;
+    height: 5px;
+    width: 5px;
     border-radius: 50%;
     background-color: #2aca3e;
   }
   
   .member_name{
-    font-size: 14px;
+    font-size:10px;
     line-height: 0;
   }
   
   #messages__container {
     height: calc(100vh - 85px);
-    background-color: #262625;
+    background-color: #09041b;
     right: 0;
     position: absolute;
     width: 70%;
@@ -168,9 +173,9 @@
   
   #stream__container {
     justify-self: center;
-    width: calc(100% - 35.7rem);
+    width: calc(100% - 28.7rem);
     position: fixed;
-    left: 15.7rem;
+    left: 9.7rem;
     top: clac(100vh - 72px);
     overflow-x:hidden;
     height: 100%;
@@ -306,13 +311,15 @@
   {
     height:30px;
     width:35px;
+
     cursor:pointer;
     border: none;
     border-radius: 5px;
     margin:5px;
+  
     font-size: 15px;
     color:white;
-    transition: 0.5s ease-in-out;
+    transition: 0.2s ease-in-out;
     
   }
   button[class="send"]
@@ -396,12 +403,22 @@
   {
     height:fit-content;
     width: fit-content;
+    margin-top:0px;
     font-size: 10px;
-    padding:10px;
-    margin-left:10px;
+    padding:8px;
+    margin-left:25px;
   }
   div#controller{
     margin-left: 5%;
+    position: fixed;
+    top:90%;
+    width:55vw;
+    padding:10px;
+    padding-left:40px;
+    border-radius: 5px;
+    z-index:999;
+    background-color: rgb(3, 0, 9);
+  
   }
   select[id="config"]{
     height:30px;
@@ -410,6 +427,7 @@
     background-color: blue;
     border:none;
     margin-top:0%;
+    margin-right:0px;
     margin-left: 10px;
     border-radius:5px;
     cursor:pointer;
@@ -423,8 +441,8 @@
   }
 div[class="full-screen"]
 {
-  height:50vh;
-  width:65.5vw;
+  height:40vh;
+  width:62.5vw;
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start:1;
@@ -434,8 +452,8 @@ div[class="full-screen"]
 }  
 div[class="full2-screen"]
 {
-  height:50vh;
-  width:65.5vw;
+  height:40vh;
+  width:62.5vw;
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start:3;

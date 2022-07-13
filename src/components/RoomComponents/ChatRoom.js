@@ -88,7 +88,7 @@ function ChatRoom(props) {
     <section id="messages__container">
 
     <div id="messages">
-        <div className="message__wrapper">
+        {/* <div className="message__wrapper">
             <div className="message__body__bot">
                 <strong className="message__author__bot">🤖 PyCardis Bot</strong>
                 <p className="message__text__bot">Welcome to the room, Don't be shy, say hello!</p>
@@ -100,7 +100,7 @@ function ChatRoom(props) {
                 <strong className="message__author__bot">🤖 PyCardis Bot</strong>
                 <p className="message__text__bot">Dennis Ivy just entered the room!</p>
             </div>
-        </div>
+        </div> */}
        
         { texts.map((text,i)=>
         <div key={i}  className="message__wrapper">
