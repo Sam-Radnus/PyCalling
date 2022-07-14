@@ -401,12 +401,13 @@
   }
   button[class="local"]
   {
-    height:fit-content;
-    width: fit-content;
+    
+    width: 100px;
     margin-top:0px;
     font-size: 10px;
     padding:8px;
-    margin-left:25px;
+    margin-left:12px;
+    height:30px;
   }
   div#controller{
     margin-left: 5%;

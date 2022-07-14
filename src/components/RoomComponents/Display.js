@@ -134,7 +134,8 @@ function Display(props) {
         <div id="big">
 
         </div>
-        <div id="controller">
+        <div style={{display:'flex'}} id="controller">
+          <div style={{marginTop:'5px'}}>
           <Popover
             isOpen={isPopoverOpen}
             positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
@@ -148,7 +149,7 @@ function Display(props) {
               )}
             </div>}
           >
-            <button class="local" onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+            <button  class="local" onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
               Get User Stats
             </button>
           </Popover>
@@ -165,11 +166,12 @@ function Display(props) {
               )}
             </div>}
           >
-            <button class="local" onClick={() => setIsPopoverOpen2(!isPopoverOpen2)}>
+            <button class="local" style={{marginLeft:'10px'}} onClick={() => setIsPopoverOpen2(!isPopoverOpen2)}>
               Get Local Stats
             </button>
           </Popover>
-          <button className="controls" style={{ color: 'white', backgroundColor: camera ? 'blue' : 'red', marginLeft: '2%' }} onClick={() => {
+          </div>
+          <button className="controls" style={{ color: 'white', backgroundColor: camera ? 'blue' : 'red', marginLeft: '5%'}} onClick={() => {
 
             console.warn(camera);
             tracks[1].muted ? tracks[1].setMuted(false) : tracks[1].setMuted(true);
@@ -212,6 +214,7 @@ function Display(props) {
           }} >
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
+         
           <div style={{ display: 'inline', marginLeft: '30px' }}>
             <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px'  }} onClick={() => { volume<100 && tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
             <span style={{ fontSize: '15px', transition: '1ms ease-in' }}>{volume + 25}</span>
