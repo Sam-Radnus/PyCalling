@@ -178,6 +178,7 @@
     left: 9.7rem;
     top: clac(100vh - 72px);
     overflow-x:hidden;
+    background-color: #191B28;
     height: 100%;
   }
   #stream__box{

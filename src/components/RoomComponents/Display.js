@@ -13,7 +13,7 @@ import image1 from './adidas.jpg';
 import image2 from './bored.png';
 import image3 from './unnamed-2.webp';
 import image4 from './unnamed5.png';
-
+import {AIDenoiserExtension} from "agora-extension-ai-denoiser";
 function Display(props) {
 
 
@@ -21,6 +21,9 @@ function Display(props) {
   const x = useSelector(selectUser);
   const dispatch = useDispatch();
   const { users, tracks } = props;
+  const [denoiser,setDenoiser] = useState(null);
+  let processor=null;
+  const [processorEnable,setProcessorEnable]=useState(true);
   const client = useClient();
   const [screenShare, setScreenShare] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -62,12 +65,75 @@ function Display(props) {
     }
     //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
+  const pipeAIDenosier = (audioTrack, processor) => {
+    audioTrack.pipe(processor).pipe(audioTrack.processorDestination);
+  }
+   const openAIDenoiser=async(e)=>{
+       e.preventDefault();
+       denoiser=denoiser||((()=>{
+          const denoiser = new AIDenoiserExtension({assetsPath:'./external'});
+          AgoraRTC.registerExtensions([denoiser]);
+          denoiser.onloaderror=(e)=>{
+            console.error(e);
+            processor=null;
+          }
+          return denoiser;
+   })())
+        processor=processor||((()=>{
+          let processor=denoiser.createProcessor();
+          processor.onoverload=async()=>{
+             console.log("overload!!!");
+             try{
+              await processor.disable();
+              processor=true;
+             }
+             catch(error)
+             {
+              console.error(error);
+             }
+             finally{
+                 console.log('enabled');
+             }
+          }
+          return processor;
+        })());
+        pipeAIDenosier(tracks[0],processor);
+    
+   }
+   const enableAiDenoiser=async(e)=>{
+    e.preventDefault();
+    if(processorEnable)
+    {
+      try{
+        await processor.enable();
+        processorEnable=false;
+      }
+      catch(e){
+        console.error(e);
+      }
+      finally{
+        
+      }
+    }else{
+       try{
+        processor.disable();
+        processorEnable=true;
+       }
+       catch(e){
+        console.error("disable AIDenoiser Failure");
+       }
+       finally{
+
+       }
+    }
+   }
 
   useEffect(() => {
     console.warn(users);
   }, [trackState])
   useEffect(() => {
     const clientStats = client.getRTCStats();
+  
     const clientStatsList = [
       { description: "Number of users in channel", value: clientStats.UserCount, unit: "" },
       { description: "Duration in channel", value: clientStats.Duration, unit: "s" },
@@ -214,7 +280,8 @@ function Display(props) {
           }} >
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
-         
+          <button className="controls" onClick={openAIDenoiser}style={{backgroundColor:'blue',width:'fit-content'}} id="openAiDenosier" >Open</button>
+          <button className="controls" onClick={enableAiDenoiser}style={{backgroundColor:'blue',width:'fit-content'}} id="enableAiDenosier">enable</button>
           <div style={{ display: 'inline', marginLeft: '30px' }}>
             <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px'  }} onClick={() => { volume<100 && tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
             <span style={{ fontSize: '15px', transition: '1ms ease-in' }}>{volume + 25}</span>
