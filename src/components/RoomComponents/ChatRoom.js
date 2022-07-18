@@ -103,8 +103,9 @@ function ChatRoom(props) {
         </div> */}
        
         { texts.map((text,i)=>
-        <div key={i}  className="message__wrapper">
-            <div style={{color:'white',backgroundColor:`${text.uid.user?'#252D33':'#51B66D'}`}} className={`message__body`}>
+        <div key={i}  onClick={(e)=>{
+        }} className="message__wrapper">
+            <div  style={{color:'white',backgroundColor:`${text.uid.user?'#252D33':'#51B66D'}`}} className={`message__body`}>
                 <strong style={{color:'white'}} className="message__author">{text.uid.user?text.uid.user:'you'}</strong>
                 
                 <p   className={`message__text${text.type==='bot'?'_bot':''}`}>{text.msg['text']}</p>

@@ -8,7 +8,7 @@
   #room__container {
     position: relative;
     display: flex;
-    background-color: #1A1E23;
+    background-color: #100121;
     gap: 3rem;
   }
   
@@ -17,7 +17,7 @@
   }
   #members__container {
     background-color: #262625;
-    border-right: 1px solid #797a79;
+    border-right: 1px solid #ffffff;
     overflow-y: auto;
     width: 90%;
     max-width: 150px;
@@ -80,14 +80,14 @@
   }
   
   #messages__container {
-    height: calc(100vh - 85px);
-    background-color: #09041b;
-    right: 0;
+    height: calc(100vh - 120px);
+    background-color: #100121;
+    right: -3%;
     position: absolute;
-    width: 70%;
-    max-width: 20rem;
+    width: 75%;
+    max-width: 22rem;
     overflow-y: auto;
-    border-left: 1px solid #111;
+    border-left: 1px solid rgb(255, 251, 251);
   }
   
   #messages {
@@ -178,7 +178,7 @@
     left: 9.7rem;
     top: clac(100vh - 72px);
     overflow-x:hidden;
-    background-color: #191B28;
+    background-color: #030c48;
     height: 100%;
   }
   #stream__box{
@@ -312,7 +312,7 @@
   {
     height:30px;
     width:35px;
-
+    margin-left:10px;
     cursor:pointer;
     border: none;
     border-radius: 5px;

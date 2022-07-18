@@ -202,7 +202,7 @@ function Display(props) {
         </div>
         <div style={{display:'flex'}} id="controller">
           <div style={{marginTop:'5px'}}>
-          <Popover
+          {/* <Popover
             isOpen={isPopoverOpen}
             positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
             onClickOutside={() => setIsPopoverOpen(false)}
@@ -232,12 +232,12 @@ function Display(props) {
               )}
             </div>}
           >
-            <button class="local" style={{marginLeft:'10px'}} onClick={() => setIsPopoverOpen2(!isPopoverOpen2)}>
+            <button class="local" style={{marginLeft:'0px'}} onClick={() => setIsPopoverOpen2(!isPopoverOpen2)}>
               Get Local Stats
             </button>
-          </Popover>
+          </Popover> */}
           </div>
-          <button className="controls" style={{ color: 'white', backgroundColor: camera ? 'blue' : 'red', marginLeft: '5%'}} onClick={() => {
+          <button className="controls" style={{ color: 'white', backgroundColor: camera ? 'blue' : 'red', marginLeft: '0%'}} onClick={() => {
 
             console.warn(camera);
             tracks[1].muted ? tracks[1].setMuted(false) : tracks[1].setMuted(true);
