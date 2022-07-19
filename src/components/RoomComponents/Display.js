@@ -21,9 +21,9 @@ function Display(props) {
   const x = useSelector(selectUser);
   const dispatch = useDispatch();
   const { users, tracks } = props;
-  const [denoiser,setDenoiser] = useState(null);
+  let denoiser=null;
   let processor=null;
-  const [processorEnable,setProcessorEnable]=useState(true);
+  const processorEnable=true;
   const client = useClient();
   const [screenShare, setScreenShare] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -65,13 +65,15 @@ function Display(props) {
     }
     //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
-  const pipeAIDenosier = (audioTrack, processor) => {
+  let pipeAIDenosier = async(audioTrack, processor) => {
     audioTrack.pipe(processor).pipe(audioTrack.processorDestination);
+    await processor.enable();
   }
-   const openAIDenoiser=async(e)=>{
-       e.preventDefault();
+   let openAIDenoiser=async()=>{
+ 
        denoiser=denoiser||((()=>{
-          const denoiser = new AIDenoiserExtension({assetsPath:'./external'});
+          let denoiser = new AIDenoiserExtension({assetsPath:'./external'});
+          console.warn(denoiser);
           AgoraRTC.registerExtensions([denoiser]);
           denoiser.onloaderror=(e)=>{
             console.error(e);
@@ -85,7 +87,7 @@ function Display(props) {
              console.log("overload!!!");
              try{
               await processor.disable();
-              processor=true;
+              processorEnable=true;
              }
              catch(error)
              {
@@ -100,8 +102,8 @@ function Display(props) {
         pipeAIDenosier(tracks[0],processor);
     
    }
-   const enableAiDenoiser=async(e)=>{
-    e.preventDefault();
+   let enableAiDenoiser=async()=>{
+   
     if(processorEnable)
     {
       try{
