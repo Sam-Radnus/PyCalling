@@ -112,13 +112,14 @@ function ChatRoom(props) {
             </div>
         </div>
         )}
-       
+        
     </div>
 
+   
     <form id="message__form" onSubmit={(e)=>{
         e.preventDefault();
         }}>
-        <input type="text" name="message" onChange={(e)=>{
+        <input type="text"  name="message" onChange={(e)=>{
             setTextInput(e.target.value);
         }} placeholder="Send a message...." />
         <button className="send" onClick={(e)=>{
@@ -131,7 +132,6 @@ function ChatRoom(props) {
              sendMsg(textInput,true);
         }}style={{marginTop:'5px',marginLeft:'5px'}}><i class="fa-solid fa-comment-slash"></i></button>
     </form>
-    
 
 </section>
   )
