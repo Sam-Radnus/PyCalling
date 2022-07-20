@@ -263,7 +263,7 @@ function Display(props) {
           <button className="controls" style={{ color: 'white', backgroundColor: screenShare ? 'red' : 'blue' }} id="screen-btn" onClick={screenSharing} >
             <i class="fa-solid fa-desktop"></i>
           </button>
-          <button className="controls" style={{ backgroundColor: 'red' }} control="true" id="leave-btn" onClick={async () => {
+          <button className="controls" style={{ backgroundColor: '#D9513F' }} control="true" id="leave-btn" onClick={async () => {
             await client.leave();
             client.removeAllListeners();
             tracks[0].close();
