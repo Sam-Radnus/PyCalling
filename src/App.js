@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar/>
+        
         <Routes>
         <Route exact path="/" element={<Landing/>}> </Route>
         <Route exact path="/Lobby" element={<Lobby/>}></Route>

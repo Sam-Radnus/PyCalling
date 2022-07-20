@@ -1,5 +1,5 @@
 .container {
-    margin-top: 74px;
+    margin-top: 0px;
     height: clac(100vh - 74px);
     width: 100%;
     position: relative;
@@ -8,21 +8,21 @@
   #room__container {
     position: relative;
     display: flex;
-    background-color: #100121;
+    background-color: #1B1A1D;
     gap: 3rem;
   }
   
   body{
-    background-color:#120142;
+    background-color:#1B1A1D;
   }
   #members__container {
-    background-color: #262625;
-    border-right: 1px solid #ffffff;
-    overflow-y: auto;
+    background-color: #676747;
+   
+    overflow-y: hidden;
     width: 90%;
     max-width: 150px;
     position: fixed;
-    height: 100%;
+    height: 90vh;
     z-index: 999;
   }
   
@@ -41,7 +41,7 @@
     padding: 0 1rem;
     position: fixed;
     font-size: 10px;
-    background-color: #280d73;
+    background-color: #1B1A1D;
     width: 120px;
   }
   
@@ -49,7 +49,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background-color:#09041B ;
+    background-color:#1B1A1D ;
     height:100vh;
     padding-top: 5rem;
     padding-bottom: 6.5rem;
@@ -71,7 +71,7 @@
     height: 5px;
     width: 5px;
     border-radius: 50%;
-    background-color: #2aca3e;
+    background-color: #1B1A1D;
   }
   
   .member_name{
@@ -80,14 +80,21 @@
   }
   
   #messages__container {
-    height: calc(100vh - 120px);
-    background-color: #100121;
-    right: -3%;
+    height: calc(100vh - 150px);
+    background-color: #2B2D2E;
+ 
+  
     position: absolute;
-    width: 75%;
-    max-width: 22rem;
+    top:30px;
+
+    width: 70%;
+    max-width: 17rem;
     overflow-y: auto;
-    border-left: 1px solid rgb(255, 251, 251);
+    right:1%;
+  
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
   
   #messages {
@@ -143,24 +150,28 @@
   }
   
   #message__form {
-    width: 20.2rem;
+    width: 15.3rem;
     position: fixed;
-    bottom: 0;
-    display: block;
-    background-color: #16083e;
+    border-bottom-left-radius:5px ;
+    border-bottom-right-radius:5px ;
+    display: flex;
+    background-color: #2B2D2E;
     padding: 1em;
+    
   }
   
   
   #message__form input {
     color: #fff;
-    width:63%;
+    width:58%;
     border: none;
+    height:55px;
+    margin-top: 5px;
     border-radius: 5px;
-    padding: 18px;
+    padding: 10px;
     font-size: 10px;
     box-sizing: border-box;
-    background-color: #1153c6;
+    background-color: #1B1A1D;
   }
   
   #message__form input:focus {
@@ -176,9 +187,14 @@
     width: calc(100% - 28.7rem);
     position: fixed;
     left: 9.7rem;
+    
+    border-style: solid ;
+    border-color:white;
+    border-width: 1px;
+    border-top-style:none;
     top: clac(100vh - 72px);
     overflow-x:hidden;
-    background-color: #030c48;
+    background-color: #1B1A1D;
     height: 100%;
   }
   #stream__box{
@@ -325,15 +341,15 @@
   }
   button[class="send"]
   {
-    height:50px;
+    height:55px;
     width:40px;
     cursor:pointer;
     border: none;
     font-size: 15px;
     border-radius: 5px;
     margin:5px;
-
-    background-color: blue;
+    margin-right:0px;
+    background-color: #3F8DFD;
     color:white;
     transition: 0.5s ease-in-out;
   }
@@ -387,7 +403,7 @@
   }
   button[class="volume"],button[class="local"]
   {
-    background-color: blue;
+    background-color:#3F8CFE;
     color:white;
     border:none;
     height:20px;
@@ -397,7 +413,7 @@
   }
   button[class="controls"]:hover
   {
-    background-color: red !important;
+    background-color: #F12646 !important;
     transition: 0.5ms ease-in-out;
   }
   button[class="local"]
@@ -426,7 +442,7 @@
     height:30px;
     width:100px;
     color:white;
-    background-color: blue;
+    background-color: #3F8CFE;
     border:none;
     margin-top:0%;
     margin-right:0px;

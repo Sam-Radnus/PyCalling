@@ -204,4 +204,46 @@ img#background{
   height: 90vh;
   width:65vw;
 }
- 
+div[class="landing"]
+{
+  background-color: rgb(15, 65, 69);
+  position: absolute;
+  height:70vh;
+  width: 99.7vw;
+  top:0%;
+  left:0%;
+  background-image:url('Styles/map.png');
+  background-size: 210vh;
+  background-blend-mode: darken;
+  border: 2px solid;
+  color: pink;
+
+}
+div[class="intro"]
+{
+  position: absolute;
+  top:20%;
+  left:22.5%;
+}
+div[class="intro"] h1
+{
+  font-size: 5em;
+}
+div[class="intro"] button{
+  margin-left: 25vw;
+  font-weight: bold;
+  border-style:solid;
+  border-color:pink;
+  border-radius:10px;
+}
+div[class="snap"]
+{
+  position: absolute;
+  height: 43.8vh;
+  width:70vw;
+  background-color:#1B1A1D;
+  top:80%;
+  overflow: hidden;
+  left:15%;
+
+}

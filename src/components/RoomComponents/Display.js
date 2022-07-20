@@ -239,7 +239,7 @@ function Display(props) {
             </button>
           </Popover> */}
           </div>
-          <button className="controls" style={{ color: 'white', backgroundColor: camera ? 'blue' : 'red', marginLeft: '0%'}} onClick={() => {
+          <button className="controls" style={{ color: 'white', backgroundColor: camera ? '#3F8CFE' : '#F12646', marginLeft: '0%'}} onClick={() => {
 
             console.warn(camera);
             tracks[1].muted ? tracks[1].setMuted(false) : tracks[1].setMuted(true);
@@ -252,18 +252,18 @@ function Display(props) {
           </button>
 
 
-          <button style={{ color: 'white', backgroundColor: mic ? 'blue' : 'red' }} onClick={() => {
+          <button style={{ color: 'white', backgroundColor: mic ? '#3F8CFE' : '#F12646' }} onClick={() => {
             tracks[0].muted ? tracks[0].setMuted(false) : tracks[0].setMuted(true);
-            tracks[1].setEncoderConfiguration({ width: 200, height: 640 });
+        
             setMic(tracks[0].muted)
             console.warn(mic);
           }} className="controls">
             <i className={`fa-solid fa-microphone-lines${mic ? '-slash' : ''}`}></i>
           </button>
-          <button className="controls" style={{ color: 'white', backgroundColor: screenShare ? 'red' : 'blue' }} id="screen-btn" onClick={screenSharing} >
+          <button className="controls" style={{ color: 'white', backgroundColor: screenShare ? '#F12646' : '#3F8CFE' }} id="screen-btn" onClick={screenSharing} >
             <i class="fa-solid fa-desktop"></i>
           </button>
-          <button className="controls" style={{ backgroundColor: '#D9513F' }} control="true" id="leave-btn" onClick={async () => {
+          <button className="controls" style={{ backgroundColor: '#F12646' }} control="true" id="leave-btn" onClick={async () => {
             await client.leave();
             client.removeAllListeners();
             tracks[0].close();
@@ -282,12 +282,12 @@ function Display(props) {
           }} >
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
-          <button className="controls" onClick={openAIDenoiser}style={{backgroundColor:'blue',width:'fit-content'}} id="openAiDenosier" >Open</button>
-          <button className="controls" onClick={enableAiDenoiser}style={{backgroundColor:'blue',width:'fit-content'}} id="enableAiDenosier">enable</button>
+          <button className="controls" onClick={openAIDenoiser}style={{backgroundColor:'#3F8CFE',width:'fit-content'}} id="openAiDenosier" >Open</button>
+          <button className="controls" onClick={enableAiDenoiser}style={{backgroundColor:'#3F8CFE',width:'fit-content'}} id="enableAiDenosier">enable</button>
           <div style={{ display: 'inline', marginLeft: '30px' }}>
-            <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginLeft: '15px'  }} onClick={() => { volume<100 && tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
+            <button className="controls" style={{ backgroundColor: '#3F8CFE', color: 'white', marginLeft: '15px'  }} onClick={() => { volume<100 && tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
             <span style={{ fontSize: '15px', transition: '1ms ease-in' }}>{volume + 25}</span>
-            <button className="controls" style={{ backgroundColor: 'blue', color: 'white', marginRight: '15px' }} onClick={() => { volume>-1 &&  tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
+            <button className="controls" style={{ backgroundColor: '#3F8CFE', color: 'white', marginRight: '15px' }} onClick={() => { volume>-1 &&  tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
 
          
           <span style={{fontSize:'10px'}}>Video Config</span>
@@ -317,7 +317,7 @@ function Display(props) {
               isFull ? setFull(false) : setFull(true)
             }
             } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
-              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle: 'solid', borderRadius: '10px', borderColor: 'blue', height: '100%', width: '100%', borderWidth: '10px' }} />
+              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle: 'solid', borderRadius: '10px', borderColor: '#3F8CFE', height: '100%', width: '100%', borderWidth: '10px' }} />
 
             </div>
 
@@ -397,7 +397,7 @@ function Display(props) {
                   if (user.videoTrack) {
 
                     return (
-                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ borderStyle: 'solid', borderRadius: '5px', borderColor: 'red', height: '100%', width: '100%', borderWidth: '10px' }} key={user.uid} />
+                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ borderStyle: 'solid', borderRadius: '5px', borderColor: '#F12646', height: '100%', width: '100%', borderWidth: '10px' }} key={user.uid} />
                     );
                   } else return null;
                 })}
