@@ -310,17 +310,65 @@ function Display(props) {
           
         </div> */}
 
-        <div id="stream__container">
-          <div style={{marginLeft:'0vw'}} className="grid-container" >
-
-            <div onClick={() => {
+        <div id="stream__container">     
+        <div className="Room__Name"><h1>{x.room}</h1></div>
+          <div  style={{marginLeft:'0vw'}} className={`grid-container`} >
+   
+            <div  style={{position:'relative'}}onClick={() => {
               isFull ? setFull(false) : setFull(true)
             }
             } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
+             <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{x.name}</span>
               <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle: 'solid', borderRadius: '10px', borderColor: '#3F8CFE', height: '100%', width: '100%', borderWidth: '10px' }} />
 
             </div>
 
+            
+            {/* <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos6"  ? isFull?'full2':'full' :'mid'}-screen`} style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image2})`}} id="videos6">
+
+            </div>
+            <div  onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos7"  ? isFull?'full2':'full' :'mid'}-screen`}
+            style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos7">
+
+            </div>
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`${isFull2 && second==="videos8"  ? isFull?'full2':'full' :'mid'}-screen`}
+             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos8">
+
+            </div> */}
+
+            
+              {users.length > 0 &&
+                users.map((user) => {
+                  if (user.videoTrack) {
+
+                    return (
+                      <div style={{ position:'relative',margin: '15px'}} onClick={(e) => {
+                        isFull2 ? setFull2(false) : setFull2(true)
+                        console.warn(user.uid);
+                        setSecond(user.uid);
+                      }} className={`${isFull2 && second===user.uid  ? isFull?'full2':'full' :'mid'}-screen`} >
+                        <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{user.uid}</span>
+                      <AgoraVideoPlayer style={{ height: '100%', width: '100%'}} className='vid' videoTrack={user.videoTrack}  key={user.uid} />
+                      </div>
+                   );
+                  } else return null;
+                })}
+         
             <div onClick={(e) => {
               isFull2 ? setFull2(false) : setFull2(true) 
               console.warn(e.target.id);
@@ -363,44 +411,6 @@ function Display(props) {
             } className={`${isFull2 && second==="videos5"  ? isFull?'full2':'full' :'mid'}-screen`}
             style={{ borderRadius:'10px',margin: '15px',  backgroundPosition:'center' ,backgroundImage:`url(${image1})` }} id="videos5">
 
-            </div>
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos6"  ? isFull?'full2':'full' :'mid'}-screen`} style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image2})`}} id="videos6">
-
-            </div>
-            <div  onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos7"  ? isFull?'full2':'full' :'mid'}-screen`}
-            style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos7">
-
-            </div>
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos8"  ? isFull?'full2':'full' :'mid'}-screen`}
-             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos8">
-
-            </div>
-
-            <div style={{ margin: '15px', height: '20vh', width: '20vw' }} id="videos">
-              {users.length > 0 &&
-                users.map((user) => {
-                  if (user.videoTrack) {
-
-                    return (
-                      <AgoraVideoPlayer className='vid' videoTrack={user.videoTrack} style={{ borderStyle: 'solid', borderRadius: '5px', borderColor: '#F12646', height: '100%', width: '100%', borderWidth: '10px' }} key={user.uid} />
-                    );
-                  } else return null;
-                })}
             </div>
           </div>
         </div>

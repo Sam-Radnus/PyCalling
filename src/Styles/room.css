@@ -459,8 +459,8 @@
   }
 div[class="full-screen"]
 {
-  height:40vh;
-  width:62.5vw;
+  height:60vh;
+  width:65vw;
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start:1;
@@ -471,7 +471,7 @@ div[class="full-screen"]
 div[class="full2-screen"]
 {
   height:40vh;
-  width:62.5vw;
+  width:65vw;
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start:3;
@@ -481,12 +481,35 @@ div[class="full2-screen"]
 }  
 div[class="mid-screen"]
 {
-  height:15vh;
-  width:19vw;
+  height:20vh;
+  width:20vw;
 }
 div[class="grid-container"]
 {
   display: grid;
   grid-template-columns:repeat(3,1fr);
   padding: 10px;
+}
+div[class="flex-container"]
+{
+  display: flex;
+  
+  padding: 10px;
+}
+div[class="flex-container"] div[class="mid-screen"]
+{
+  height:10vh;
+  width:10vw;
+}
+div[class="Room__Name"]
+{
+  background-color: #2B2D2E;
+  width:5vw;
+  height:5vh;
+  padding:0px 5px 0px 5px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+div [class="Room__Name"] h1{
+  text-align: center;
 }
