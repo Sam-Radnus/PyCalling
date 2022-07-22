@@ -14,6 +14,7 @@ import image2 from './bored.png';
 import image3 from './unnamed-2.webp';
 import image4 from './unnamed5.png';
 import {AIDenoiserExtension} from "agora-extension-ai-denoiser";
+
 function Display(props) {
 
 
@@ -21,9 +22,8 @@ function Display(props) {
   const x = useSelector(selectUser);
   const dispatch = useDispatch();
   const { users, tracks } = props;
-  let denoiser=null;
-  let processor=null;
-  const processorEnable=true;
+ 
+ 
   const client = useClient();
   const [screenShare, setScreenShare] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -36,6 +36,8 @@ function Display(props) {
   const [stats, setStats] = useState([]);
   const [second,setSecond]=useState('');
   const [isFull, setFull] = useState(false);
+  const [enabled,setEnabled]=useState(false);
+  const [opened,setOpened]=useState(false);
   const [isFull2, setFull2] = useState(false);
   const [volume, setVolume] = useState(100);
   const [localStats, setLocalStats] = useState([]);
@@ -65,14 +67,20 @@ function Display(props) {
     }
     //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
-  let pipeAIDenosier = async(audioTrack, processor) => {
-    audioTrack.pipe(processor).pipe(audioTrack.processorDestination);
-    await processor.enable();
+  let denoiser=null;
+  let processor=null;
+  let processorEnable=true;
+  const pipeAIDenosier = async(audioTrack, processor) => {
+    
+    await audioTrack.pipe(processor).pipe(audioTrack.processorDestination);
+    
   }
    let openAIDenoiser=async()=>{
  
-       denoiser=denoiser||((()=>{
-          let denoiser = new AIDenoiserExtension({assetsPath:'./external'});
+       denoiser=denoiser|| ((()=>{
+          let denoiser = new AIDenoiserExtension({
+            assetsPath:'./aiDenoiserExtension/external'
+          });
           console.warn(denoiser);
           AgoraRTC.registerExtensions([denoiser]);
           denoiser.onloaderror=(e)=>{
@@ -83,25 +91,31 @@ function Display(props) {
    })())
         processor=processor||((()=>{
           let processor=denoiser.createProcessor();
+          console.error(processor);
+       
           processor.onoverload=async()=>{
              console.log("overload!!!");
              try{
               await processor.disable();
+              setEnabled(false);
               processorEnable=true;
              }
              catch(error)
              {
-              console.error(error);
+              console.error("disable AIDenoiser Failure");
              }
              finally{
                  console.log('enabled');
+               
              }
           }
           return processor;
         })());
+   
+        
         pipeAIDenosier(tracks[0],processor);
-    
    }
+  
    let enableAiDenoiser=async()=>{
    
     if(processorEnable)
@@ -111,14 +125,14 @@ function Display(props) {
         processorEnable=false;
       }
       catch(e){
-        console.error(e);
+        console.error("enable Denoiser Failure");
       }
       finally{
-        
+        console.error(processor);
       }
     }else{
        try{
-        processor.disable();
+        await processor.disable();
         processorEnable=true;
        }
        catch(e){

@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "agora-extension-ai-denoiser": "^1.0.0-beta2",
     "agora-rtc-react": "github:AgoraIO-Community/agora-rtc-react#v1.0.1",
-    "agora-rtc-sdk": "^3.6.11",
+    "agora-rtc-sdk": "^4.0.0",
     "agora-rtc-sdk-ng": "^4.12.0",
     "agora-rtm-react": "^1.1.0",
     "agora-rtm-sdk": "^1.4.5",
