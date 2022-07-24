@@ -23,11 +23,12 @@
     max-width: 150px;
     position: fixed;
     height: 90vh;
+    margin-top: 1%;
     z-index: 999;
   }
   
   #members__count {
-    background-color: #08021f;
+    background-color: #2B2D2E;
     padding: 7px 15px;
     font-size: 10px;
     font-weight: 600;
@@ -63,6 +64,11 @@
     display: flex;
     align-items: center;
     column-gap: 10px;
+    background-color: #2B2D2E;
+    width:8vw;
+    padding:10px;
+    border-radius: 5px;
+    margin-left: 7px;
     padding-left: 1em;
   }
   
@@ -435,7 +441,7 @@
     padding-left:40px;
     border-radius: 5px;
     z-index:999;
-    background-color: rgb(3, 0, 9);
+    background-color: #2B2D2E;
   
   }
   select[id="config"]{
@@ -505,7 +511,7 @@ div[class="Room__Name"]
 {
   background-color: #2B2D2E;
   width:5vw;
-  height:5vh;
+  height:fit-content;
   padding:0px 5px 0px 5px;
   border-radius: 5px;
   margin-left: 10px;

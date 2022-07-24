@@ -333,7 +333,7 @@ function Display(props) {
             }
             } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
              <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{x.name}</span>
-              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{ borderStyle: 'solid', borderRadius: '10px', borderColor: '#3F8CFE', height: '100%', width: '100%', borderWidth: '10px' }} />
+              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px', height: '100%', width: '100%', borderWidth: '10px' }} />
 
             </div>
 

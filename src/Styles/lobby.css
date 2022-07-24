@@ -88,3 +88,16 @@
   .avatar__option__selected {
     border: 3px solid #845695;
   }
+button[class="back"]{
+   background-color: rgb(234, 23, 23);
+   height:5vh;
+   border: none;
+   cursor:pointer;
+   color:white;
+   
+}  
+button[class="back"] h1{
+  line-height: 0;
+  
+  
+}  

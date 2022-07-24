@@ -133,7 +133,7 @@ function Room() {
         <main className="container">
             <div style={{backgroundColor:'#1A1E23'}} id="room__container">
             
-                {start && tracks && screen && users &&  <ChatRoom uid={uid} users={users} /> } 
+                {start && tracks && screen && users &&  <ChatRoom uid={uid} users={users} tracks={tracks}  /> } 
                 {start && tracks && screen && users &&  <Display  users={users} screen={screen} tracks={tracks} />}
               
             </div>

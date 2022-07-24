@@ -3,16 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { createChannel, createClient, RtmChannel, RtmMessage } from 'agora-rtm-react'
 import '../../Styles/room.css'
 import AgoraRTM from 'agora-rtm-sdk'
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout, selectUser } from "./../../features/userSlice";
 const useClient = createClient("9e4b87cc837448969b97b4301e2aca92");
 const USER_ID = Math.floor(Math.random() * 1000000001);
 let type='bot';
 const useChannel = createChannel('TV')
-const client=AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92",{enableLogUpload:false});
+const client=AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92");    
 function ChatRoom(props) {
-    
+   
     const testChannel=useChannel(client);
     const [texts,setTexts]=useState([]);
     const [uid,setUid]=useState('');
@@ -22,6 +22,7 @@ function ChatRoom(props) {
     const users=props.users;
     const clientRTM = AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92");
     const cust = useSelector(selectUser);
+    const tracks=props.tracks;
     let uid2=props.uid;
      
     const sendMsg=async(text,hide)=>{
@@ -36,13 +37,14 @@ function ChatRoom(props) {
          })
         setTextInput('');   
     }
-  
+ 
     let login=async(val)=>{
         
         console.warn(isLoggedIn);
         console.warn(cust.name);
         await client.login({uid:USER_ID.toString()});
         await testChannel.join();
+        console.warn(client);
         //await client.setLocalUserAttributes({user:users[0]});
         //console.warn(users);
         
@@ -54,6 +56,14 @@ function ChatRoom(props) {
           testChannel.on('ChannelMessage',async (msg, uid) => {
 
             const user = await client.getUserAttributes(uid);
+            console.warn(msg);
+            console.warn(users[0]===msg.text);
+            if(msg.text===users[0])
+            {
+                tracks[0].close();
+                tracks[1].close();
+                logout();
+            }
             console.warn(user);     
              setTexts((previous) => {
               return [...previous, { msg, uid:user, type:type}]
@@ -61,19 +71,10 @@ function ChatRoom(props) {
             
           })
           
-          client.on('MessageFromPeer',function({
-            text
-          },peerId){
-            console.log(peerId+"muted/Unmuted your"+text);
-            if(text=="audio")
-            {
-              console.warn("audio")
-            }
-            else if(text=="video")
-            {
-                console.warn("video");
-            }
-          })
+          client.on('MessageFromPeer', function (message, peerId) {
+            console.warn(message,peerId);
+            console.warn('message received');
+       })
           testChannel.on('MemberJoined',async (memberId) => {
           //  console.warn('New Member: ', memberId)
            // console.warn(users);          
@@ -85,34 +86,38 @@ function ChatRoom(props) {
             //    return [...previous, { msg: { text },type:type,uid:'PyCardis Bot' }]
             // })
             // type='none';
-            // console.warn(texts);
+            // console.warn(texts); 
+            
           })
           setLoggedIn(true)
          
     }
     let logout=async()=>{
         await testChannel.leave();
-        await client.logout()
+        await client.logout();
+        console.warn("removed");
         testChannel.removeAllListeners()
         setLoggedIn(false);
     }
-    const toggleVideo=async(uid)=>{
-      var fullDiv=uid;
+const toggleVideo=async(uid)=>{
+      var peerId=uid.toString();
+      console.warn(peerId);
       console.warn("Remote Video Button Pressed");
       let peerMessage="video";
-      client.sendMessageToPeer({
-        text:peerMessage
-      },uid,).then(sendResult=>{
-        if(sendResult.hasPeerReceived)
-        {
+      await client.sendMessageToPeer(
+        { text: peerMessage },
+          uid,
+    ).then(sendResult => {
+        if (sendResult.hasPeerReceived) {
             console.warn(sendResult.hasPeerReceived);
-            console.warn("Message has been received by:"+uid+"Message:"+peerMessage);
+            //document.getElementById("log").appendChild(document.createElement('div')).append("Message has been received by: " + peerId + " Message: " + peerMessage)
+
+        } else {
+          console.warn(sendResult.hasPeerReceived);
+            //document.getElementById("log").appendChild(document.createElement('div')).append("Message sent to: " + peerId + " Message: " + peerMessage)
+
         }
-        else{
-           console.warn(sendResult.hasPeerReceived);
-            console.warn("Message has been send To:"+uid+" Message:"+peerMessage);
-        }
-      })
+    })
 }
     useEffect(()=>{
         login('100');
