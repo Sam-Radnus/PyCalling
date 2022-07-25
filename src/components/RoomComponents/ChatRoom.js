@@ -6,6 +6,7 @@ import AgoraRTM from 'agora-rtm-sdk'
 import { connect, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout, selectUser } from "./../../features/userSlice";
+import { useNavigate } from 'react-router-dom';
 const useClient = createClient("9e4b87cc837448969b97b4301e2aca92");
 const USER_ID = Math.floor(Math.random() * 1000000001);
 let type='bot';
@@ -23,6 +24,8 @@ function ChatRoom(props) {
     const clientRTM = AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92");
     const cust = useSelector(selectUser);
     const tracks=props.tracks;
+    const clientRTC=props.clientRTC;
+    const navigate=useNavigate();
     let uid2=props.uid;
      
     const sendMsg=async(text,hide)=>{
@@ -63,12 +66,33 @@ function ChatRoom(props) {
                 console.warn('Action Taken');
                 console.warn(msg.text.substring(7,13));
                 console.warn(msg.text.substring(20));
-                if(msg.text.substring(7,13)==="kicked"&&msg.text.substring(20)===users[0])
+                if(msg.text.substring(7,13)==="Kicked"&&msg.text.substring(20)===users[0])
                 {
-                    tracks[0].close();
-                    tracks[1].close();
-                    logout();
+                    await tracks[0].close();
+                    await tracks[1].close();
+                    await logout();
+                    await clientRTC.leave();
+                    navigate('/Lobby');
+                    
                 }
+                else
+                if(msg.text.substring(7,12)==="Audio"&&msg.text.substring(19)===users[0])
+                {
+                    console.warn("audio muting");
+                    tracks[0].muted ? tracks[0].setMuted(false) : tracks[0].setMuted(true);   
+                    console.warn(tracks[0].muted);
+                }
+                if(msg.text.substring(7,12)==="Video"&&msg.text.substring(19)===users[0])
+                {
+                    console.warn("video muting");
+                    tracks[1].muted ? tracks[1].setMuted(false) : tracks[1].setMuted(true);   
+                    console.warn(tracks[1].muted);
+                }
+                if(msg.text.substring(7,13)==="Letter"&&msg.text.substring(20)===users[0])
+                {
+                    await logout();    
+                }
+
             }
             else{
             console.warn(users[0]===msg.text);
@@ -128,8 +152,9 @@ const toggleVideo=async(uid)=>{
         }
     })
 }
-const kickUser=async(uid)=>{
-    let text="Action:kicked->User:"+ uid ;
+const action=async(uid,action)=>{
+    let text="Action:"+action+"->User:"+ uid ;
+    console.warn(text);
     let message=client.createMessage({text,uid:USER_ID.toString(),messageType:'TEXT'})
     // console.warn(message);
      // console.warn(users);
@@ -172,16 +197,16 @@ const kickUser=async(uid)=>{
             </div>
             <div className="host_control" >
                  <button onClick={()=>{
-                     kickUser(user.uid);
+                     action(user.uid,"Kicked");
                  }}><i class="fa-solid fa-circle-xmark"></i></button>
                  <button onClick={()=>{
-                     
+                      action(user.uid,"Audio");
                  }}><i class="fa-solid fa-volume-xmark"></i></button>
                  <button onClick={()=>{
-                     
+                     action(user.uid,"Letter");
                  }}><i class="fa-solid fa-comment-slash"></i></button>
                  <button onClick={()=>{
-                     
+                     action(user.uid,"Video");
                  }}><i class="fa-solid fa-video-slash"></i></button>
                  <button onClick={()=>{
                      
