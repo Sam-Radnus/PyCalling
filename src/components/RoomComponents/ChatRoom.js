@@ -54,21 +54,30 @@ function ChatRoom(props) {
             
           })
           testChannel.on('ChannelMessage',async (msg, uid) => {
-
+          
             const user = await client.getUserAttributes(uid);
+           
             console.warn(msg);
-            console.warn(users[0]===msg.text);
-            if(msg.text===users[0])
+            if(msg.text.toString().substring(0,7)==='Action:')
             {
-                tracks[0].close();
-                tracks[1].close();
-                logout();
+                console.warn('Action Taken');
+                console.warn(msg.text.substring(7,13));
+                console.warn(msg.text.substring(20));
+                if(msg.text.substring(7,13)==="kicked"&&msg.text.substring(20)===users[0])
+                {
+                    tracks[0].close();
+                    tracks[1].close();
+                    logout();
+                }
             }
+            else{
+            console.warn(users[0]===msg.text);
+            
             console.warn(user);     
              setTexts((previous) => {
               return [...previous, { msg, uid:user, type:type}]
-            })
-            
+            } )
+        }
           })
           
           client.on('MessageFromPeer', function (message, peerId) {
@@ -119,6 +128,19 @@ const toggleVideo=async(uid)=>{
         }
     })
 }
+const kickUser=async(uid)=>{
+    let text="Action:kicked->User:"+ uid ;
+    let message=client.createMessage({text,uid:USER_ID.toString(),messageType:'TEXT'})
+    // console.warn(message);
+     // console.warn(users);
+     
+     await testChannel.sendMessage(message);
+     console.warn(message);
+        setTexts((previous) => {
+            return [...previous, { msg: { text } ,uid:USER_ID.toString() }]
+         })
+    setTextInput('');     
+}
     useEffect(()=>{
         login('100');
      },[]);
@@ -135,19 +157,39 @@ const toggleVideo=async(uid)=>{
   
       <div id="member__list">
           <div  className="member__wrapper" id="member__1__wrapper">
-              <span className="green__icon"></span>
-              <p className="member_name">{users[0]}</p>
-              
+          <div style={{display:'flex'}}>
+              <span style={{marginTop:'5px'}} className="green__icon"></span>
+              <p style={{marginLeft:'7px'}} className="member_name">{users[0]}</p>
+           </div>
+             
               
           </div>
           {users.slice(1,10).map(user=>(
             <div key={user.uid} className="member__wrapper" id="member__1__wrapper">
-            <button class="remote" onClick={()=>{
-                uid2=user.uid;
-                console.log(user.uid)
-                toggleVideo(user.uid)
-            }}>mute</button>
-            <p  className="member_name">{user.uid}</p>
+                   <div style={{display:'flex'}}>
+                   <span className="green__icon"></span>
+            <p  style={{marginLeft:'7px'}}  className="member_name">{user.uid}</p>
+            </div>
+            <div className="host_control" >
+                 <button onClick={()=>{
+                     kickUser(user.uid);
+                 }}><i class="fa-solid fa-circle-xmark"></i></button>
+                 <button onClick={()=>{
+                     
+                 }}><i class="fa-solid fa-volume-xmark"></i></button>
+                 <button onClick={()=>{
+                     
+                 }}><i class="fa-solid fa-comment-slash"></i></button>
+                 <button onClick={()=>{
+                     
+                 }}><i class="fa-solid fa-video-slash"></i></button>
+                 <button onClick={()=>{
+                     
+                 }}><i class="fa-solid fa-volume-high"></i></button>
+                 <button onClick={()=>{
+                     
+                 }}><i class="fa-solid fa-volume-low"></i></button>
+              </div>
         </div>
           ))
         }

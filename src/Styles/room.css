@@ -61,7 +61,7 @@
   }
   
   .member__wrapper {
-    display: flex;
+    display: grid;
     align-items: center;
     column-gap: 10px;
     background-color: #2B2D2E;
@@ -76,8 +76,28 @@
     display: block;
     height: 5px;
     width: 5px;
+    margin-top:6px;
+    margin-right:5px;
     border-radius: 50%;
     background-color: #1B1A1D;
+  }
+  div[class="host_control"] 
+  {
+    flex-wrap: wrap;
+    display:inline-flex;
+    margin-left: 6px;
+  
+  }
+  div[class="host_control"] button
+  {
+    margin:1px;
+    background-color:#1B1A1D ;
+    border:none;
+    color:white;
+    border-radius: 5px;
+    font-size: 15px;
+
+    cursor:pointer;
   }
   
   .member_name{
