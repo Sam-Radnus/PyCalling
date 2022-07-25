@@ -183,7 +183,7 @@ const action=async(uid,action)=>{
       <div id="member__list">
           <div  className="member__wrapper" id="member__1__wrapper">
           <div style={{display:'flex'}}>
-              <span style={{marginTop:'5px'}} className="green__icon"></span>
+             
               <p style={{marginLeft:'7px'}} className="member_name">{users[0]}</p>
            </div>
              
@@ -191,30 +191,20 @@ const action=async(uid,action)=>{
           </div>
           {users.slice(1,10).map(user=>(
             <div key={user.uid} className="member__wrapper" id="member__1__wrapper">
-                   <div style={{display:'flex'}}>
-                   <span className="green__icon"></span>
+                     
+                 
             <p  style={{marginLeft:'7px'}}  className="member_name">{user.uid}</p>
-            </div>
-            <div className="host_control" >
+            
+            <div style={{display:'inherit'}}>
                  <button onClick={()=>{
                      action(user.uid,"Kicked");
                  }}><i class="fa-solid fa-circle-xmark"></i></button>
-                 <button onClick={()=>{
-                      action(user.uid,"Audio");
-                 }}><i class="fa-solid fa-volume-xmark"></i></button>
+    
                  <button onClick={()=>{
                      action(user.uid,"Letter");
                  }}><i class="fa-solid fa-comment-slash"></i></button>
-                 <button onClick={()=>{
-                     action(user.uid,"Video");
-                 }}><i class="fa-solid fa-video-slash"></i></button>
-                 <button onClick={()=>{
-                     
-                 }}><i class="fa-solid fa-volume-high"></i></button>
-                 <button onClick={()=>{
-                     
-                 }}><i class="fa-solid fa-volume-low"></i></button>
-              </div>
+            </div>
+            
         </div>
           ))
         }
