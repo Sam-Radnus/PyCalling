@@ -1,6 +1,7 @@
 import React from 'react'
 import '../App.css'
 import {Link ,Navigate,useNavigate,useLocation} from 'react-router-dom';
+import image from "./Preview.png";
 function Landing() {
   const navigate=useNavigate();
   return (
@@ -25,10 +26,11 @@ function Landing() {
     <div className="landing" >
         <div className="intro">
         <h1>Welcome to PyCalling</h1>
-        <button onClick={()=>{ navigate('/Lobby')}} style={{backgroundColor:'white',cursor:'pointer',padding:'15px'}}>Join a Room</button>
+        <button onClick={()=>{ navigate('/Lobby')}} style={{backgroundColor:'white',cursor:'pointer',padding:'15px'}}>Join as a Host</button>
+        <button onClick={()=>{ navigate('/Lobby')}} style={{backgroundColor:'white',cursor:'pointer',padding:'15px',marginLeft:'2vw'}}>Join a Room</button>
         </div>
-        <div className="snap">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi cumque labore beatae. Facere architecto, repellat, obcaecati reiciendis dolor est quia et atque accusantium recusandae suscipit excepturi, doloremque in id ad non hic cumque dicta sit rerum asperiores. Iusto voluptatem explicabo, ipsam tempore nemo magni laudantium quisquam sed distinctio aliquid architecto.
+        <div className="snap" style={{backgroundImage:`url(${image})`, backgroundSize:'147vh'}}>
+            
         </div>
     </div>
   </div>
