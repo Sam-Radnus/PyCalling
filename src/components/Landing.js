@@ -26,7 +26,7 @@ function Landing() {
     <div className="landing" >
         <div className="intro">
         <h1>Welcome to PyCalling</h1>
-        <button onClick={()=>{ navigate('/Lobby')}} style={{backgroundColor:'white',cursor:'pointer',padding:'15px'}}>Join as a Host</button>
+        <button onClick={()=>{ navigate('/Host/Lobby')}} style={{backgroundColor:'white',cursor:'pointer',padding:'15px'}}>Join as a Host</button>
         <button onClick={()=>{ navigate('/Lobby')}} style={{backgroundColor:'white',cursor:'pointer',padding:'15px',marginLeft:'2vw'}}>Join a Room</button>
         </div>
         <div className="snap" style={{backgroundImage:`url(${image})`, backgroundSize:'147vh'}}>
