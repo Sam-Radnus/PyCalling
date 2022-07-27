@@ -70,23 +70,9 @@ function ChatRoom(props) {
                 {
                     await tracks[0].close();
                     await tracks[1].close();
-                    await logout();
                     await clientRTC.leave();
                     navigate('/Lobby');
                     
-                }
-                else
-                if(msg.text.substring(7,12)==="Audio"&&msg.text.substring(19)===users[0])
-                {
-                    console.warn("audio muting");
-                    tracks[0].muted ? tracks[0].setMuted(false) : tracks[0].setMuted(true);   
-                    console.warn(tracks[0].muted);
-                }
-                if(msg.text.substring(7,12)==="Video"&&msg.text.substring(19)===users[0])
-                {
-                    console.warn("video muting");
-                    tracks[1].muted ? tracks[1].setMuted(false) : tracks[1].setMuted(true);   
-                    console.warn(tracks[1].muted);
                 }
                 if(msg.text.substring(7,13)==="Letter"&&msg.text.substring(20)===users[0])
                 {
@@ -230,7 +216,7 @@ const action=async(uid,action)=>{
         </div> */}
        
         { texts.map((text,i)=>
-        <div key={i}  onClick={(e)=>{
+        <div key={i} style={{color:'white',marginLeft:`${text.uid.user?'1em':'12em'}`}}  onClick={(e)=>{
         }} className="message__wrapper">
             <div  style={{color:'white',backgroundColor:`${text.uid.user?'#252D33':'#51B66D'}`}} className={`message__body`}>
                 <strong style={{color:'white'}} className="message__author">{text.uid.user?text.uid.user:'you'}</strong>
