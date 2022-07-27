@@ -18,9 +18,9 @@
   #members__container {
     background-color: #676747;
    
-    overflow-y: hidden;
+    overflow: hidden;
     width: 90%;
-    max-width: 150px;
+    max-width: 10vw;
     position: fixed;
     height: 90vh;
     margin-top: 1%;
@@ -452,13 +452,14 @@
     font-size: 10px;
     padding:8px;
     margin-left:12px;
+    margin-right:10px;
     height:30px;
   }
   div#controller{
-    margin-left: 5%;
+    margin-left: 10%;
     position: fixed;
     top:90%;
-    width:55vw;
+    width:fit-content;
     padding:10px;
     padding-left:40px;
     border-radius: 5px;
@@ -473,7 +474,7 @@
     background-color: #3F8CFE;
     border:none;
     margin-top:0%;
-    margin-right:0px;
+    margin-right:30px;
     margin-left: 10px;
     border-radius:5px;
     cursor:pointer;
@@ -536,7 +537,7 @@ div[class="Room__Name"]
   height:fit-content;
   padding:0px 5px 0px 5px;
   border-radius: 5px;
-  margin-left: 10px;
+  margin-left: 25px;
 }
 div [class="Room__Name"] h1{
   text-align: center;

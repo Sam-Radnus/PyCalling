@@ -217,42 +217,7 @@ function Display(props) {
 
         </div>
         <div style={{display:'flex'}} id="controller">
-          <div style={{marginTop:'5px'}}>
-          {/* <Popover
-            isOpen={isPopoverOpen}
-            positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
-            onClickOutside={() => setIsPopoverOpen(false)}
-            content={<div style={{ position: 'absolute', backgroundColor: '#09041B', top: '25%', left: '0%', paddingLeft: '25px', borderRadius: '5px', transition: '2s ease-in-out' }}>
-
-              {stats.map((stat) =>
-                <p style={{ fontSize: '15px' }}>
-                  <small >{stat.description}</small><span>:{stat.value} {stat.unit}</span>
-                </p>
-              )}
-            </div>}
-          >
-            <button  class="local" onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
-              Get User Stats
-            </button>
-          </Popover>
-          <Popover
-            isOpen={isPopoverOpen2}
-            positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
-            onClickOutside={() => setIsPopoverOpen2(false)}
-            content={<div style={{ position: 'absolute', backgroundColor: '#09041B', top: '25%', left: '0%', width: '10vw', paddingLeft: '25px', borderRadius: '5px', transition: '2s ease-in-out' }}>
-
-              {localStats.map((stat) =>
-                <p style={{ fontSize: '15px' }}>
-                  <small >{stat.description}</small><span>:{stat.value} {stat.unit}</span>
-                </p>
-              )}
-            </div>}
-          >
-            <button class="local" style={{marginLeft:'0px'}} onClick={() => setIsPopoverOpen2(!isPopoverOpen2)}>
-              Get Local Stats
-            </button>
-          </Popover> */}
-          </div>
+         
           <button className="controls" style={{ color: 'white', backgroundColor: camera ? '#3F8CFE' : '#F12646', marginLeft: '0%'}} onClick={() => {
 
             console.warn(camera);
@@ -328,7 +293,7 @@ function Display(props) {
         <div className="Room__Name"><h1>{x.room}</h1></div>
           <div  style={{marginLeft:'0vw'}} className={`grid-container`} >
    
-            <div  style={{position:'relative'}}onClick={() => {
+            <div  style={{position:'relative',marginTop:'2vh',marginLeft:'1vw'}}onClick={() => {
               isFull ? setFull(false) : setFull(true)
             }
             } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
@@ -383,49 +348,7 @@ function Display(props) {
                   } else return null;
                 })}
          
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true) 
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos1" ? isFull?'full2':'full' :'mid'}-screen`}
-             style={{borderRadius:'10px', margin: '15px',backgroundPosition:'center' ,backgroundImage:`url(${image1})` }} id="videos1">
-              
-            </div>
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-
-            } 
-            } className={`${isFull2 && second==="videos2"  ? isFull?'full2':'full' :'mid'}-screen`} style={{borderRadius:'10px', margin: '15px',backgroundPosition:'center' ,backgroundImage:`url(${image2})` }} id="videos2">
-
-            </div>
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos3"  ? isFull?'full2':'full' :'mid'}-screen`} style={{borderRadius:'10px', margin: '15px',  backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos3">
-
-            </div>
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos4"  ? isFull?'full2':'full' :'mid'}-screen`} style={{ borderRadius:'10px',margin: '15px',backgroundPosition:'center' , backgroundImage:`url(${image4})` }} id="videos4">
-
-            </div>
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos5"  ? isFull?'full2':'full' :'mid'}-screen`}
-            style={{ borderRadius:'10px',margin: '15px',  backgroundPosition:'center' ,backgroundImage:`url(${image1})` }} id="videos5">
-
-            </div>
+          
           </div>
         </div>
 
