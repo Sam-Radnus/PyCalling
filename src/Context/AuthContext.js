@@ -27,7 +27,8 @@ export const AuthProvider = ({ children }) => {
         if (response.status === 200) {
           setAuthTokens(data);
           setUser(jwt_decode(data.access));
-          localStorage.setItem("authTokens", JSON.stringify(data));
+          //localStorage.setItem("authTokens", JSON.stringify(data));
+          sessionStorage.setItem("authTokens", JSON.stringify(data));
         } else {
           alert("Something went wrong!");
         //  navigate('/');
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     let logoutUser = () => {
         setAuthTokens(null);
         setUser(null);
-        localStorage.removeItem('authTokens');
+        sessionStorage.removeItem('authTokens');
       //  navigate('/');
     }
     // let updateToken = async () => {

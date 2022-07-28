@@ -59,17 +59,19 @@ const LobbyHost = () => {
                         console.log("name:",name)
                         console.log("room:",room)    
                         loginUser(name,password);
-                        navigate(`/Room/${room}`)       
-                        dispatch(
-                            login({
-                                name:name,
-                                room:room,
-                                camera:true,
-                                mic:true,
-                                screen:false,
-                                loggedIn:true,
-                            })
-                        )
+                        if(sessionStorage.getItem('authTokens')!==null){
+                           navigate(`/Room/${room}`)       
+                           dispatch(
+                               login({
+                                   name:name,
+                                   room:room,
+                                   camera:true,
+                                   mic:true,
+                                   screen:false,
+                                   loggedIn:true,
+                               })
+                           )
+                        }
                         sessionStorage.setItem('name',name);
                         sessionStorage.setItem('room',room);
                         sessionStorage.setItem('loggedIn',true);

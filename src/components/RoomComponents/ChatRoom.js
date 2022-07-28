@@ -1,8 +1,9 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import { createChannel, createClient, RtmChannel, RtmMessage } from 'agora-rtm-react'
 import '../../Styles/room.css'
 import AgoraRTM from 'agora-rtm-sdk'
+import AuthContext from '../../Context/AuthContext'
 import { connect, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout, selectUser } from "./../../features/userSlice";
@@ -13,11 +14,12 @@ let type='bot';
 const useChannel = createChannel('TV')
 const client=AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92");    
 function ChatRoom(props) {
-   
+
     const testChannel=useChannel(client);
     const [texts,setTexts]=useState([]);
     const [uid,setUid]=useState('');
     const [hide,setHide]=useState(false);
+    const [disable,setDisable]=useState(true);
     const [textInput,setTextInput]=useState('')
     const [isLoggedIn,setLoggedIn]=useState(false);
     const users=props.users;
@@ -71,12 +73,13 @@ function ChatRoom(props) {
                     await tracks[0].close();
                     await tracks[1].close();
                     await clientRTC.leave();
+                    await logout();
                     navigate('/Lobby');
                     
                 }
                 if(msg.text.substring(7,13)==="Letter"&&msg.text.substring(20)===users[0])
                 {
-                    await logout();    
+                    setDisable(prev=>!prev);   
                 }
 
             }
@@ -170,7 +173,9 @@ const action=async(uid,action)=>{
           <div  className="member__wrapper" id="member__1__wrapper">
           <div style={{display:'flex'}}>
              
-              <p style={{marginLeft:'7px'}} className="member_name">{users[0]}</p>
+              <p style={{marginLeft:'7px'}} className="member_name">{users[0]}
+              <span style={{display:`${sessionStorage.getItem('authTokens')!==null?'absolute':'none'}`,left:'50%'}}>(Host)</span>
+              </p>
            </div>
              
               
@@ -181,7 +186,7 @@ const action=async(uid,action)=>{
                  
             <p  style={{marginLeft:'7px'}}  className="member_name">{user.uid}</p>
             
-            <div style={{display:'inherit'}}>
+            <div style={{display:`${sessionStorage.getItem('authTokens')!==null?'inherit':'none'}`}}>
                  <button onClick={()=>{
                      action(user.uid,"Kicked");
                  }}><i class="fa-solid fa-circle-xmark"></i></button>
@@ -232,9 +237,11 @@ const action=async(uid,action)=>{
     <form id="message__form" onSubmit={(e)=>{
         e.preventDefault();
         }}>
+       {disable?<>
         <input type="text"  name="message" onChange={(e)=>{
             setTextInput(e.target.value);
         }} placeholder="Send a message...." />
+       
         <button className="send" onClick={(e)=>{
              e.preventDefault();
              
@@ -244,6 +251,8 @@ const action=async(uid,action)=>{
              e.preventDefault();
              sendMsg(textInput,true);
         }}style={{marginTop:'5px',marginLeft:'5px'}}><i class="fa-solid fa-comment-slash"></i></button>
+        </>:<p>The Host has Disabled your Messaging Privilege</p>
+        }
     </form>
 
 </section>

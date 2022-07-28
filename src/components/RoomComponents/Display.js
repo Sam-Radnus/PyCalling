@@ -1,28 +1,31 @@
-import React from 'react'
+import {React,useContext} from 'react'
 import '../../Styles/room.css'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import AuthContext from '../../Context/AuthContext';
 import { config, useClient, useMicrophoneAndCameraTracks } from "./../../settings.js";
 import AgoraRTC, { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
 import { useSelector } from "react-redux"
 import Participants from './Participants';
 import { login, selectUser } from "./../../features/userSlice.js";
 import { Popover } from 'react-tiny-popover'
-import image1 from './adidas.jpg';
-import image2 from './bored.png';
-import image3 from './unnamed-2.webp';
-import image4 from './unnamed5.png';
+import image1 from './../images/Lani.png'
+import image2 from './../images/Elizabeth.png';
+import image3 from './../images/you.png';
+import image4 from './../images/Niesha.png' ;
+import image5 from './../images/Josh.png' ;
+import image6 from './../images/Alexander.png' ;
 import {AIDenoiserExtension} from "agora-extension-ai-denoiser";
 
 function Display(props) {
 
-
+  
   let localScreenTracks = [];
   const x = useSelector(selectUser);
   const dispatch = useDispatch();
   const { users, tracks } = props;
- 
+  let {loginUser,authTokens,logoutUser}=useContext(AuthContext);
  
   const client = useClient();
   const [screenShare, setScreenShare] = useState(false);
@@ -255,6 +258,10 @@ function Display(props) {
                 loggedIn: false,
               }),
             )
+            if(sessionStorage.getItem('authTokens')!==null)
+            {
+              logoutUser();
+            }
             //setInCall(false);
             navigate(-2);
 
