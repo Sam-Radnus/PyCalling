@@ -510,8 +510,11 @@ div[class="full2-screen"]
 }  
 div[class="mid-screen"]
 {
-  height:20vh;
+  height:25vh;
   width:20vw;
+  background-repeat: no-repeat;
+  background-size: 50vh;
+  
 }
 div[class="grid-container"]
 {
@@ -533,7 +536,7 @@ div[class="flex-container"] div[class="mid-screen"]
 div[class="Room__Name"]
 {
   background-color: #2B2D2E;
-  width:5vw;
+  width:fit-content;
   height:fit-content;
   padding:0px 5px 0px 5px;
   border-radius: 5px;
