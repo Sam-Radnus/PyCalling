@@ -560,3 +560,16 @@ div[class="Room__Name"]
 div [class="Room__Name"] h1{
   text-align: center;
 }
+button[id="disolve"]
+{
+  border:none;
+  color:white;
+  border-radius: 5px;
+  cursor:pointer;
+  background-color: #F12646;
+  padding:none;
+  height: fit-content;
+}
+button[id="disolve"] h1{
+  line-height: 0%;
+}

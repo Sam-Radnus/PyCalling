@@ -24,7 +24,7 @@ function Display(props) {
   let localScreenTracks = [];
   const x = useSelector(selectUser);
   const dispatch = useDispatch();
-  const { users, tracks } = props;
+  const { users, tracks, disolve} = props;
   let {loginUser,authTokens,logoutUser}=useContext(AuthContext);
  
   const client = useClient();
@@ -134,6 +134,7 @@ function Display(props) {
   useEffect(() => {
     console.warn(volume);
   }, [volume]);
+ 
 
   return (
 
@@ -219,8 +220,16 @@ function Display(props) {
           
         </div> */}
 
-        <div id="stream__container">     
+        <div  id="stream__container">  
+        <div style={{position:'relative',width:'100%'}}> 
         <div className="Room__Name"><h1>{x.room}</h1></div>
+        
+        <button onClick={()=>{
+          props.onChange();
+        }} style={{display: `${sessionStorage.getItem('authTokens') !== null ? 'inherit' : 'none'}`,position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve {x.room}</h1></button>
+       
+        
+         </div>  
           <div  style={{marginLeft:'0vw'}} className={`grid-container`} >
    
             <div  style={{position:'relative',marginTop:'2vh',marginLeft:'1vw'}}onClick={() => {
@@ -231,36 +240,6 @@ function Display(props) {
               <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px',height: '100%', width: '100%', borderWidth: '10px' }}  />
 
             </div>
-
-            
-            {/* <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos6"  ? isFull?'full2':'full' :'mid'}-screen`} style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image2})`}} id="videos6">
-
-            </div>
-            <div  onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos7"  ? isFull?'full2':'full' :'mid'}-screen`}
-            style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos7">
-
-            </div>
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos8"  ? isFull?'full2':'full' :'mid'}-screen`}
-             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos8">
-
-            </div> */}
-
-            
               {users.length > 0 &&
                 users.map((user) => {
                   if (user.videoTrack) {
