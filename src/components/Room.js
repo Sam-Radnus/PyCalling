@@ -8,11 +8,11 @@ import {selectUser } from "./../features/userSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import AgoraRTC, {
+import  {
    
     createScreenVideoTrack,
 } from "agora-rtc-react";
-import { createChannel } from 'agora-rtm-react';
+
 function Room() {
     let token=null;
    
@@ -47,7 +47,7 @@ function Room() {
         {
             navigate('/Lobby')
         }
-    });
+    },[]);
     useEffect(() => {
         let init = async (name) => { 
             console.log("init:", name);

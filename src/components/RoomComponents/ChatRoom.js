@@ -47,6 +47,7 @@ function ChatRoom(props) {
         console.warn(props.disolve);
         console.warn(isLoggedIn);
         console.warn(cust.name);
+        console.log(uid);
         await client.login({ uid: USER_ID.toString() });
         await testChannel.join();
         console.warn(client);
