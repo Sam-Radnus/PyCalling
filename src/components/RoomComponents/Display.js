@@ -65,9 +65,6 @@ function Display(props) {
     //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
 
-  useEffect(() => {
-    console.warn(users);
-  }, [trackState])
    useEffect(() => {
      var videoProfiles = [
        { label: "480p_1", detail: "640×480, 15fps, 500Kbps", value: "480p_1" },
@@ -81,7 +78,7 @@ function Display(props) {
 
      setVideoConfigs(videoProfiles);
      console.warn(videoConfigs);
-   }, [ videoConfigs.length]);
+   }, [ videoConfigs]);
 
   const tuneVolume = (op) => {
     let val = volume;
@@ -90,9 +87,6 @@ function Display(props) {
     console.warn(op);
     console.warn(volume);
   }
-  useEffect(() => {
-    console.warn(volume);
-  }, [volume]);
  
 
   return (
