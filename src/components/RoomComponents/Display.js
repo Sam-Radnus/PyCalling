@@ -24,7 +24,7 @@ function Display(props) {
   let localScreenTracks = [];
   const x = useSelector(selectUser);
   const dispatch = useDispatch();
-  const { users, tracks } = props;
+  const { users, tracks, disolve} = props;
   let {loginUser,authTokens,logoutUser}=useContext(AuthContext);
  
   const client = useClient();
@@ -70,82 +70,6 @@ function Display(props) {
     }
     //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
-  let denoiser=null;
-  let processor=null;
-  let processorEnable=true;
-  const pipeAIDenosier = async(audioTrack, processor) => {
-    
-    await audioTrack.pipe(processor).pipe(audioTrack.processorDestination);
-    
-  }
-   let openAIDenoiser=async()=>{
- 
-       denoiser=denoiser|| ((()=>{
-          let denoiser = new AIDenoiserExtension({
-            assetsPath:'./aiDenoiserExtension/external'
-          });
-          console.warn(denoiser);
-          AgoraRTC.registerExtensions([denoiser]);
-          denoiser.onloaderror=(e)=>{
-            console.error(e);
-            processor=null;
-          }
-          return denoiser;
-   })())
-        processor=processor||((()=>{
-          let processor=denoiser.createProcessor();
-          console.error(processor);
-       
-          processor.onoverload=async()=>{
-             console.log("overload!!!");
-             try{
-              await processor.disable();
-              setEnabled(false);
-              processorEnable=true;
-             }
-             catch(error)
-             {
-              console.error("disable AIDenoiser Failure");
-             }
-             finally{
-                 console.log('enabled');
-               
-             }
-          }
-          return processor;
-        })());
-   
-        
-        pipeAIDenosier(tracks[0],processor);
-   }
-  
-   let enableAiDenoiser=async()=>{
-   
-    if(processorEnable)
-    {
-      try{
-        await processor.enable();
-        processorEnable=false;
-      }
-      catch(e){
-        console.error("enable Denoiser Failure");
-      }
-      finally{
-        console.error(processor);
-      }
-    }else{
-       try{
-        await processor.disable();
-        processorEnable=true;
-       }
-       catch(e){
-        console.error("disable AIDenoiser Failure");
-       }
-       finally{
-
-       }
-    }
-   }
 
   useEffect(() => {
     console.warn(users);
@@ -210,6 +134,7 @@ function Display(props) {
   useEffect(() => {
     console.warn(volume);
   }, [volume]);
+ 
 
   return (
 
@@ -220,8 +145,10 @@ function Display(props) {
 
         </div>
         <div style={{display:'flex'}} id="controller">
-         
-          <button className="controls" style={{ color: 'white', backgroundColor: camera ? '#3F8CFE' : '#F12646', marginLeft: '0%'}} onClick={() => {
+        <button className="controls" style={{ backgroundColor: '#3F8CFE', color: 'white', marginLeft: '0px'  }} onClick={() => { volume<100 && tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
+            <span style={{ fontSize: '15px', transition: '1ms ease-in',marginTop:'8px' }}>{volume + 25}</span>
+            <button className="controls" style={{ backgroundColor: '#3F8CFE', color: 'white', marginRight: '15px' }} onClick={() => { volume>-1 &&  tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
+          <button className="controls" style={{ color: 'white', backgroundColor: camera ? '#3F8CFE' : '#F12646', marginLeft: '6%'}} onClick={() => {
 
             console.warn(camera);
             tracks[1].muted ? tracks[1].setMuted(false) : tracks[1].setMuted(true);
@@ -268,15 +195,12 @@ function Display(props) {
           }} >
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
-          <button className="controls" onClick={openAIDenoiser}style={{backgroundColor:'#3F8CFE',width:'fit-content'}} id="openAiDenosier" >Open</button>
-          <button className="controls" onClick={enableAiDenoiser}style={{backgroundColor:'#3F8CFE',width:'fit-content'}} id="enableAiDenosier">enable</button>
-          <div style={{ display: 'inline', marginLeft: '30px' }}>
-            <button className="controls" style={{ backgroundColor: '#3F8CFE', color: 'white', marginLeft: '15px'  }} onClick={() => { volume<100 && tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
-            <span style={{ fontSize: '15px', transition: '1ms ease-in' }}>{volume + 25}</span>
-            <button className="controls" style={{ backgroundColor: '#3F8CFE', color: 'white', marginRight: '15px' }} onClick={() => { volume>-1 &&  tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
+       
+          <div style={{ display:'inline-flex', marginLeft: '5%' }}>
+         
 
          
-          <span style={{fontSize:'10px'}}>Video Config</span>
+          <span style={{fontSize:'12px',width:'80px',paddingTop:'12px'}}>Video Config</span>
           <select id="config" name="configs" value={selectedConfig} onChange={(e) => {
             console.warn(e.target.value);
             setSelectedConfig(e.target.value);
@@ -296,8 +220,16 @@ function Display(props) {
           
         </div> */}
 
-        <div id="stream__container">     
+        <div  id="stream__container">  
+        <div style={{position:'relative',width:'100%'}}> 
         <div className="Room__Name"><h1>{x.room}</h1></div>
+        
+        <button onClick={()=>{
+          props.onChange();
+        }} style={{display: `${sessionStorage.getItem('authTokens') !== null ? 'inherit' : 'none'}`,position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve {x.room}</h1></button>
+       
+        
+         </div>  
           <div  style={{marginLeft:'0vw'}} className={`grid-container`} >
    
             <div  style={{position:'relative',marginTop:'2vh',marginLeft:'1vw'}}onClick={() => {
@@ -305,39 +237,9 @@ function Display(props) {
             }
             } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
              <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{x.name}</span>
-              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px', height: '100%', width: '100%', borderWidth: '10px' }} />
+              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px',height: '100%', width: '100%', borderWidth: '10px' }}  />
 
             </div>
-
-            
-            {/* <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos6"  ? isFull?'full2':'full' :'mid'}-screen`} style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image2})`}} id="videos6">
-
-            </div>
-            <div  onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos7"  ? isFull?'full2':'full' :'mid'}-screen`}
-            style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos7">
-
-            </div>
-            <div onClick={(e) => {
-              isFull2 ? setFull2(false) : setFull2(true)
-              console.warn(e.target.id);
-              setSecond(e.target.id);
-            } 
-            } className={`${isFull2 && second==="videos8"  ? isFull?'full2':'full' :'mid'}-screen`}
-             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} id="videos8">
-
-            </div> */}
-
-            
               {users.length > 0 &&
                 users.map((user) => {
                   if (user.videoTrack) {

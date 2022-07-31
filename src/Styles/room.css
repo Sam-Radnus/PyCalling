@@ -108,7 +108,7 @@
   }
   
   #messages__container {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 125px);
     background-color: #2B2D2E;
  
   
@@ -193,7 +193,7 @@
     color: #fff;
     width:58%;
     border: none;
-    height:55px;
+    height:40px;
     margin-top: 5px;
     border-radius: 5px;
     padding: 10px;
@@ -217,7 +217,7 @@
     left: 9.7rem;
     
     border-style: solid ;
-    border-color:white;
+    border-color:#373639;
     border-width: 1px;
     border-top-style:none;
     top: clac(100vh - 72px);
@@ -369,8 +369,8 @@
   }
   button[class="send"]
   {
-    height:55px;
-    width:40px;
+    height:40px;
+    width:50px;
     cursor:pointer;
     border: none;
     font-size: 15px;
@@ -456,10 +456,10 @@
     height:30px;
   }
   div#controller{
-    margin-left: 10%;
+    margin-left: 12%;
     position: fixed;
     top:90%;
-    width:fit-content;
+    width:40vw;
     padding:10px;
     padding-left:40px;
     border-radius: 5px;
@@ -473,13 +473,14 @@
     color:white;
     background-color: #3F8CFE;
     border:none;
-    margin-top:0%;
+    margin-top:2%;
     margin-right:30px;
     margin-left: 10px;
     border-radius:5px;
     cursor:pointer;
     font-size:10px;
     padding:5px;
+    padding-top:7px;
   }
  option{
     width:100px;
@@ -489,17 +490,19 @@
 div[class="full-screen"]
 {
   height:60vh;
-  width:65vw;
+  width:90%;
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start:1;
   grid-row-end:3;
   margin-bottom: 2vh;
   margin-left:10px;
+  border-radius:10px;
+  overflow: hidden;
 }  
 div[class="full2-screen"]
 {
-  height:40vh;
+  height:60vh;
   width:65vw;
   grid-column-start: 1;
   grid-column-end: 4;
@@ -507,17 +510,32 @@ div[class="full2-screen"]
   grid-row-end:4;
   margin-bottom: 2vh;
   margin-left:10px;
+  border-radius:10px;
+  overflow: hidden;
 }  
 div[class="mid-screen"]
 {
   height:20vh;
   width:20vw;
+
+  border-radius:10px;
+  overflow: hidden;
 }
 div[class="grid-container"]
 {
   display: grid;
   grid-template-columns:repeat(3,1fr);
+  
+  width:70vw;
+  border-top-style:solid;
+  border-top-color: #373639;
+  border-top-width:1px;
   padding: 10px;
+}
+video{
+  cursor:pointer;
+  
+  overflow:hidden;
 }
 div[class="flex-container"]
 {
@@ -541,4 +559,17 @@ div[class="Room__Name"]
 }
 div [class="Room__Name"] h1{
   text-align: center;
+}
+button[id="disolve"]
+{
+  border:none;
+  color:white;
+  border-radius: 5px;
+  cursor:pointer;
+  background-color: #F12646;
+  padding:none;
+  height: fit-content;
+}
+button[id="disolve"] h1{
+  line-height: 0%;
 }

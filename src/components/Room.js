@@ -29,7 +29,7 @@ function Room() {
     const [uid,setUid]=useState('');
     const client = useClient();
     const [channelName, setChannelName] = useState("");
-   
+    const [disolve,setDisolve]=useState(false);
     const appid = "9e4b87cc837448969b97b4301e2aca92";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
@@ -103,7 +103,7 @@ function Room() {
             
             try{
                 let x=await client.join(appid, name,token,username.toString());
-               
+                  
                 setUsers((prevUsers)=>{
                     return [...prevUsers,x];
              })
@@ -129,12 +129,16 @@ function Room() {
     useEffect(()=>{
        console.warn(users);
     },[users.length]);
+    const handleChange=()=>{
+        setDisolve((prev)=>!prev);
+       // console.warn(disolve)
+    }
     return (
         <main className="container">
             <div style={{backgroundColor:'#1A1E23'}} id="room__container">
             
-                {start && tracks && screen && users &&  <ChatRoom uid={uid} clientRTC={client} users={users} tracks={tracks}  /> } 
-                {start && tracks && screen && users &&  <Display  users={users} screen={screen} tracks={tracks} />}
+                {start && tracks && screen && users &&  <ChatRoom uid={uid} clientRTC={client}  disolve={disolve} users={users} tracks={tracks}  /> } 
+                {start && tracks && screen && users &&  <Display  users={users} screen={screen} onChange={handleChange} disolve={setDisolve} tracks={tracks} />}
               
             </div>
         </main>
