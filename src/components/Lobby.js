@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import '../Styles/lobby.css'
-import {Link ,Navigate,useNavigate,useLocation} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { useSelector } from 'react-redux/es/exports';
-import { selectUser } from './../features/userSlice';
 import { useState } from 'react';
 import { login } from "./../features/userSlice";
 import Room from './Room';
@@ -12,7 +10,6 @@ function Lobby() {
     let [name,setName]=useState('');
     let [room,setRoom]=useState('');
     const dispatch=useDispatch();
-    const x=useSelector(selectUser);
       
   return (
     <div style={{height:'100vh',backgroundColor:'#181E23'}}>

@@ -4,19 +4,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import AuthContext from '../../Context/AuthContext';
-import { config, useClient, useMicrophoneAndCameraTracks } from "./../../settings.js";
-import AgoraRTC, { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
+import {  useClient } from "./../../settings.js";
+import AgoraRTC, { AgoraVideoPlayer } from "agora-rtc-react";
 import { useSelector } from "react-redux"
 import Participants from './Participants';
 import { login, selectUser } from "./../../features/userSlice.js";
-import { Popover } from 'react-tiny-popover'
-import image1 from './../images/Lani.png'
-import image2 from './../images/Elizabeth.png';
-import image3 from './../images/you.png';
-import image4 from './../images/Niesha.png' ;
-import image5 from './../images/Josh.png' ;
-import image6 from './../images/Alexander.png' ;
-import {AIDenoiserExtension} from "agora-extension-ai-denoiser";
+//import { Popover } from 'react-tiny-popover'
+
 
 function Display(props) {
 
@@ -24,26 +18,26 @@ function Display(props) {
   let localScreenTracks = [];
   const x = useSelector(selectUser);
   const dispatch = useDispatch();
-  const { users, tracks, disolve} = props;
-  let {loginUser,authTokens,logoutUser}=useContext(AuthContext);
+  const { users, tracks} = props;
+  let {logoutUser}=useContext(AuthContext);
  
   const client = useClient();
   const [screenShare, setScreenShare] = useState(false);
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const [isPopoverOpen2, setIsPopoverOpen2] = useState(false);
+ // const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+ // const [isPopoverOpen2, setIsPopoverOpen2] = useState(false);
   const navigate = useNavigate();
   const [trackState, setTrackState] = useState(tracks[1]);
   const [mic, setMic] = useState(true);
   const [videoConfigs, setVideoConfigs] = useState([]);
   const [selectedConfig, setSelectedConfig] = useState([]);
-  const [stats, setStats] = useState([]);
+ // const [stats, setStats] = useState([]);
   const [second,setSecond]=useState('');
   const [isFull, setFull] = useState(false);
-  const [enabled,setEnabled]=useState(false);
-  const [opened,setOpened]=useState(false);
+  //const [enabled,setEnabled]=useState(false);
+  //const [opened,setOpened]=useState(false);
   const [isFull2, setFull2] = useState(false);
   const [volume, setVolume] = useState(100);
-  const [localStats, setLocalStats] = useState([]);
+ // const [localStats, setLocalStats] = useState([]);
   const [camera, setCamera] = useState(true);
   const screenSharing = async (e) => {
     if (screenShare) {
@@ -71,58 +65,20 @@ function Display(props) {
     //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
 
-  useEffect(() => {
-    console.warn(users);
-  }, [trackState])
-  useEffect(() => {
-    const clientStats = client.getRTCStats();
-  
-    const clientStatsList = [
-      { description: "Number of users in channel", value: clientStats.UserCount, unit: "" },
-      { description: "Duration in channel", value: clientStats.Duration, unit: "s" },
-      { description: "Bit rate receiving", value: clientStats.RecvBitrate, unit: "bps" },
-      { description: "Bit rate being sent", value: clientStats.SendBitrate, unit: "bps" },
-      { description: "Total bytes received", value: clientStats.RecvBytes, unit: "bytes" },
-      { description: "Total bytes sent", value: clientStats.SendBytes, unit: "bytes" },
-      { description: "Outgoing available bandwidth", value: clientStats.OutgoingAvailableBandwidth.toFixed(3), unit: "kbps" },
-      { description: "RTT from SDK to SD-RTN access node", value: clientStats.RTT, unit: "ms" },
-    ]
-    console.warn(clientStatsList);
-    setStats(clientStatsList)
-    const localStats = { video: client.getLocalVideoStats(), audio: client.getLocalAudioStats() };
-    const localStatsList = [
-      { description: "Send audio bit rate", value: localStats.audio.sendBitrate, unit: "bps" },
-      { description: "Total audio bytes sent", value: localStats.audio.sendBytes, unit: "bytes" },
-      { description: "Total audio packets sent", value: localStats.audio.sendPackets, unit: "" },
-      { description: "Total audio packets loss", value: localStats.audio.sendPacketsLost, unit: "" },
-      { description: "Video capture resolution height", value: localStats.video.captureResolutionHeight, unit: "" },
-      { description: "Video capture resolution width", value: localStats.video.captureResolutionWidth, unit: "" },
-      { description: "Video send resolution height", value: localStats.video.sendResolutionHeight, unit: "" },
-      { description: "Video send resolution width", value: localStats.video.sendResolutionWidth, unit: "" },
-      { description: "video encode delay", value: Number(localStats.video.encodeDelay).toFixed(2), unit: "ms" },
-      { description: "Send video bit rate", value: localStats.video.sendBitrate, unit: "bps" },
-      { description: "Total video bytes sent", value: localStats.video.sendBytes, unit: "bytes" },
-      { description: "Total video packets sent", value: localStats.video.sendPackets, unit: "" },
-      { description: "Total video packets loss", value: localStats.video.sendPacketsLost, unit: "" },
-      { description: "Video duration", value: localStats.video.totalDuration, unit: "s" },
-      { description: "Total video freeze time", value: localStats.video.totalFreezeTime, unit: "s" },
-    ];
-    //console.warn(localStatsList);
-    console.warn(client.getRemoteNetworkQuality());
-    setLocalStats(localStatsList)
-    var videoProfiles = [
-      { label: "480p_1", detail: "640×480, 15fps, 500Kbps", value: "480p_1" },
-      { label: "480p_2", detail: "640×480, 30fps, 1000Kbps", value: "480p_2" },
-      { label: "720p_1", detail: "1280×720, 15fps, 1130Kbps", value: "720p_1" },
-      { label: "720p_2", detail: "1280×720, 30fps, 2000Kbps", value: "720p_2" },
-      { label: "1080p_1", detail: "1920×1080, 15fps, 2080Kbps", value: "1080p_1" },
-      { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
-      { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
-    ]
+   useEffect(() => {
+     var videoProfiles = [
+       { label: "480p_1", detail: "640×480, 15fps, 500Kbps", value: "480p_1" },
+       { label: "480p_2", detail: "640×480, 30fps, 1000Kbps", value: "480p_2" },
+       { label: "720p_1", detail: "1280×720, 15fps, 1130Kbps", value: "720p_1" },
+       { label: "720p_2", detail: "1280×720, 30fps, 2000Kbps", value: "720p_2" },
+       { label: "1080p_1", detail: "1920×1080, 15fps, 2080Kbps", value: "1080p_1" },
+       { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
+       { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
+     ]
 
-    setVideoConfigs(videoProfiles);
-    console.warn(videoConfigs);
-  }, [isPopoverOpen, videoConfigs.length]);
+     setVideoConfigs(videoProfiles);
+     console.warn(videoConfigs);
+   }, [ videoConfigs]);
 
   const tuneVolume = (op) => {
     let val = volume;
@@ -131,9 +87,6 @@ function Display(props) {
     console.warn(op);
     console.warn(volume);
   }
-  useEffect(() => {
-    console.warn(volume);
-  }, [volume]);
  
 
   return (

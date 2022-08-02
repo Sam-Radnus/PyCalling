@@ -1,15 +1,13 @@
 
-import React, { useEffect, useState, useContext } from 'react'
-import { createChannel, createClient, RtmChannel, RtmMessage } from 'agora-rtm-react'
+import React, { useEffect, useState } from 'react'
+import { createChannel } from 'agora-rtm-react'
 import '../../Styles/room.css'
 import AgoraRTM from 'agora-rtm-sdk'
-import AuthContext from '../../Context/AuthContext'
-import { connect, useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { logout, selectUser } from "./../../features/userSlice";
+
+import {  useSelector } from "react-redux";
+
+import {  selectUser } from "./../../features/userSlice";
 import { useNavigate } from 'react-router-dom';
-import { setUseProxies } from 'immer'
-const useClient = createClient("9e4b87cc837448969b97b4301e2aca92");
 const USER_ID = Math.floor(Math.random() * 1000000001);
 let type = 'bot';
 const useChannel = createChannel('TV')
@@ -19,17 +17,17 @@ function ChatRoom(props) {
     const testChannel = useChannel(client);
     const [texts, setTexts] = useState([]);
     const [uid, setUid] = useState('');
-    const [hide, setHide] = useState(false);
+    //const [hide, setHide] = useState(false);
     const [disable, setDisable] = useState(true);
     const [textInput, setTextInput] = useState('')
     const [isLoggedIn, setLoggedIn] = useState(false);
     const users = props.users;
-    const clientRTM = AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92");
+    //const clientRTM = AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92");
     const cust = useSelector(selectUser);
     const tracks = props.tracks;
     const clientRTC = props.clientRTC;
     const navigate = useNavigate();
-    let uid2 = props.uid;
+   // let uid2 = props.uid;
     let { disolve } = props;
     const sendMsg = async (text, hide) => {
         console.log(disolve);
@@ -49,6 +47,7 @@ function ChatRoom(props) {
         console.warn(props.disolve);
         console.warn(isLoggedIn);
         console.warn(cust.name);
+        console.log(uid);
         await client.login({ uid: USER_ID.toString() });
         await testChannel.join();
         console.warn(client);
@@ -127,7 +126,7 @@ function ChatRoom(props) {
         setLoggedIn(false);
     }
     const disolveRoom = async () => {
-        let text = "Action:" + "Delete" + "->User:" + "all";
+        let text = "Action:Delete->User:all";
         console.warn(text);
         let message = client.createMessage({ text, uid: USER_ID.toString(), messageType: 'TEXT' })
         // console.warn(message);
@@ -142,7 +141,7 @@ function ChatRoom(props) {
         navigate('/Lobby');
 
     }
-    const toggleVideo = async (uid) => {
+/*    const toggleVideo = async (uid) => {
         var peerId = uid.toString();
         console.warn(peerId);
         console.warn("Remote Video Button Pressed");
@@ -162,6 +161,7 @@ function ChatRoom(props) {
             }
         })
     }
+    */
     const action = async (uid, action) => {
         let text = "Action:" + action + "->User:" + uid;
         console.warn(text);

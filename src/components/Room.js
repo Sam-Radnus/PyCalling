@@ -1,26 +1,18 @@
 import React from 'react'
 import ChatRoom from './RoomComponents/ChatRoom';
 import Display from './RoomComponents/Display';
-import Participants from './RoomComponents/Participants';
 import { useState, useEffect } from 'react';
-import { config, useClient, useMicrophoneAndCameraTracks } from "./../settings.js";
+import {  useClient, useMicrophoneAndCameraTracks } from "./../settings.js";
 import "../Styles/room.css"
-import { logout, selectUser } from "./../features/userSlice";
+import {selectUser } from "./../features/userSlice";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import AgoraRTC, {
-    AgoraVideoPlayer,
-    createClient,
-    createMicrophoneAndCameraTracks,
-    ClientConfig,
-    IAgoraRTCRemoteUser,
-    ICameraVideoTrack,
-    IMicrophoneAudioTrack,
+import  {
+   
     createScreenVideoTrack,
 } from "agora-rtc-react";
-import { createChannel } from 'agora-rtm-react';
+
 function Room() {
     let token=null;
    
@@ -28,14 +20,14 @@ function Room() {
     const [start, setStart] = useState(false);
     const [uid,setUid]=useState('');
     const client = useClient();
-    const [channelName, setChannelName] = useState("");
+ //   const [channelName, setChannelName] = useState("");
     const [disolve,setDisolve]=useState(false);
     const appid = "9e4b87cc837448969b97b4301e2aca92";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
     const [username,setName]=useState();
     const navigate = useNavigate();
-    const channel=createChannel();
+  //  const channel=createChannel();
     const x = useSelector(selectUser);
     
 
@@ -55,7 +47,7 @@ function Room() {
         {
             navigate('/Lobby')
         }
-    });
+    },[]);
     useEffect(() => {
         let init = async (name) => { 
             console.log("init:", name);

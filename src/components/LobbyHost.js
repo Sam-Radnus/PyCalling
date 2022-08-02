@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import '../Styles/lobby.css'
-import {Link ,Navigate,useNavigate,useLocation} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { useSelector } from 'react-redux/es/exports';
-import { selectUser } from './../features/userSlice';
+
 import { useState } from 'react';
 import { login } from "./../features/userSlice";
 import AuthContext from '../Context/AuthContext';
@@ -15,8 +14,7 @@ const LobbyHost = () => {
   let [password,setPassword]=useState('');
   let [room,setRoom]=useState('');
   const dispatch=useDispatch();
-  const x=useSelector(selectUser);
-  const {authTokens,loginUser}=useContext(AuthContext);
+  const {loginUser}=useContext(AuthContext);
   return (
     <div style={{height:'100vh',backgroundColor:'#181E23'}}>
     <button className="back" onClick={()=>{
