@@ -7,8 +7,10 @@
 ## Preview 
 ---
 ![Landing Page](./src/components/Preview2.png)
+![Landing Page](./src/components/Lobby.png)
 ---
 ## Normal View
+![Landing Page](./src/components/Preview3.png)
 ![Landing Page](./src/components/Preview.png)
 ## Features:-
 * Anonymous Messaging 
