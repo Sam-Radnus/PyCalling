@@ -10,7 +10,7 @@ import {
 import {
     createChannel,
   } from "agora-rtm-react";
-const appid="9e4b87cc837448969b97b4301e2aca92";
+const appid="YOUR AGORA APP ID";
 export const config ={ mode:"rtc",codec:"vp8",appid:appid}
 export const useClient=createClient(config);
 
