@@ -22,7 +22,7 @@ function Room() {
     const client = useClient();
  //   const [channelName, setChannelName] = useState("");
     const [disolve,setDisolve]=useState(false);
-    const appid = "9e4b87cc837448969b97b4301e2aca92";
+    const appid = "YOUR AGORA APP ID";
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
     const [username,setName]=useState();
