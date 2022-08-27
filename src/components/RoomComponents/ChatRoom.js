@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom';
 const USER_ID = Math.floor(Math.random() * 1000000001);
 let type = 'bot';
 const useChannel = createChannel('TV')
-const client = AgoraRTM.createInstance("YOUR AGORA APP ID");
+const client = AgoraRTM.createInstance(process.env.REACT_APP_AGORA_APP_ID);
 function ChatRoom(props) {
-
+   
     const testChannel = useChannel(client);
     const [texts, setTexts] = useState([]);
     const [uid, setUid] = useState('');

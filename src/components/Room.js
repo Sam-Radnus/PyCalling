@@ -22,7 +22,7 @@ function Room() {
     const client = useClient();
  //   const [channelName, setChannelName] = useState("");
     const [disolve,setDisolve]=useState(false);
-    const appid = "YOUR AGORA APP ID";
+    const appid = process.env.REACT_APP_AGORA_APP_ID;
     const { ready, tracks } = useMicrophoneAndCameraTracks();
     const  screen =createScreenVideoTrack();
     const [username,setName]=useState();
@@ -51,7 +51,7 @@ function Room() {
     useEffect(() => {
         let init = async (name) => { 
             console.log("init:", name);
-            
+            console.warn(process.env.REACT_APP_AGORA_APP_ID);
             client.on("user-published", async (user, mediaType) => {
                 await client.subscribe(user, mediaType);
                 
