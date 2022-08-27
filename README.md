@@ -79,10 +79,11 @@ npm run build
 ![Landing Page](./src/components/Preview2.png)
 ![Landing Page](./src/components/Lobby.png)
 ---
-## Normal View
-![Preview1](./src/components/Preview3.png)
 ## Host View
-![Preview2](./src/components/Preview.png)
+![Preview2](./src/components/Preview6.png)
+## Normal View
+![Preview1](./src/components/Preview5.png)
+
 ## Features:-
 * Anonymous Messaging 
 * Toggle User Chat

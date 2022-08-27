@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css'
 import {useNavigate} from 'react-router-dom';
-import image from "./Preview.png";
+import image from "./Preview6.png";
 function Landing() {
   const navigate=useNavigate();
   return (
