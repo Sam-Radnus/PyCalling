@@ -208,9 +208,9 @@ function ChatRoom(props) {
                         <p style={{ marginLeft: '7px' }} className="member_name">Marc </p>
 
                         <div style={{ display: 'inherit' }}>
-                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
+                           
 
-                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                           
                         </div>
                     </div>
                     <div className="member__wrapper" id="member__1__wrapper">
@@ -219,9 +219,9 @@ function ChatRoom(props) {
                         <p style={{ marginLeft: '7px' }} className="member_name">Lani </p>
 
                         <div style={{ display: 'inherit' }}>
-                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
+                           
 
-                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                           
                         </div>
                     </div>
                     <div className="member__wrapper" id="member__1__wrapper">
@@ -230,9 +230,9 @@ function ChatRoom(props) {
                         <p style={{ marginLeft: '7px' }} className="member_name">Gemma </p>
 
                         <div style={{ display: 'inherit' }}>
-                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
+                           
 
-                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                           
                         </div>
                     </div>
                     <div className="member__wrapper" id="member__1__wrapper">
@@ -241,9 +241,9 @@ function ChatRoom(props) {
                         <p style={{ marginLeft: '7px' }} className="member_name">Sarah </p>
 
                         <div style={{ display: 'inherit' }}>
-                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
+                           
 
-                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                           
                         </div>
                     </div>
                     <div className="member__wrapper" id="member__1__wrapper">
@@ -252,9 +252,9 @@ function ChatRoom(props) {
                         <p style={{ marginLeft: '7px' }} className="member_name">Elizabeth </p>
 
                         <div style={{ display: 'inherit' }}>
-                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
+                           
 
-                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                           
                         </div>
                     </div>
                     {/* {users.slice(1, 10).map(user => (
@@ -297,17 +297,17 @@ function ChatRoom(props) {
                             </p>
                         </div>
                     </div>
-                    <div  style={{ color: 'white', marginLeft:  '1em'  }} onClick={(e) => {
+                    <div  style={{ color: 'white', marginLeft:  '12em'  }} onClick={(e) => {
                     }} className="message__wrapper">
                         <div style={{ color: 'white', backgroundColor:  '#252D33'  }} className={`message__body`}>
-                            <strong style={{ color: 'white' }} className="message__author">you</strong>
+                            <strong style={{ color: 'white' }} className="message__author">Anastasia</strong>
 
                             <p className={`message__text`}>Hey Everyone It's Anastasia Here👋</p>
                         </div>
                     </div>
                     <div  style={{ color: 'white', marginLeft: '12em' }} onClick={(e) => {
                     }} className="message__wrapper">
-                        <div style={{ color: 'white', backgroundColor: '#51B66D' }} className={`message__body`}>
+                        <div style={{ color: 'white', backgroundColor: '#252D33' }} className={`message__body`}>
                             <strong style={{ color: 'white' }} className="message__author">Marc</strong>
 
                             <p className={`message__text`}>Hello Anastasia</p>
@@ -331,21 +331,8 @@ function ChatRoom(props) {
                 <form id="message__form" onSubmit={(e) => {
                     e.preventDefault();
                 }}>
-                    {disable ? <>
-                        <input type="text" name="message" onChange={(e) => {
-                            setTextInput(e.target.value);
-                        }} placeholder="Send a message...." />
-
-                        <button className="send" onClick={(e) => {
-                            e.preventDefault();
-                            sendMsg(textInput, false);
-                        }} style={{ marginTop: '5px' }}><i className="fa-solid fa-message"></i></button>
-                        <button className="send" id="second" onClick={(e) => {
-                            e.preventDefault();
-                            sendMsg(textInput, true);
-                        }} style={{ marginTop: '5px', marginLeft: '5px' }}><i class="fa-solid fa-comment-slash"></i></button>
-                    </> : <p>The Host has Disabled your Messaging Privilege</p>
-                    }
+                     <p>The Host has Disabled your Messaging Privilege</p>
+                    
                 </form>
 
             </section>

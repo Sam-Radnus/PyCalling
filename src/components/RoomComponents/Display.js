@@ -184,9 +184,9 @@ function Display(props) {
         <div style={{position:'relative',width:'100%'}}> 
         <div className="Room__Name" style={{width:'fit-content'}}><h1>Friendly Gossips</h1></div>
         
-        <button onClick={()=>{
+        {/* <button onClick={()=>{
           props.onChange();
-        }} style={{position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve Room</h1></button>
+        }} style={{position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve Room</h1></button> */}
        
         
          </div>  
