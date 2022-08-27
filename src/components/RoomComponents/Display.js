@@ -182,11 +182,11 @@ function Display(props) {
 
         <div  id="stream__container">  
         <div style={{position:'relative',width:'100%'}}> 
-        <div className="Room__Name"><h1>{x.room}</h1></div>
+        <div className="Room__Name" style={{width:'fit-content'}}><h1>Friendly Gossips</h1></div>
         
         <button onClick={()=>{
           props.onChange();
-        }} style={{display: `${sessionStorage.getItem('authTokens') !== null ? 'inherit' : 'none'}`,position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve {x.room}</h1></button>
+        }} style={{position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve Room</h1></button>
        
         
          </div>  

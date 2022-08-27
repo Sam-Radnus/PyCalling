@@ -4,16 +4,16 @@ import { createChannel } from 'agora-rtm-react'
 import '../../Styles/room.css'
 import AgoraRTM from 'agora-rtm-sdk'
 
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import {  selectUser } from "./../../features/userSlice";
+import { selectUser } from "./../../features/userSlice";
 import { useNavigate } from 'react-router-dom';
 const USER_ID = Math.floor(Math.random() * 1000000001);
 let type = 'bot';
 const useChannel = createChannel('TV')
 const client = AgoraRTM.createInstance(process.env.REACT_APP_AGORA_APP_ID);
 function ChatRoom(props) {
-   
+
     const testChannel = useChannel(client);
     const [texts, setTexts] = useState([]);
     const [uid, setUid] = useState('');
@@ -26,7 +26,7 @@ function ChatRoom(props) {
     const tracks = props.tracks;
     const clientRTC = props.clientRTC;
     const navigate = useNavigate();
-   // let uid2 = props.uid;
+    // let uid2 = props.uid;
     let { disolve } = props;
     const sendMsg = async (text, hide) => {
         console.log(disolve);
@@ -140,27 +140,27 @@ function ChatRoom(props) {
         navigate('/Lobby');
 
     }
-/*    const toggleVideo = async (uid) => {
-        var peerId = uid.toString();
-        console.warn(peerId);
-        console.warn("Remote Video Button Pressed");
-        let peerMessage = "video";
-        await client.sendMessageToPeer(
-            { text: peerMessage },
-            uid,
-        ).then(sendResult => {
-            if (sendResult.hasPeerReceived) {
-                console.warn(sendResult.hasPeerReceived);
-                //document.getElementById("log").appendChild(document.createElement('div')).append("Message has been received by: " + peerId + " Message: " + peerMessage)
-
-            } else {
-                console.warn(sendResult.hasPeerReceived);
-                //document.getElementById("log").appendChild(document.createElement('div')).append("Message sent to: " + peerId + " Message: " + peerMessage)
-
-            }
-        })
-    }
-    */
+    /*    const toggleVideo = async (uid) => {
+            var peerId = uid.toString();
+            console.warn(peerId);
+            console.warn("Remote Video Button Pressed");
+            let peerMessage = "video";
+            await client.sendMessageToPeer(
+                { text: peerMessage },
+                uid,
+            ).then(sendResult => {
+                if (sendResult.hasPeerReceived) {
+                    console.warn(sendResult.hasPeerReceived);
+                    //document.getElementById("log").appendChild(document.createElement('div')).append("Message has been received by: " + peerId + " Message: " + peerMessage)
+    
+                } else {
+                    console.warn(sendResult.hasPeerReceived);
+                    //document.getElementById("log").appendChild(document.createElement('div')).append("Message sent to: " + peerId + " Message: " + peerMessage)
+    
+                }
+            })
+        }
+        */
     const action = async (uid, action) => {
         let text = "Action:" + action + "->User:" + uid;
         console.warn(text);
@@ -190,73 +190,73 @@ function ChatRoom(props) {
                 <div id="members__header">
                     <p>Participants</p>
                     <strong id="members__count">{users.length}</strong>
-                    
+
                 </div>
 
                 <div id="member__list">
-                   
-                    <div  className="member__wrapper" id="member__1__wrapper">
+
+                    <div className="member__wrapper" id="member__1__wrapper">
 
 
-                     <p  style={{marginLeft:'7px'}}  className="member_name">Anastasia(Host)</p>
+                        <p style={{ marginLeft: '7px' }} className="member_name">Anastasia(Host)</p>
 
 
-           </div>
-           <div  className="member__wrapper" id="member__1__wrapper">
+                    </div>
+                    <div className="member__wrapper" id="member__1__wrapper">
 
 
-                     <p  style={{marginLeft:'7px'}}  className="member_name">Marc </p>
+                        <p style={{ marginLeft: '7px' }} className="member_name">Marc </p>
 
-                     <div style={{display:'inherit'}}>
-                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
+                        <div style={{ display: 'inherit' }}>
+                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
 
-                          <button><i class="fa-solid fa-comment-slash"></i></button>
-                     </div>
-           </div>
-           <div  className="member__wrapper" id="member__1__wrapper">
-
-
-                     <p  style={{marginLeft:'7px'}}  className="member_name">Lani </p>
-
-                     <div style={{display:'inherit'}}>
-                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
-
-                          <button><i class="fa-solid fa-comment-slash"></i></button>
-                     </div>
-           </div>
-           <div  className="member__wrapper" id="member__1__wrapper">
+                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                        </div>
+                    </div>
+                    <div className="member__wrapper" id="member__1__wrapper">
 
 
-                     <p  style={{marginLeft:'7px'}}  className="member_name">Gemma </p>
+                        <p style={{ marginLeft: '7px' }} className="member_name">Lani </p>
 
-                     <div style={{display:'inherit'}}>
-                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
+                        <div style={{ display: 'inherit' }}>
+                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
 
-                          <button><i class="fa-solid fa-comment-slash"></i></button>
-                     </div>
-           </div>
-           <div  className="member__wrapper" id="member__1__wrapper">
-
-
-                     <p  style={{marginLeft:'7px'}}  className="member_name">Sarah </p>
-
-                     <div style={{display:'inherit'}}>
-                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
-
-                          <button><i class="fa-solid fa-comment-slash"></i></button>
-                     </div>
-           </div>
-           <div  className="member__wrapper" id="member__1__wrapper">
+                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                        </div>
+                    </div>
+                    <div className="member__wrapper" id="member__1__wrapper">
 
 
-                     <p  style={{marginLeft:'7px'}}  className="member_name">Elizabeth </p>
+                        <p style={{ marginLeft: '7px' }} className="member_name">Gemma </p>
 
-                     <div style={{display:'inherit'}}>
-                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
+                        <div style={{ display: 'inherit' }}>
+                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
 
-                          <button><i class="fa-solid fa-comment-slash"></i></button>
-                     </div>
-           </div>
+                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                        </div>
+                    </div>
+                    <div className="member__wrapper" id="member__1__wrapper">
+
+
+                        <p style={{ marginLeft: '7px' }} className="member_name">Sarah </p>
+
+                        <div style={{ display: 'inherit' }}>
+                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
+
+                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                        </div>
+                    </div>
+                    <div className="member__wrapper" id="member__1__wrapper">
+
+
+                        <p style={{ marginLeft: '7px' }} className="member_name">Elizabeth </p>
+
+                        <div style={{ display: 'inherit' }}>
+                            <button ><i class="fa-solid fa-circle-xmark"></i></button>
+
+                            <button><i class="fa-solid fa-comment-slash"></i></button>
+                        </div>
+                    </div>
                     {/* {users.slice(1, 10).map(user => (
                         <div key={user.uid} className="member__wrapper" id="member__1__wrapper">
 
@@ -283,19 +283,36 @@ function ChatRoom(props) {
             <section id="messages__container">
 
                 <div id="messages">
-                    {/* <div className="message__wrapper">
-            <div className="message__body__bot">
-                <strong className="message__author__bot">🤖 PyCardis Bot</strong>
-                <p className="message__text__bot">Welcome to the room, Don't be shy, say hello!</p>
-            </div>
-        </div>
+                    <div className="message__wrapper">
+                        <div className="message__body__bot">
+                            <strong className="message__author__bot">🤖 PyCardis Bot</strong>
+                            <p className="message__text__bot">Welcome to the room, Don't be shy, say hello!</p>
+                        </div>
+                    </div>
 
-        <div className="message__wrapper">
-            <div className="message__body__bot">
-                <strong className="message__author__bot">🤖 PyCardis Bot</strong>
-                <p className="message__text__bot">Dennis Ivy just entered the room!</p>
-            </div>
-        </div> */}
+                    <div className="message__wrapper">
+                        <div className="message__body__bot">
+                            <strong className="message__author__bot">🤖 PyCardis Bot</strong>
+                            <p className="message__text__bot">Please Behave
+                            </p>
+                        </div>
+                    </div>
+                    <div  style={{ color: 'white', marginLeft:  '1em'  }} onClick={(e) => {
+                    }} className="message__wrapper">
+                        <div style={{ color: 'white', backgroundColor:  '#252D33'  }} className={`message__body`}>
+                            <strong style={{ color: 'white' }} className="message__author">you</strong>
+
+                            <p className={`message__text`}>Hey Everyone It's Anastasia Here👋</p>
+                        </div>
+                    </div>
+                    <div  style={{ color: 'white', marginLeft: '12em' }} onClick={(e) => {
+                    }} className="message__wrapper">
+                        <div style={{ color: 'white', backgroundColor: '#51B66D' }} className={`message__body`}>
+                            <strong style={{ color: 'white' }} className="message__author">Marc</strong>
+
+                            <p className={`message__text`}>Hello Anastasia</p>
+                        </div>
+                    </div>
 
                     {texts.map((text, i) =>
                         <div key={i} style={{ color: 'white', marginLeft: `${text.uid.user ? '1em' : '12em'}` }} onClick={(e) => {
