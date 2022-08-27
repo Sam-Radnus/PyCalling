@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import image from "./Preview.png";
 function Landing() {
   const navigate=useNavigate();
+  //console.warn(process.env.REACT_APP_AGORA_APP_ID)
   return (
     <div style={{height:'100vh',width:'100vw',backgroundColor:'white'}}>
             {/* <header id="nav">
