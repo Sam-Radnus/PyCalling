@@ -8,11 +8,11 @@ import { connect, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout, selectUser } from "./../../features/userSlice";
 import { useNavigate } from 'react-router-dom';
-const useClient = createClient("9e4b87cc837448969b97b4301e2aca92");
+const useClient = createClient("YOUR AGORA APP ID");
 const USER_ID = Math.floor(Math.random() * 1000000001);
 let type='bot';
 const useChannel = createChannel('TV')
-const client=AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92");    
+const client=AgoraRTM.createInstance("YOUR AGORA APP ID");    
 function ChatRoom(props) {
 
     const testChannel=useChannel(client);
@@ -23,7 +23,7 @@ function ChatRoom(props) {
     const [textInput,setTextInput]=useState('')
     const [isLoggedIn,setLoggedIn]=useState(false);
     const users=props.users;
-    const clientRTM = AgoraRTM.createInstance("9e4b87cc837448969b97b4301e2aca92");
+    const clientRTM = AgoraRTM.createInstance("YOUR AGORA APP ID");
     const cust = useSelector(selectUser);
     const tracks=props.tracks;
     const clientRTC=props.clientRTC;
