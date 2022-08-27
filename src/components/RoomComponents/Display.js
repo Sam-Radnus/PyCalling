@@ -9,6 +9,12 @@ import AgoraRTC, { AgoraVideoPlayer } from "agora-rtc-react";
 import { useSelector } from "react-redux"
 import Participants from './Participants';
 import { login, selectUser } from "./../../features/userSlice.js";
+import image1 from './../images/Lani.png'
+import image2 from './../images/Elizabeth.png';
+import image3 from './../images/Sarah.png';
+import image4 from './../images/Niesha.png' ;
+import image5 from './../images/Marc.png' ;
+import image6 from './../images/Adams.png' ;
 //import { Popover } from 'react-tiny-popover'
 
 
@@ -94,6 +100,7 @@ function Display(props) {
     <>
       <Participants users={users} />
       <section id="stream__container">
+     
         <div id="big">
 
         </div>
@@ -185,30 +192,61 @@ function Display(props) {
          </div>  
           <div  style={{marginLeft:'0vw'}} className={`grid-container`} >
    
-            <div  style={{position:'relative',marginTop:'2vh',marginLeft:'1vw'}}onClick={() => {
-              isFull ? setFull(false) : setFull(true)
-            }
-            } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
-             <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{x.name}</span>
-              <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px',height: '100%', width: '100%', borderWidth: '10px' }}  />
+           
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`mid-screen`} style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image2})`}} id="videos6">
 
             </div>
-              {users.length > 0 &&
-                users.map((user) => {
-                  if (user.videoTrack) {
+            <div  onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`mid-screen`}
+            style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image5})`}} id="videos7">
 
-                    return (
-                      <div style={{ position:'relative',margin: '15px'}} onClick={(e) => {
-                        isFull2 ? setFull2(false) : setFull2(true)
-                        console.warn(user.uid);
-                        setSecond(user.uid);
-                      }} className={`${isFull2 && second===user.uid  ? isFull?'full2':'full' :'mid'}-screen`} >
-                        <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{user.uid}</span>
-                      <AgoraVideoPlayer style={{ height: '100%', width: '100%'}} className='vid' videoTrack={user.videoTrack}  key={user.uid} />
-                      </div>
-                   );
-                  } else return null;
-                })}
+            </div>
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`mid-screen`}
+             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image1})`}} id="videos8">
+
+            </div> 
+
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`mid-screen`}
+             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image4})`}} id="videos8">
+
+            </div> 
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`mid-screen`}
+             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image3})`}} >
+
+            </div> 
+            <div onClick={(e) => {
+              isFull2 ? setFull2(false) : setFull2(true)
+              console.warn(e.target.id);
+              setSecond(e.target.id);
+            } 
+            } className={`mid-screen`}
+             style={{ borderRadius:'10px',margin: '15px', backgroundPosition:'center'  ,backgroundImage:`url(${image6})`}} >
+
+            </div> 
          
           
           </div>

@@ -190,20 +190,74 @@ function ChatRoom(props) {
                 <div id="members__header">
                     <p>Participants</p>
                     <strong id="members__count">{users.length}</strong>
+                    
                 </div>
 
                 <div id="member__list">
-                    <div className="member__wrapper" id="member__1__wrapper">
-                        <div style={{ display: 'flex' }}>
-
-                            <p style={{ marginLeft: '7px' }} className="member_name">{users[0]}
-                                <span style={{ display: `${sessionStorage.getItem('authTokens') !== null ? 'absolute' : 'none'}`, left: '50%' }}>(Host)</span>
-                            </p>
-                        </div>
+                   
+                    <div  className="member__wrapper" id="member__1__wrapper">
 
 
-                    </div>
-                    {users.slice(1, 10).map(user => (
+                     <p  style={{marginLeft:'7px'}}  className="member_name">Anastasia(Host)</p>
+
+
+           </div>
+           <div  className="member__wrapper" id="member__1__wrapper">
+
+
+                     <p  style={{marginLeft:'7px'}}  className="member_name">Marc </p>
+
+                     <div style={{display:'inherit'}}>
+                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
+
+                          <button><i class="fa-solid fa-comment-slash"></i></button>
+                     </div>
+           </div>
+           <div  className="member__wrapper" id="member__1__wrapper">
+
+
+                     <p  style={{marginLeft:'7px'}}  className="member_name">Lani </p>
+
+                     <div style={{display:'inherit'}}>
+                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
+
+                          <button><i class="fa-solid fa-comment-slash"></i></button>
+                     </div>
+           </div>
+           <div  className="member__wrapper" id="member__1__wrapper">
+
+
+                     <p  style={{marginLeft:'7px'}}  className="member_name">Gemma </p>
+
+                     <div style={{display:'inherit'}}>
+                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
+
+                          <button><i class="fa-solid fa-comment-slash"></i></button>
+                     </div>
+           </div>
+           <div  className="member__wrapper" id="member__1__wrapper">
+
+
+                     <p  style={{marginLeft:'7px'}}  className="member_name">Sarah </p>
+
+                     <div style={{display:'inherit'}}>
+                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
+
+                          <button><i class="fa-solid fa-comment-slash"></i></button>
+                     </div>
+           </div>
+           <div  className="member__wrapper" id="member__1__wrapper">
+
+
+                     <p  style={{marginLeft:'7px'}}  className="member_name">Elizabeth </p>
+
+                     <div style={{display:'inherit'}}>
+                          <button ><i class="fa-solid fa-circle-xmark"></i></button>
+
+                          <button><i class="fa-solid fa-comment-slash"></i></button>
+                     </div>
+           </div>
+                    {/* {users.slice(1, 10).map(user => (
                         <div key={user.uid} className="member__wrapper" id="member__1__wrapper">
 
 
@@ -221,7 +275,7 @@ function ChatRoom(props) {
 
                         </div>
                     ))
-                    }
+                    } */}
 
                 </div>
 

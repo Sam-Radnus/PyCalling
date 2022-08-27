@@ -515,11 +515,10 @@ div[class="full2-screen"]
 }  
 div[class="mid-screen"]
 {
-  height:20vh;
+  height:25vh;
   width:20vw;
-
-  border-radius:10px;
-  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: 50vh;
 }
 div[class="grid-container"]
 {
@@ -545,8 +544,10 @@ div[class="flex-container"]
 }
 div[class="flex-container"] div[class="mid-screen"]
 {
-  height:10vh;
-  width:10vw;
+  height:25vh;
+  width:20vw;
+  background-repeat: no-repeat;
+  background-size: 50vh;
 }
 div[class="Room__Name"]
 {
