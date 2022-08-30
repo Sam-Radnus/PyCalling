@@ -7,13 +7,13 @@ import Room from './components/Room';
 import LobbyHost from './components/LobbyHost';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useSelector } from "react-redux"
-import { selectUser } from './features/userSlice';
+
 import { useEffect } from 'react';
 function App() {
-  const user=useSelector(selectUser)
+
   useEffect(()=>{
     try{
-    console.log(user);
+   
     }
     catch(error)
     {

@@ -1,12 +1,11 @@
 import {createStore,combineReducers,applyMiddleware} from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import useReducer from "../features/userSlice";
 import { userReducer } from "../Reducers/UserReducers";
 const reducer=combineReducers({
     user:userReducer,
 })
-const userInfoFromStorage=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null
+const userInfoFromStorage=localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):{}
 
 const initialState={
     user:{userInfo:userInfoFromStorage}

@@ -6,7 +6,7 @@ import AgoraRTM from 'agora-rtm-sdk'
 
 import {  useSelector } from "react-redux";
 
-import {  selectUser } from "./../../features/userSlice";
+
 import { useNavigate } from 'react-router-dom';
 const USER_ID = Math.floor(Math.random() * 1000000001);
 let type = 'bot';
@@ -22,7 +22,7 @@ function ChatRoom(props) {
     const [textInput, setTextInput] = useState('')
     const [isLoggedIn, setLoggedIn] = useState(false);
     const users = props.users;
-    const cust = useSelector(selectUser);
+ 
     const tracks = props.tracks;
     const clientRTC = props.clientRTC;
     const navigate = useNavigate();
@@ -45,7 +45,7 @@ function ChatRoom(props) {
     let login = async (val) => {
         console.warn(props.disolve);
         console.warn(isLoggedIn);
-        console.warn(cust.name);
+        
         console.log(uid);
         await client.login({ uid: USER_ID.toString() });
         await testChannel.join();

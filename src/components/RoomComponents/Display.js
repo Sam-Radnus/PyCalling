@@ -8,7 +8,7 @@ import {  useClient } from "./../../settings.js";
 import AgoraRTC, { AgoraVideoPlayer } from "agora-rtc-react";
 import { useSelector } from "react-redux"
 import Participants from './Participants';
-import { login, selectUser } from "./../../features/userSlice.js";
+
 //import { Popover } from 'react-tiny-popover'
 
 
@@ -16,7 +16,7 @@ function Display(props) {
 
   
   let localScreenTracks = [];
-  const x = useSelector(selectUser);
+  
   const dispatch = useDispatch();
   const { users, tracks} = props;
   let {logoutUser}=useContext(AuthContext);
@@ -50,7 +50,7 @@ function Display(props) {
 
 
       console.warn('hey');
-      console.warn(x);
+      
     }
     else {
       console.warn(screenShare);
@@ -65,20 +65,20 @@ function Display(props) {
     //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
 
-   useEffect(() => {
-     var videoProfiles = [
-       { label: "480p_1", detail: "640×480, 15fps, 500Kbps", value: "480p_1" },
-       { label: "480p_2", detail: "640×480, 30fps, 1000Kbps", value: "480p_2" },
-       { label: "720p_1", detail: "1280×720, 15fps, 1130Kbps", value: "720p_1" },
-       { label: "720p_2", detail: "1280×720, 30fps, 2000Kbps", value: "720p_2" },
-       { label: "1080p_1", detail: "1920×1080, 15fps, 2080Kbps", value: "1080p_1" },
-       { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
-       { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
-     ]
+  //  useEffect(() => {
+  //    var videoProfiles = [
+  //      { label: "480p_1", detail: "640×480, 15fps, 500Kbps", value: "480p_1" },
+  //      { label: "480p_2", detail: "640×480, 30fps, 1000Kbps", value: "480p_2" },
+  //      { label: "720p_1", detail: "1280×720, 15fps, 1130Kbps", value: "720p_1" },
+  //      { label: "720p_2", detail: "1280×720, 30fps, 2000Kbps", value: "720p_2" },
+  //      { label: "1080p_1", detail: "1920×1080, 15fps, 2080Kbps", value: "1080p_1" },
+  //      { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
+  //      { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
+  //    ]
 
-     setVideoConfigs(videoProfiles);
-     console.warn(videoConfigs);
-   }, [ videoConfigs]);
+  //    setVideoConfigs(videoProfiles);
+  //    console.warn(videoConfigs);
+  //  }, [ videoConfigs]);
 
   const tuneVolume = (op) => {
     let val = volume;
@@ -131,13 +131,13 @@ function Display(props) {
             tracks[0].close();
             tracks[1].close();
             client.leave();
-            dispatch(
-              login({
-                name: '',
-                room: '',
-                loggedIn: false,
-              }),
-            )
+            // dispatch(
+            //   login({
+            //     name: '',
+            //     room: '',
+            //     loggedIn: false,
+            //   }),
+            // )
             if(sessionStorage.getItem('authTokens')!==null)
             {
               logoutUser();
@@ -175,11 +175,11 @@ function Display(props) {
 
         <div  id="stream__container">  
         <div style={{position:'relative',width:'100%'}}> 
-        <div className="Room__Name"><h1>{x.room}</h1></div>
+        <div className="Room__Name"><h1></h1></div>
         
         <button onClick={()=>{
           props.onChange();
-        }} style={{display: `${sessionStorage.getItem('authTokens') !== null ? 'inherit' : 'none'}`,position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve {x.room}</h1></button>
+        }} style={{display: `${sessionStorage.getItem('authTokens') !== null ? 'inherit' : 'none'}`,position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve </h1></button>
        
         
          </div>  
@@ -189,7 +189,7 @@ function Display(props) {
               isFull ? setFull(false) : setFull(true)
             }
             } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
-             <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{x.name}</span>
+             <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}></span>
               <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px',height: '100%', width: '100%', borderWidth: '10px' }}  />
 
             </div>

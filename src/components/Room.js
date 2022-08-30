@@ -4,10 +4,10 @@ import Display from './RoomComponents/Display';
 import { useState, useEffect } from 'react';
 import {  useClient, useMicrophoneAndCameraTracks } from "./../settings.js";
 import "../Styles/room.css"
-import {selectUser } from "./../features/userSlice";
+
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { loginUser } from "../Actions/UserActions"; 
 import  {
    
     createScreenVideoTrack,
@@ -28,26 +28,24 @@ function Room() {
     const [username,setName]=useState();
     const navigate = useNavigate();
   //  const channel=createChannel();
-    const x = useSelector(selectUser);
+    const user=useSelector(state=>state.user)
     
-
-
     useEffect(() => {
         
         try {
-            console.log(x.name);
-            setName(x.name);
-            console.log(x.loggedIn);
+            console.log(user.name);
+            setName(user.name);
+            console.log(user.uid);
         }
         catch (error) {
             console.warn(error);
-            navigate('/Lobby')
+            //navigate('/Lobby')
         }
-        if(!x.loggedIn)
+        if(!user.name)
         {
-            navigate('/Lobby')
+            //navigate('/Lobby')
         }
-    },[]);
+    },[user.name]);
     useEffect(() => {
         let init = async (name) => { 
             console.log("init:", name);
@@ -94,7 +92,7 @@ function Room() {
             });
             
             try{
-                let x=await client.join(appid, name,token,username.toString());
+                let x=await client.join(appid, name,token,username);
                   
                 setUsers((prevUsers)=>{
                     return [...prevUsers,x];
@@ -118,9 +116,7 @@ function Room() {
             init(roomName);
         }
     }, [client, ready, tracks]);
-    useEffect(()=>{
-       console.warn(users);
-    },[users.length]);
+    
     const handleChange=()=>{
         setDisolve((prev)=>!prev);
        // console.warn(disolve)

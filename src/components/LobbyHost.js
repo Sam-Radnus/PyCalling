@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
 import { useState } from 'react';
-import { login } from "./../features/userSlice";
+
 import AuthContext from '../Context/AuthContext';
 import Room from './Room';
 import { useContext } from 'react';
@@ -56,19 +56,19 @@ const LobbyHost = () => {
                         e.preventDefault();
                         console.log("name:",name)
                         console.log("room:",room)    
-                        loginUser(name,password);
+                        //loginUser(name,password);
                         if(sessionStorage.getItem('authTokens')!==null){
                            navigate(`/Room/${room}`)       
-                           dispatch(
-                               login({
-                                   name:name,
-                                   room:room,
-                                   camera:true,
-                                   mic:true,
-                                   screen:false,
-                                   loggedIn:true,
-                               })
-                           )
+                        //    dispatch(
+                        //        login({
+                        //            name:name,
+                        //            room:room,
+                        //            camera:true,
+                        //            mic:true,
+                        //            screen:false,
+                        //            loggedIn:true,
+                        //        })
+                        //    )
                         }
                         sessionStorage.setItem('name',name);
                         sessionStorage.setItem('room',room);
