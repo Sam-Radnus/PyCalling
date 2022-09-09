@@ -77,7 +77,7 @@ function Display(props) {
         { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
         { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
       ]
-
+        
        setVideoConfigs(videoProfiles);
        console.warn(videoConfigs);
      }, [ videoConfigs.length]);
@@ -101,7 +101,7 @@ function Display(props) {
         </div>
         <div style={{display:'flex'}} id="controller">
         <button className="controls" style={{ backgroundColor: '#3F8CFE', color: 'white', marginLeft: '0px'  }} onClick={() => { volume<100 && tuneVolume('+') }}> <i className="fa-solid fa-volume-high"></i> </button>
-            <span style={{ fontSize: '15px', transition: '1ms ease-in',marginTop:'8px' }}>{volume + 25}</span>
+            <span style={{ fontSize: '15px', transition: '1ms ease-in',marginTop:'8px',marginLeft:'5px',width:'25px'}}>{volume + 25}</span>
             <button className="controls" style={{ backgroundColor: '#3F8CFE', color: 'white', marginRight: '15px' }} onClick={() => { volume>-1 &&  tuneVolume('-') }} > <i className="fa-solid fa-volume-low"></i> </button>
           <button className="controls" style={{ color: 'white', backgroundColor: camera ? '#3F8CFE' : '#F12646', marginLeft: '6%'}} onClick={() => {
 
@@ -156,8 +156,9 @@ function Display(props) {
 
          
           <span style={{fontSize:'12px',width:'80px',paddingTop:'12px'}}>Video Config</span>
-          <select multiple={true} id="config" name="configs" value={selectedConfig} onChange={(e) => {
+          <select multiple={false} id="config" name="configs" value={selectedConfig} onChange={(e) => {
             console.warn(e.target.value);
+          
             setSelectedConfig(e.target.value);
             tracks[1].setEncoderConfiguration(e.target.value);
           }}>
@@ -177,7 +178,7 @@ function Display(props) {
 
         <div  id="stream__container">  
         <div style={{position:'relative',width:'100%'}}> 
-        <div className="Room__Name"><h1></h1></div>
+        <div className="Room__Name"><h1>{userInfo.room_Name}</h1></div>
         
         <button onClick={()=>{
           props.onChange();
@@ -191,7 +192,7 @@ function Display(props) {
               isFull ? setFull(false) : setFull(true)
             }
             } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
-             <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{users[0]}</span>
+             <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,cursor:'pointer',backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{users[0]}</span>
               <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px',height: '100%', width: '100%', borderWidth: '10px' }}  />
 
             </div>
