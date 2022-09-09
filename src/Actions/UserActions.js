@@ -23,7 +23,9 @@ export const loginUser=(Name,Uid,room_Name)=>async(dispatch)=>{
         },
           config
         )
-        console.log(data);
+        console.warn("1");
+        console.warn(data);
+        console.warn("2");
         dispatch({
             type:USER_LOGIN_SUCCESS,
             payload:data
@@ -40,8 +42,9 @@ export const loginUser=(Name,Uid,room_Name)=>async(dispatch)=>{
     }
 }
 
-export const logout=()=>(dispatch)=>{
+export const user_logout=(uid)=>(dispatch)=>{
     dispatch({type:USER_LOGOUT})
+    axios.get(`http://127.0.0.1:8000/api/leave/${uid}`)
     localStorage.removeItem('userInfo')
 }
 

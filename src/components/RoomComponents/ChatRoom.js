@@ -22,7 +22,7 @@ function ChatRoom(props) {
     const [textInput, setTextInput] = useState('')
     const [isLoggedIn, setLoggedIn] = useState(false);
     const users = props.users;
- 
+    
     const tracks = props.tracks;
     const clientRTC = props.clientRTC;
     const navigate = useNavigate();
@@ -212,11 +212,11 @@ function ChatRoom(props) {
                             <div style={{ display: `${sessionStorage.getItem('authTokens') !== null ? 'inherit' : 'none'}` }}>
                                 <button onClick={() => {
                                     action(user.uid, "Kicked");
-                                }}><i class="fa-solid fa-circle-xmark"></i></button>
+                                }}><i className="fa-solid fa-circle-xmark"></i></button>
 
                                 <button onClick={() => {
                                     action(user.uid, "Letter");
-                                }}><i class="fa-solid fa-comment-slash"></i></button>
+                                }}><i className="fa-solid fa-comment-slash"></i></button>
                             </div>
 
                         </div>
@@ -272,7 +272,7 @@ function ChatRoom(props) {
                         <button className="send" id="second" onClick={(e) => {
                             e.preventDefault();
                             sendMsg(textInput, true);
-                        }} style={{ marginTop: '5px', marginLeft: '5px' }}><i class="fa-solid fa-comment-slash"></i></button>
+                        }} style={{ marginTop: '5px', marginLeft: '5px' }}><i className="fa-solid fa-comment-slash"></i></button>
                     </> : <p>The Host has Disabled your Messaging Privilege</p>
                     }
                 </form>

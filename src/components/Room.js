@@ -29,27 +29,31 @@ function Room() {
     const navigate = useNavigate();
   //  const channel=createChannel();
     const user=useSelector(state=>state.user)
+    const {loading,userInfo}=user
     
     useEffect(() => {
-        
+        console.warn("hello",userInfo);
+        console.warn(loading);
         try {
-            console.log(user.name);
-            setName(user.name);
-            console.log(user.uid);
+
+            console.warn(userInfo.name);
+            setName(userInfo.name);
+            console.warn(userInfo.uid);
         }
         catch (error) {
             console.warn(error);
-            //navigate('/Lobby')
+           // navigate('/Lobby')
         }
-        if(!user.name)
-        {
-            //navigate('/Lobby')
-        }
-    },[user.name]);
+         if(userInfo)
+         {
+             navigate('/Lobby')
+         }
+    },[]);
     useEffect(() => {
         let init = async (name) => { 
-            console.log("init:", name);
-            
+            console.warn(userInfo)
+            console.warn("init:", name);
+           
             client.on("user-published", async (user, mediaType) => {
                 await client.subscribe(user, mediaType);
                 
@@ -92,7 +96,8 @@ function Room() {
             });
             
             try{
-                let x=await client.join(appid, name,token,username);
+                console.warn(userInfo.name);
+                let x=await client.join(appid, userInfo.room_Name,null,userInfo.name.toString());
                   
                 setUsers((prevUsers)=>{
                     return [...prevUsers,x];
@@ -109,11 +114,12 @@ function Room() {
             
         };
 
-        if (ready && tracks ) {
+        if (ready && tracks  ) {
             console.log("init ready");
             
-            let roomName=sessionStorage.getItem('room');
-            init(roomName);
+            //let roomName=sessionStorage.getItem('room');
+            //console.warn(roomName);
+            init('TV');
         }
     }, [client, ready, tracks]);
     

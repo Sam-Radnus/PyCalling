@@ -8,7 +8,7 @@ import {  useClient } from "./../../settings.js";
 import AgoraRTC, { AgoraVideoPlayer } from "agora-rtc-react";
 import { useSelector } from "react-redux"
 import Participants from './Participants';
-
+import { user_logout } from '../../Actions/UserActions';
 //import { Popover } from 'react-tiny-popover'
 
 
@@ -39,6 +39,9 @@ function Display(props) {
   const [volume, setVolume] = useState(100);
  // const [localStats, setLocalStats] = useState([]);
   const [camera, setCamera] = useState(true);
+  const user=useSelector(state=>state.user)
+  const {loading,userInfo}=user
+  
   const screenSharing = async (e) => {
     if (screenShare) {
       //STOP SCREEN SHARE
@@ -62,23 +65,22 @@ function Display(props) {
 
 
     }
-    //return <AgoraVideoPlayer className='vid' videoTrack={localScreenTracks} style={{ height: '100%', width: '100%' }} />
   }
 
-  //  useEffect(() => {
-  //    var videoProfiles = [
-  //      { label: "480p_1", detail: "640×480, 15fps, 500Kbps", value: "480p_1" },
-  //      { label: "480p_2", detail: "640×480, 30fps, 1000Kbps", value: "480p_2" },
-  //      { label: "720p_1", detail: "1280×720, 15fps, 1130Kbps", value: "720p_1" },
-  //      { label: "720p_2", detail: "1280×720, 30fps, 2000Kbps", value: "720p_2" },
-  //      { label: "1080p_1", detail: "1920×1080, 15fps, 2080Kbps", value: "1080p_1" },
-  //      { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
-  //      { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
-  //    ]
+    useEffect(() => {
+      var videoProfiles = [
+        { label: "480p_1", detail: "640×480, 15fps, 500Kbps", value: "480p_1" },
+        { label: "480p_2", detail: "640×480, 30fps, 1000Kbps", value: "480p_2" },
+        { label: "720p_1", detail: "1280×720, 15fps, 1130Kbps", value: "720p_1" },
+        { label: "720p_2", detail: "1280×720, 30fps, 2000Kbps", value: "720p_2" },
+        { label: "1080p_1", detail: "1920×1080, 15fps, 2080Kbps", value: "1080p_1" },
+        { label: "1080p_2", detail: "1920×1080, 30fps, 3000Kbps", value: "1080p_2" },
+        { label: "200×640", detail: "200×640, 30fps", value: { width: 200, height: 640, frameRate: 30 } } // custom video profile
+      ]
 
-  //    setVideoConfigs(videoProfiles);
-  //    console.warn(videoConfigs);
-  //  }, [ videoConfigs]);
+       setVideoConfigs(videoProfiles);
+       console.warn(videoConfigs);
+     }, [ videoConfigs.length]);
 
   const tuneVolume = (op) => {
     let val = volume;
@@ -123,7 +125,7 @@ function Display(props) {
             <i className={`fa-solid fa-microphone-lines${mic ? '-slash' : ''}`}></i>
           </button>
           <button className="controls" style={{ color: 'white', backgroundColor: screenShare ? '#F12646' : '#3F8CFE' }} id="screen-btn" onClick={screenSharing} >
-            <i class="fa-solid fa-desktop"></i>
+            <i className="fa-solid fa-desktop"></i>
           </button>
           <button className="controls" style={{ backgroundColor: '#F12646' }} control="true" id="leave-btn" onClick={async () => {
             await client.leave();
@@ -138,15 +140,15 @@ function Display(props) {
             //     loggedIn: false,
             //   }),
             // )
-            if(sessionStorage.getItem('authTokens')!==null)
-            {
-              logoutUser();
-            }
+
+            logoutUser();
             //setInCall(false);
+            dispatch(user_logout(userInfo.uid))
+            localStorage.clear()
             navigate(-2);
 
           }} >
-            <i class="fa-solid fa-right-from-bracket"></i>
+            <i className="fa-solid fa-right-from-bracket"></i>
           </button>
        
           <div style={{ display:'inline-flex', marginLeft: '5%' }}>
@@ -154,7 +156,7 @@ function Display(props) {
 
          
           <span style={{fontSize:'12px',width:'80px',paddingTop:'12px'}}>Video Config</span>
-          <select id="config" name="configs" value={selectedConfig} onChange={(e) => {
+          <select multiple={true} id="config" name="configs" value={selectedConfig} onChange={(e) => {
             console.warn(e.target.value);
             setSelectedConfig(e.target.value);
             tracks[1].setEncoderConfiguration(e.target.value);
@@ -189,7 +191,7 @@ function Display(props) {
               isFull ? setFull(false) : setFull(true)
             }
             } className={`${isFull ? 'full' : 'mid'}-screen`} id={`user`}>
-             <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}></span>
+             <span style={{position:'absolute',bottom:'2%',right:'2%',fontSize:'small',zIndex:999,backgroundColor:'rgba(0,0,0,0.7)',padding:'5px',borderRadius:'5px'}}>{users[0]}</span>
               <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px',height: '100%', width: '100%', borderWidth: '10px' }}  />
 
             </div>
