@@ -38,6 +38,7 @@ function Room() {
 
             console.warn(userInfo.name);
             setName(userInfo.name);
+            localStorage.setItem('room_Name',userInfo.room_Name)
             console.warn(userInfo.uid);
         }
         catch (error) {
@@ -48,6 +49,7 @@ function Room() {
          {
              navigate('/Lobby')
          }
+
     },[]);
     useEffect(() => {
         let init = async (name) => { 

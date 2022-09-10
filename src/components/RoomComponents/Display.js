@@ -81,7 +81,7 @@ function Display(props) {
        setVideoConfigs(videoProfiles);
        console.warn(videoConfigs);
      }, [ videoConfigs.length]);
-
+    
   const tuneVolume = (op) => {
     let val = volume;
     (op === '+') ? setVolume(val + 25) : setVolume(val - 25);
@@ -140,12 +140,10 @@ function Display(props) {
             //     loggedIn: false,
             //   }),
             // )
-
-            logoutUser();
+            navigate(-1);
             //setInCall(false);
-            dispatch(user_logout(userInfo.uid))
             localStorage.clear()
-            navigate(-2);
+            dispatch(user_logout(userInfo.uid))
 
           }} >
             <i className="fa-solid fa-right-from-bracket"></i>
@@ -178,7 +176,7 @@ function Display(props) {
 
         <div  id="stream__container">  
         <div style={{position:'relative',width:'100%'}}> 
-        <div className="Room__Name"><h1>{userInfo.room_Name}</h1></div>
+        <div className="Room__Name"><h1>{loading?'':userInfo.room_Name}</h1></div>
         
         <button onClick={()=>{
           props.onChange();
