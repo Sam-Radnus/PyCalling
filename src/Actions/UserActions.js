@@ -27,6 +27,7 @@ export const loginUser=(Name,Uid,room_Name)=>async(dispatch)=>{
         console.warn(data);
         console.warn("2");
         dispatch({
+            
             type:USER_LOGIN_SUCCESS,
             payload:data
         })
