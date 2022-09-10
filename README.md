@@ -84,7 +84,7 @@ npm run build
 ## Normal View
 ![Preview1](./src/components/Preview5.png)
 ## Video 
-[![Preview](./src/components/Preview6.png)](https://www.youtube.com/watch?v=CNJ3SwTHBq0)
+[![Preview3]](https://www.youtube.com/watch?v=CNJ3SwTHBq0)
 
 ## Features:-
 * Anonymous Messaging 
