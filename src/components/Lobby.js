@@ -53,6 +53,7 @@ function Lobby() {
                                         loginUser(
                                             name,
                                             UID,
+                                            true,
                                             room,
                                         )
                                     )

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { createChannel } from 'agora-rtm-react'
 import '../../Styles/room.css'
@@ -12,6 +11,7 @@ const USER_ID = Math.floor(Math.random() * 1000000001);
 let type = 'bot';
 const useChannel = createChannel('TV')
 const client = AgoraRTM.createInstance(process.env.REACT_APP_AGORA_APP_ID);
+
 function ChatRoom(props) {
 
     const testChannel = useChannel(client);
@@ -28,6 +28,8 @@ function ChatRoom(props) {
     const navigate = useNavigate();
    // let uid2 = props.uid;
     let { disolve } = props;
+    const state=useSelector(state=>state.user)
+    const {loading,userInfo}=state;
     const sendMsg = async (text, hide) => {
         console.log(disolve);
         setUid(users[0]);
@@ -43,10 +45,7 @@ function ChatRoom(props) {
     }
 
     let login = async (val) => {
-        console.warn(props.disolve);
-        console.warn(isLoggedIn);
-        
-        console.log(uid);
+        console.warn(userInfo.isAdmin);
         await client.login({ uid: USER_ID.toString() });
         await testChannel.join();
         console.warn(client);
@@ -64,9 +63,9 @@ function ChatRoom(props) {
 
             console.warn(msg);
             if (msg.text.toString().substring(0, 7) === 'Action:') {
-                console.warn('Action Taken');
-                console.warn(msg.text.substring(7, 13));
-                console.warn(msg.text.substring(20));
+                //console.warn('Action Taken');
+                //console.warn(msg.text.substring(7, 13));
+                //console.warn(msg.text.substring(20));
                 if (msg.text.substring(7, 13) === "Kicked" && msg.text.substring(20) === users[0]) {
                     await tracks[0].close();
                     await tracks[1].close();
@@ -152,11 +151,9 @@ function ChatRoom(props) {
             if (sendResult.hasPeerReceived) {
                 console.warn(sendResult.hasPeerReceived);
                 //document.getElementById("log").appendChild(document.createElement('div')).append("Message has been received by: " + peerId + " Message: " + peerMessage)
-
             } else {
                 console.warn(sendResult.hasPeerReceived);
                 //document.getElementById("log").appendChild(document.createElement('div')).append("Message sent to: " + peerId + " Message: " + peerMessage)
-
             }
         })
     }
@@ -178,6 +175,7 @@ function ChatRoom(props) {
         login('100');
     }, []);
 
+
     useEffect(() => {
         console.warn(props.disolve);
         disolveRoom();
@@ -196,8 +194,8 @@ function ChatRoom(props) {
                     <div className="member__wrapper" id="member__1__wrapper">
                         <div style={{ display: 'flex' }}>
 
-                            <p style={{ marginLeft: '7px' }} className="member_name">{users[0]}
-                                <span style={{ display: `${sessionStorage.getItem('authTokens') !== null ? 'absolute' : 'none'}`, left: '50%' }}>(Host)</span>
+                            <p style={{ marginLeft: '7px' }} className="member_name">   {users[0]}
+                             
                             </p>
                         </div>
 
@@ -209,7 +207,7 @@ function ChatRoom(props) {
 
                             <p style={{ marginLeft: '7px' }} className="member_name">{user.uid}</p>
 
-                            <div style={{ display: `${sessionStorage.getItem('authTokens') !== null ? 'inherit' : 'none'}` }}>
+                             <div style={{ display: `${userInfo.isAdmin  ? 'inherit' : 'none'}` }}>
                                 <button onClick={() => {
                                     action(user.uid, "Kicked");
                                 }}><i className="fa-solid fa-circle-xmark"></i></button>
@@ -218,6 +216,7 @@ function ChatRoom(props) {
                                     action(user.uid, "Letter");
                                 }}><i className="fa-solid fa-comment-slash"></i></button>
                             </div>
+                         
 
                         </div>
                     ))
@@ -235,7 +234,6 @@ function ChatRoom(props) {
                 <p className="message__text__bot">Welcome to the room, Don't be shy, say hello!</p>
             </div>
         </div>
-
         <div className="message__wrapper">
             <div className="message__body__bot">
                 <strong className="message__author__bot">🤖 PyCardis Bot</strong>

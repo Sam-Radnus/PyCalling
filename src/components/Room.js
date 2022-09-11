@@ -98,7 +98,7 @@ function Room() {
             });
             
             try{
-                console.warn(userInfo.name);
+                //console.warn(userInfo.name);
                 let x=await client.join(appid, userInfo.room_Name,null,userInfo.name.toString());
                   
                 setUsers((prevUsers)=>{

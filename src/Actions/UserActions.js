@@ -2,13 +2,14 @@ import {
     USER_LOGIN_REQUEST,USER_LOGIN_SUCCESS,USER_LOGIN_FAILURE,USER_LOGOUT
 } from '../Constants/UserConstants'
 import axios from "axios"
-export const loginUser=(Name,Uid,room_Name)=>async(dispatch)=>{
+export const loginUser=(Name,Uid,isAdmin,room_Name)=>async(dispatch)=>{
     try{
         
         console.log("Login Request")
         console.log(Name)
         console.log(Uid)
         console.log(room_Name)
+        console.warn(isAdmin);
         dispatch({type:USER_LOGIN_REQUEST})
         const config={
             headers:{
@@ -19,6 +20,7 @@ export const loginUser=(Name,Uid,room_Name)=>async(dispatch)=>{
         {
             "name":Name,
             "uid":Uid,
+            "isAdmin":isAdmin,
             "room_Name":room_Name
         },
           config
