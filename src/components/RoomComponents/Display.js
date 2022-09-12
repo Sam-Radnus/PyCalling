@@ -180,7 +180,7 @@ function Display(props) {
         
         <button onClick={()=>{
           props.onChange();
-        }} style={{display: `${sessionStorage.getItem('authTokens') !== null ? 'inherit' : 'none'}`,position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve </h1></button>
+        }} style={{display: `${userInfo.isAdmin ? 'inherit' : 'none'}`,position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve </h1></button>
        
         
          </div>  

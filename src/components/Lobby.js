@@ -16,9 +16,7 @@ function Lobby() {
 
     return (
         <div style={{ height: '100vh', backgroundColor: '#181E23' }}>
-            <button className="back" onClick={() => {
-                navigate('/');
-            }}><h1>go back</h1></button>
+            
 
             <main id="room__lobby__container">
                 <div id="form__container">

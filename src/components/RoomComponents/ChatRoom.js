@@ -194,7 +194,7 @@ function ChatRoom(props) {
                     <div className="member__wrapper" id="member__1__wrapper">
                         <div style={{ display: 'flex' }}>
 
-                            <p style={{ marginLeft: '7px' }} className="member_name">   {users[0]}
+                            <p style={{ marginLeft: '45px' }} className="member_name">   {users[0]}
                              
                             </p>
                         </div>
@@ -202,12 +202,12 @@ function ChatRoom(props) {
 
                     </div>
                     {users.slice(1, 10).map(user => (
-                        <div key={user.uid} className="member__wrapper" id="member__1__wrapper">
+                        <div key={user.uid} style={{display:'grid',paddingLeft:'15px'}} className="member__wrapper" id="member__1__wrapper">
 
 
-                            <p style={{ marginLeft: '7px' }} className="member_name">{user.uid}</p>
+                            <p style={{ marginLeft: '30px' }} className="member_name">{user.uid}</p>
 
-                             <div style={{ display: `${userInfo.isAdmin  ? 'inherit' : 'none'}` }}>
+                             <div style={{ margin:'5px 0px',display: `${userInfo.isAdmin  ? 'flex' : 'none'}` }}>
                                 <button onClick={() => {
                                     action(user.uid, "Kicked");
                                 }}><i className="fa-solid fa-circle-xmark"></i></button>
@@ -215,6 +215,13 @@ function ChatRoom(props) {
                                 <button onClick={() => {
                                     action(user.uid, "Letter");
                                 }}><i className="fa-solid fa-comment-slash"></i></button>
+
+                                 <button onClick={() => {
+                                    console.log('Info');
+                                }}><i class="fa-solid fa-circle-info"></i></button>
+                                  <button onClick={() => {
+                                    console.log('Info');
+                                }}><i class="fa-solid fa-download"></i></button>
                             </div>
                          
 
@@ -256,18 +263,20 @@ function ChatRoom(props) {
 
 
                 <form id="message__form" onSubmit={(e) => {
+                    
                     e.preventDefault();
+                    
                 }}>
                     {disable ? <>
-                        <input type="text" name="message" onChange={(e) => {
+                        <input type="text" class="form-control" name="message" onChange={(e) => {
                             setTextInput(e.target.value);
-                        }} placeholder="Send a message...." />
+                        }} required placeholder="Send a message...." />
 
-                        <button className="send" onClick={(e) => {
+                        <button className="send"  disabled={!textInput} onClick={(e) => {
                             e.preventDefault();
                             sendMsg(textInput, false);
                         }} style={{ marginTop: '5px' }}><i className="fa-solid fa-message"></i></button>
-                        <button className="send" id="second" onClick={(e) => {
+                        <button className="send" disabled={!textInput} id="second" onClick={(e) => {
                             e.preventDefault();
                             sendMsg(textInput, true);
                         }} style={{ marginTop: '5px', marginLeft: '5px' }}><i className="fa-solid fa-comment-slash"></i></button>
