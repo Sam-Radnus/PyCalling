@@ -100,17 +100,7 @@ function ChatRoom(props) {
             console.warn('message received');
         })
         testChannel.on('MemberJoined', async (memberId) => {
-            //  console.warn('New Member: ', memberId)
-            // console.warn(users);          
-            // type='bot';
-            // let text=`${cust.name} just joined the room,say hello!!!`;
-            // let message=client.createMessage({text,uid:'PyCardis Bot',type:'bot',messageType:'TEXT'});
-            // await testChannel.sendMessage(message);
-            // setTexts((previous) => {
-            //    return [...previous, { msg: { text },type:type,uid:'PyCardis Bot' }]
-            // })
-            // type='none';
-            // console.warn(texts); 
+            
 
         })
         setLoggedIn(true)
@@ -124,6 +114,7 @@ function ChatRoom(props) {
         setLoggedIn(false);
     }
     const disolveRoom = async () => {
+        if(isLoggedIn){
         let text = "Action:Delete->User:all";
         console.warn(text);
         let message = client.createMessage({ text, uid: USER_ID.toString(), messageType: 'TEXT' })
@@ -137,7 +128,7 @@ function ChatRoom(props) {
             return [...previous, { msg: { text }, uid: USER_ID.toString() }]
         })
         navigate('/Lobby');
-
+        }
     }
 /*    const toggleVideo = async (uid) => {
         var peerId = uid.toString();
@@ -218,10 +209,10 @@ function ChatRoom(props) {
 
                                  <button onClick={() => {
                                     console.log('Info');
-                                }}><i class="fa-solid fa-circle-info"></i></button>
+                                }}><i className="fa-solid fa-circle-info"></i></button>
                                   <button onClick={() => {
                                     console.log('Info');
-                                }}><i class="fa-solid fa-download"></i></button>
+                                }}><i className="fa-solid fa-download"></i></button>
                             </div>
                          
 
@@ -268,7 +259,7 @@ function ChatRoom(props) {
                     
                 }}>
                     {disable ? <>
-                        <input type="text" class="form-control" name="message" onChange={(e) => {
+                        <input type="text" className="form-control" name="message" onChange={(e) => {
                             setTextInput(e.target.value);
                         }} required placeholder="Send a message...." />
 

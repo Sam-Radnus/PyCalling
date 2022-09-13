@@ -29,7 +29,7 @@ function Display(props) {
   const [trackState, setTrackState] = useState(tracks[1]);
   const [mic, setMic] = useState(true);
   const [videoConfigs, setVideoConfigs] = useState([]);
-  const [selectedConfig, setSelectedConfig] = useState([]);
+  const [selectedConfig, setSelectedConfig] = useState('');
  // const [stats, setStats] = useState([]);
   const [second,setSecond]=useState('');
   const [isFull, setFull] = useState(false);
@@ -161,7 +161,7 @@ function Display(props) {
             tracks[1].setEncoderConfiguration(e.target.value);
           }}>
             {videoConfigs.map(config =>
-              <option key={config.label} value={config.label}>{config.label}</option>
+              <option key={config.value} value={config.label}>{config.label}</option>
             )};
           </select>
          
