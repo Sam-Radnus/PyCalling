@@ -16,7 +16,7 @@ export const loginUser=(Name,Uid,isAdmin,room_Name)=>async(dispatch)=>{
                 'Content-Type':'application/json'
             }
         }
-        const {data}=await axios.post('http://127.0.0.1:8000/api/join',
+        const {data}=await axios.post('https://pycalling.herokuapp.com/api/join',
         {
             "name":Name,
             "uid":Uid,
@@ -47,7 +47,7 @@ export const loginUser=(Name,Uid,isAdmin,room_Name)=>async(dispatch)=>{
 
 export const user_logout=(uid)=>(dispatch)=>{
     dispatch({type:USER_LOGOUT})
-    axios.get(`http://127.0.0.1:8000/api/leave/${uid}`)
+    axios.get(`https://pycalling.herokuapp.com/api//leave/${uid}`)
     localStorage.removeItem('userInfo')
 }
 
