@@ -1,6 +1,7 @@
 {
   "name": "py-calling",
   "version": "0.2.1",
+  "homepage":"https://py-calling-fyhdti9zt-sam-radnus.vercel.app/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",

@@ -28,7 +28,7 @@ function App() {
         <Route exact path="/" element={<Landing/>}> </Route>
         <Route exact path="/Lobby" element={<Lobby/>}></Route>
         <Route exact path="/Host/Lobby" element={<LobbyHost/>}></Route>
-        <Route  path="/Room/:room" element={<Room  ></Room>}></Route>
+        <Route  path="/Room/:room" element={<Room/>}></Route>
          </Routes>
       </Router>
     </>
