@@ -123,7 +123,7 @@ function Room() {
             //console.warn(roomName);
             init('TV');
         }
-    }, [client, ready, tracks]);
+    }, [client, ready, tracks,userInfo]);
     
     const handleChange=()=>{
         setDisolve((prev)=>!prev);
