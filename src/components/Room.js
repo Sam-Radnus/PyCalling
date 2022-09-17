@@ -14,8 +14,6 @@ import  {
 } from "agora-rtc-react";
 
 function Room() {
-    let token=null;
-   
     const [users, setUsers] = useState([]);
     const [start, setStart] = useState(false);
     const [uid,setUid]=useState('');
@@ -67,10 +65,7 @@ function Room() {
                        console.warn(users);
                    }
                    if (mediaType === "audio") {
-                       user.audioTrack.play();
-                       
-    
-                       
+                       user.audioTrack.play();   
                    }
 
               
@@ -110,20 +105,19 @@ function Room() {
              {
                console.error(error);
              }
-               
             if (tracks) await client.publish([tracks[0], tracks[1]],screen);
             setStart(true);
             
         };
 
-        if (ready && tracks  ) {
+        if (ready && tracks && !loading ) {
             console.log("init ready");
             
             //let roomName=sessionStorage.getItem('room');
             //console.warn(roomName);
             init('TV');
         }
-    }, [client, ready, tracks]);
+    }, [client, ready, tracks,userInfo]);
     
     const handleChange=()=>{
         setDisolve((prev)=>!prev);
