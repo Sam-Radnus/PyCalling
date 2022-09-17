@@ -55,6 +55,7 @@ function Lobby() {
                                             room,
                                         )
                                     )
+                                    
                                     navigate(`/Room/${room}`)       
                                    
                                     sessionStorage.setItem('name', name);
