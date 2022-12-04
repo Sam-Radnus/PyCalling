@@ -64,8 +64,8 @@ Use `npm run start` for a local build. View the application in your browser with
 npm run start
 ```
 6. Host Registration and Login
-*  [Host Registration](https://socioauth-login.herokuapp.com/api/register/)
-*  [Host Login](https://socioauth-login.herokuapp.com/api/token/)
+*  [Host Registration](https://pycallingbackend-production.up.railway.app/api/register/)
+*  [Host Login](https://pycallingbackend-production.up.railway.app//api/token/)
 *  click 'Join as a Host' to enter room as a host
 
 Use `build` for a production version with minification.
