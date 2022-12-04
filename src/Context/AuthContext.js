@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
-
+import { URL } from '../Constants/URLs';
 const AuthContext = createContext();
 export default AuthContext;
 
@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     let [loading, setLoading] = useState(true);
     
     const loginUser = async (username, password) => {
-        const response = await fetch("https://socioauth-login.herokuapp.com/api/token/", {
+        const response = await fetch(`${URL}/api/token/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

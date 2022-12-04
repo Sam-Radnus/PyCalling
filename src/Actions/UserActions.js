@@ -1,6 +1,7 @@
 import {
     USER_LOGIN_REQUEST,USER_LOGIN_SUCCESS,USER_LOGIN_FAILURE,USER_LOGOUT
 } from '../Constants/UserConstants'
+import { URL } from '../Constants/URLs'
 import axios from "axios"
 export const loginUser=(Name,Uid,isAdmin,room_Name)=>async(dispatch)=>{
     try{
@@ -16,7 +17,7 @@ export const loginUser=(Name,Uid,isAdmin,room_Name)=>async(dispatch)=>{
                 'Content-Type':'application/json'
             }
         }
-        const {data}=await axios.post('https://pycalling.herokuapp.com/api/join',
+        const {data}=await axios.post(`${URL}/api/join`,
         {
             "name":Name,
             "uid":Uid,
@@ -47,7 +48,7 @@ export const loginUser=(Name,Uid,isAdmin,room_Name)=>async(dispatch)=>{
 
 export const user_logout=(uid)=>(dispatch)=>{
     dispatch({type:USER_LOGOUT})
-    axios.get(`https://pycalling.herokuapp.com/api/leave/${uid}`)
+    axios.get(`${URL}/api/leave/${uid}`)
     localStorage.removeItem('userInfo')
 }
 
