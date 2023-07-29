@@ -1,9 +1,12 @@
 {
   "name": "py-calling",
   "version": "0.2.1",
-  "homepage":"https://py-calling-fyhdti9zt-sam-radnus.vercel.app/",
+  "homepage": "https://py-calling-fyhdti9zt-sam-radnus.vercel.app/",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.2",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",

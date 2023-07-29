@@ -62,7 +62,7 @@ function ChatRoom(props) {
             const user = await client.getUserAttributes(uid);
 
             console.warn(msg);
-            if (msg.text.toString().substring(0, 7) === 'Action:') {
+            if (msg.text.toString().substring(1, 7) === 'Action:') {
                 //console.warn('Action Taken');
                 //console.warn(msg.text.substring(7, 13));
                 //console.warn(msg.text.substring(20));
@@ -173,7 +173,7 @@ function ChatRoom(props) {
     }, [props.disolve]);
     return (
         <>
-
+     
             <section id="members__container">
 
                 <div id="members__header">
@@ -239,7 +239,11 @@ function ChatRoom(props) {
             </div>
         </div> */}
 
-                    {texts.map((text, i) =>
+                    {texts.map((text, i) =>{
+                        if (text.msg['text'].startsWith('Action:'))
+                           return null
+                        else
+                        return (
                         <div key={i} style={{ color: 'white', marginLeft: `${text.uid.user ? '1em' : '12em'}` }} onClick={(e) => {
                         }} className="message__wrapper">
                             <div style={{ color: 'white', backgroundColor: `${text.uid.user ? '#252D33' : '#51B66D'}` }} className={`message__body`}>
@@ -248,9 +252,9 @@ function ChatRoom(props) {
                                 <p className={`message__text${text.type === 'bot' ? '_bot' : ''}`}>{text.msg['text']}</p>
                             </div>
                         </div>
-                    )}
-
-                </div>
+                    )})
+                    }
+                </div> 
 
 
                 <form id="message__form" onSubmit={(e) => {

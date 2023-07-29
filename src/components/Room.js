@@ -12,6 +12,7 @@ import  {
    
     createScreenVideoTrack,
 } from "agora-rtc-react";
+import LinearIndeterminate from './LinearIndeterminate';
 
 function Room() {
     const [users, setUsers] = useState([]);
@@ -121,16 +122,26 @@ function Room() {
     
     const handleChange=()=>{
         setDisolve((prev)=>!prev);
+
        // console.warn(disolve)
     }
     return (
         <main className="container">
-            <div style={{backgroundColor:'#1A1E23'}} id="room__container">
-            
-                {start && tracks && screen && users  && <ChatRoom uid={uid} clientRTC={client}  disolve={disolve} users={users} tracks={tracks}  /> } 
-                {start && tracks && screen && users  && <Display  users={users} screen={screen} onChange={handleChange} disolve={setDisolve} tracks={tracks} />}
-              
-            </div>
+                {start && tracks && screen && users  && <ChatRoom uid={uid} clientRTC={client}  disolve={disolve} users={users} tracks={tracks}  /> ? <div style={{backgroundColor:'#1A1E23'}} id="room__container">
+             
+             {start && tracks && screen && users  && <ChatRoom uid={uid} clientRTC={client}  disolve={disolve} users={users} tracks={tracks}  /> } 
+             {start && tracks && screen && users  && <Display  users={users} screen={screen} onChange={handleChange} disolve={setDisolve} tracks={tracks} />}
+           
+         </div>:
+         <div>    <LinearIndeterminate/>
+         <div style={{marginTop:"20%",width:"100%",textAlign:"center"}}>
+  
+                  <h1 >Your Chat Room is being created Please be Patient</h1>
+      </div>
+      </div>
+         } 
+
+           
         </main>
     )
 }

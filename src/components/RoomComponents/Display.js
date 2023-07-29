@@ -92,7 +92,7 @@ function Display(props) {
  
 
   return (
-
+    loading?<h1 style={{marginTop:"50%",width:"100%",zIndex:"99999999"}}>No One is Here</h1>:
     <>
       <Participants users={users} />
       <section id="stream__container">
@@ -178,9 +178,7 @@ function Display(props) {
         <div style={{position:'relative',width:'100%'}}> 
         <div className="Room__Name"><h1>{loading?'':userInfo.room_Name}</h1></div>
         
-        <button onClick={()=>{
-          props.onChange();
-        }} style={{display: `${userInfo.isAdmin ? 'inherit' : 'none'}`,position:'absolute',top:'10%',right:'2%'}} id="disolve"><h1>Disolve </h1></button>
+
        
         
          </div>  
@@ -194,7 +192,7 @@ function Display(props) {
               <AgoraVideoPlayer className='vid' videoTrack={trackState} style={{  borderRadius: '10px',height: '100%', width: '100%', borderWidth: '10px' }}  />
 
             </div>
-              {users.length > 0 &&
+              {users  ?
                 users.map((user) => {
                   if (user.videoTrack) {
 
@@ -209,7 +207,11 @@ function Display(props) {
                       </div>
                    );
                   } else return null;
-                })}
+                })
+              :<div>
+                <h1 style={{zIndex:"9999999",color:'white'}}>No one is here</h1>
+              </div>
+              }
          
           
           </div>
