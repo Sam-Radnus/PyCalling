@@ -62,7 +62,7 @@ function ChatRoom(props) {
             const user = await client.getUserAttributes(uid);
 
             console.warn(msg);
-            if (msg.text.toString().substring(1, 7) === 'Action:') {
+            if (msg.text.toString().substring(0, 7) === 'Action:') {
                 //console.warn('Action Taken');
                 //console.warn(msg.text.substring(7, 13));
                 //console.warn(msg.text.substring(20));

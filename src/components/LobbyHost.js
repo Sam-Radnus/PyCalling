@@ -52,12 +52,12 @@ const LobbyHost = () => {
  
                  <div className="form__field__wrapper">
                      <button onClick={async(e)=>{
-                        if(name.length!==0 && room.length!==0){
+                        if(name.length!==0 && room.length!==0)
                         e.preventDefault();
                         console.log("name:",name)
                         console.log("room:",room)    
                         //loginUser(name,password);
-                        if(sessionStorage.getItem('authTokens')!==null){
+                        if(sessionStorage.getItem('authTokens')!==null)
                            navigate(`/Room/${room}`)       
                         //    dispatch(
                         //        login({
@@ -69,11 +69,11 @@ const LobbyHost = () => {
                         //            loggedIn:true,
                         //        })
                         //    )
-                        }
+                        
                         sessionStorage.setItem('name',name);
                         sessionStorage.setItem('room',room);
                         sessionStorage.setItem('loggedIn',true);
-                        } 
+                         
                         console.warn(room);
                         return <Room  room={room} />
                    }} type="submit">Login and Join
