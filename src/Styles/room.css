@@ -555,7 +555,7 @@ div[class="flex-container"] div[class="mid-screen"]
 div[class="Room__Name"]
 {
   background-color: #2B2D2E;
-  width:5vw;
+  width:fit-content ;
   height:fit-content;
   padding:0px 5px 0px 5px;
   border-radius: 5px;
