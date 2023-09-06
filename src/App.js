@@ -11,15 +11,37 @@ import { useSelector } from "react-redux"
 import { useEffect } from 'react';
 function App() {
 
-  useEffect(()=>{
-    try{
-   
-    }
-    catch(error)
-    {
-      console.log('loggedOut');
-    }
-  })
+   useEffect(() => {
+    // Define the API URL and request body
+    const apiUrl = 'https://log-project.onrender.com/create';
+    const requestBody = {
+      name: 'PyCalling',
+    };
+
+    // Make the API call
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((response) => {
+        if (response) {
+          return response.json();
+        } else {
+          throw new Error('API request failed');
+        }
+      })
+      .then((data) => {
+        // Handle the API response data here
+        console.log('API response:', data);
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the API call
+        console.error('API error:', error);
+      });
+  }, []);
   return (
     <>
       <Router>
