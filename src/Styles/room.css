@@ -17,10 +17,10 @@
   }
   #members__container {
     background-color: #676747;
-   
+ 
     overflow: hidden;
     width: 100%;
-    max-width: 11vw;
+    max-width: 9vw;
     position: fixed;
     height: 100vh;
     margin-top: 1%;
